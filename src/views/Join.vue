@@ -53,7 +53,8 @@
 /* holds the join prompt with everything. just to make sure everything is layed out in the middle */
 
 .join-container {
-  border: 1px solid black;
+  margin-top: 3rem;
+
   height: 600px;
   display: flex;
   justify-content: center;
@@ -66,7 +67,9 @@
 
 /* holding all the the inputs labels and titles */
 .join-prompt {
-  border: 1px solid white;
+  box-shadow: 5px 5px 20px 1px;
+  border-radius: 5px;
+
   width: 500px;
   height: 600px;
   display: flex;
@@ -79,7 +82,7 @@
   display: flex;
   flex-direction: column;
   width: 400px;
-  margin-top: 1rem;
+  margin-top: 2rem;
 }
 
 /* label needs to be a bit more over input */
@@ -106,7 +109,7 @@
 
 /* button container join prompt */
 .button-container {
-  margin-top: 2rem;
+  margin-top: 1rem;
   height: 100px;
   display: flex;
   justify-content: center;
@@ -120,7 +123,7 @@
   font-family: var(--font-primary);
   border-radius: 5px;
   border: none;
-  transform: color 2s ease;
+
 }
 
 /* button hover */
