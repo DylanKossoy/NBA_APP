@@ -12,6 +12,9 @@ import { RouterLink } from 'vue-router'
       <RouterLink to="/signin">Sign In</RouterLink>
     </div>
   </div>
+  <div class="welcome-message-container">
+    <h1 class="welcome-message">Welcome! Please Sign In</h1>
+  </div>
 </template>
 
 <style scoped>
@@ -19,5 +22,12 @@ import { RouterLink } from 'vue-router'
   display: flex;
   margin-inline: 3rem;
   gap: 2rem;
+}
+
+.welcome-message-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+  font-family: var(--font-primary);
 }
 </style>
