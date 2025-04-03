@@ -25,9 +25,28 @@
 
   <div class="top-half-container">
     <div class="blue-team-members-container">
+      <div class="blue-team-header">Blue Team</div>
+
+      <div class="input-container">
+        <img src="../../public/search-interface-symbol.png" alt="" class="search-img">
+        <input type="text">
+      </div>
+      <div class="blue-team-members">
+        <div class="user-cell"></div>
+        <div class="user-cell"></div>
+        <div class="user-cell"></div>
+        <div class="user-cell"></div>
+        <div class="user-cell"></div>
+        <div class="user-cell"></div>
+        <div class="user-cell"></div>
+        <div class="user-cell"></div>
+      </div>
 
     </div>
     <div class="latest-feed-container">
+      <div class="feed-card">news</div>
+      <div class="feed-card">news</div>
+
 
     </div>
   </div>
@@ -35,20 +54,132 @@
   <div class="bottom-half-container">
     <div class="favorite-players-header">Favorite Players</div>
     <div class="card-container">
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
-      <div class="favorite-player-card"></div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
+      <div class="favorite-player-card">
+        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <div class="player-name-incard">player name</div>
+        <div class="player-stats-incard">
+          <span class="stats-incard">PTS: 0</span>
+          <span class="stats-incard">RBS: 0</span>
+          <span class="stats-incard">ASS: 0</span>
+        </div>
+      </div>
 
 
     </div>
@@ -57,6 +188,114 @@
 </template>
 
 <style scoped>
+
+
+
+
+/* latest feed container. the two cards that have recent news about games and stats and things like that */
+.latest-feed-container .feed-card {
+  width: 600px;
+  height: 450px;
+  background-color: rgba(0, 0, 0, 0.031);
+  border: 1px solid black;
+}
+
+/* top half container  right side latest updates */
+
+.top-half-container .latest-feed-container {
+  background-color: rgba(65, 62, 62, 5%);
+  width: 1300px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* blue team members box that has the input and all the other blue team users inside it
+/* top half container blue team members container */
+
+.top-half-container .blue-team-members-container {
+  width: 500px;
+  background-color: rgb(121, 121, 121);
+  flex: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0rem 2rem 2rem 2rem;
+  align-items: center;
+  font-family: var(--font-primary);
+}
+
+
+/* input container inside the blue team members box */
+.blue-team-members-container .input-container {
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+
+/* input in the input container in the blue team member box */
+.input-container input {
+  width: 500px;
+  height: 40px;
+  padding-left: 3rem;
+  font-size: 20px;
+}
+
+/* search image */
+.input-container .search-img {
+  position: absolute;
+  width: 25px;
+  left: 0;
+  margin-top: 8px;
+  margin-left: 10px;
+
+}
+
+
+/* blue team header over the input */
+.blue-team-header {
+
+  font-size: 30px;
+  color: rgb(0, 0, 133);
+}
+
+/* blue members cell container holding each blue team member */
+.blue-team-members {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  margin-top: 2rem;
+}
+
+.blue-team-members .user-cell {
+  height: 60px;
+  border: 1px solid black;
+  width: 500px;
+  flex: 0 0 auto;
+}
+
+
+
+
+
+
+
 
 
 
@@ -98,7 +337,7 @@
 
 
 .top-half-container {
-  height: 400px;
+  height: 450px;
   display: flex;
   margin: 1rem;
   margin-top: 2rem;
@@ -106,21 +345,7 @@
 }
 
 
-/* top half container blue team members container */
 
-.top-half-container .blue-team-members-container {
-  width: 500px;
-  background-color: rgb(121, 121, 121);
-  flex: auto;
-}
-
-
-/* top half container  right side latest updates */
-
-.top-half-container .latest-feed-container {
-  background-color: rgba(65, 62, 62, 5%);
-  width: 1300px;
-}
 
 
 
@@ -170,8 +395,26 @@
   border: 1px solid black;
   border-radius: 5px;
   flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+  justify-content: space-between;
 
 
+}
+
+
+
+/* span elements inside card that show stats (pTS, RBS, ASS) */
+
+.favorite-player-card .stats-incard {
+  font-size: 10px;
+}
+
+/* profile image in the favorite player cards */
+.favorite-player-card .stats-user-img {
+  width: 60px;
 }
 
 

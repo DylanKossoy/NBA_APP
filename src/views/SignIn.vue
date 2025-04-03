@@ -116,6 +116,7 @@
   font-family: var(--font-primary);
   border-radius: 5px;
   border: none;
+  transition: background-color 1s ease;
 
 }
 

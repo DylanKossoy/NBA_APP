@@ -1,4 +1,12 @@
-<script setup></script>
+<script setup>
+
+
+function checkInputs() {
+
+}
+
+
+</script>
 
 <template>
   <div class="navbar">
@@ -37,7 +45,7 @@
       </div>
 
       <div class="button-container">
-        <button type="submit">Proceed</button>
+        <button type="submit" @click="checkInputs()">Proceed</button>
       </div>
     </div>
   </div>
@@ -123,6 +131,7 @@
   font-family: var(--font-primary);
   border-radius: 5px;
   border: none;
+  transition: background-color 1s ease;
 
 }
 
