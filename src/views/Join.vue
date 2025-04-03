@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import emailValidator from 'email-validator'
 
 
 
@@ -24,6 +25,16 @@ const triggerShake = (field) => {
   setTimeout(() => {
     field.value = false;
   }, 300)
+}
+
+
+// this will trigger a error text and then reset it
+
+const triggerError = (error) => {
+  errorText.value = error;
+  setTimeout(() => {
+    errorText.value = '-';
+  }, 1000)
 }
 
 const check = async (event) => {
@@ -56,9 +67,47 @@ const check = async (event) => {
   }
 
   if(error) {
-    errorText.value = "* Empty Field *";
-
+    triggerError("* Empty Field *");
+    return;
   }
+
+
+
+  // checking if the email is valid
+  if(!emailValidator.validate(email.value)) {
+    triggerShake(emailValid);
+    triggerError('* Invalid Email *');
+    return;
+  }
+
+
+  // check password length
+
+  if(password.value.length < 8) {
+    triggerShake(passwordValid)
+    triggerShake(confirmPassValid);
+    triggerError('* password needs to be 8 or more characters');
+    return;
+  }
+
+
+
+  // checking if the passwords match
+  if(password.value !== confirmPass.value) {
+    triggerShake(passwordValid);
+    triggerShake(confirmPassValid);
+    triggerError("* Passwords do not match *")
+    return;
+  }
+
+
+
+
+
+
+
+
+
 
 
 }
@@ -85,28 +134,28 @@ const check = async (event) => {
         <h2>Welcome New User! Enter Information</h2>
       </div>
 
-      <div class="join-inputs-container">
+      <form class="join-inputs-container">
         <div class="group-input">
-          <label for="username">Username</label>
+          <div class="label-input" >Username</div>
           <input type="text" v-model="username" :class="{ shake: usernameValid}"/>
           <p class="error-text" v-if="errorText">{{ errorText }}</p>
         </div>
         <div class="group-input">
-          <label for="email">Email</label>
+          <div class="label-input">Email</div>
           <input type="email" v-model="email" :class="{ shake: emailValid}"/>
           <p class="error-text" v-if="errorText">{{ errorText }}</p>
         </div>
         <div class="group-input">
-          <label for="password">Password</label>
+          <div class="label-input" >Password</div>
           <input type="password" v-model="password" :class="{ shake: passwordValid}"/>
           <p class="error-text" v-if="errorText">{{ errorText }}</p>
         </div>
         <div class="group-input">
-          <label for="confirmPass">Confirm Password</label>
-          <input type="password" v-model="confirmPass" :class="{ shake: confirmPassValid }"/>
+          <div class="label-input">Confirm Password</div>
+          <input type="password" id="confirmPass" v-model="confirmPass" :class="{ shake: confirmPassValid }"/>
           <p class="error-text" v-if="errorText">{{ errorText }}</p>
         </div>
-      </div>
+      </form>
 
       <div class="button-container">
         <button type="submit" @click="check">Proceed</button>
@@ -130,6 +179,14 @@ const check = async (event) => {
   height: 600px;
   display: flex;
   justify-content: center;
+}
+
+
+
+/* label inputs for the input fields */
+.label-input {
+  font-family: var(--font-primary);
+  font-style: italic;
 }
 
 /* title container is just holding the message in the join prompt */
@@ -157,12 +214,6 @@ const check = async (event) => {
   margin-top: 1rem;
 }
 
-/* label needs to be a bit more over input */
-
-.group-input label {
-  margin-bottom: 0.5rem;
-  font-family: var(--font-primary);
-}
 
 /* styling the input  */
 .group-input input {
@@ -172,6 +223,7 @@ const check = async (event) => {
   outline: none;
   background-color: rgba(237, 235, 235, 0.607);
   padding-left: 0.5rem;
+  font-family: var(--font-primary);
 }
 
 /* styling the input on focus */
@@ -215,5 +267,12 @@ const check = async (event) => {
   font-size: 15px;
 
 
+}
+
+
+/* h2 title */
+h2 {
+  font-family: var(--font-primary);
+  font-size: 23px;
 }
 </style>
