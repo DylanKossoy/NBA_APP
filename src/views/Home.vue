@@ -98,7 +98,7 @@
 
 
 .top-half-container {
-  height: 450px;
+  height: 400px;
   display: flex;
   margin: 1rem;
   margin-top: 2rem;
@@ -111,6 +111,7 @@
 .top-half-container .blue-team-members-container {
   width: 500px;
   background-color: rgb(121, 121, 121);
+  flex: auto;
 }
 
 
