@@ -1,9 +1,69 @@
 <script setup>
+import { ref } from 'vue'
 
 
-function checkInputs() {
+
+const errorText = ref('-');
+
+const username = ref('');
+const email = ref('');
+const password = ref('');
+const confirmPass = ref('');
+
+
+const usernameValid = ref(false);
+const emailValid = ref(false);
+const passwordValid = ref(false);
+const confirmPassValid = ref(false);
+
+
+
+// triggershake to whatever element i need and a timer to set it back
+const triggerShake = (field) => {
+  field.value = true;
+  setTimeout(() => {
+    field.value = false;
+  }, 300)
+}
+
+const check = async (event) => {
+  event.preventDefault()
+
+
+  let error = false;
+
+
+  // checking
+
+  if(!username.value.trim()) {
+    triggerShake(usernameValid)
+    error = true;
+  }
+
+  if(!email.value.trim()) {
+    triggerShake(emailValid);
+    error = true;
+  }
+
+  if(!password.value.trim()) {
+    triggerShake(passwordValid);
+    error = true;
+  }
+
+  if(!confirmPass.value.trim()){
+    triggerShake(confirmPassValid);
+    error = true
+  }
+
+  if(error) {
+    errorText.value = "* Empty Field *";
+
+  }
+
 
 }
+
+
 
 
 </script>
@@ -28,24 +88,28 @@ function checkInputs() {
       <div class="join-inputs-container">
         <div class="group-input">
           <label for="username">Username</label>
-          <input type="text" />
+          <input type="text" v-model="username" :class="{ shake: usernameValid}"/>
+          <p class="error-text" v-if="errorText">{{ errorText }}</p>
         </div>
         <div class="group-input">
           <label for="email">Email</label>
-          <input type="email" />
+          <input type="email" v-model="email" :class="{ shake: emailValid}"/>
+          <p class="error-text" v-if="errorText">{{ errorText }}</p>
         </div>
         <div class="group-input">
           <label for="password">Password</label>
-          <input type="password" />
+          <input type="password" v-model="password" :class="{ shake: passwordValid}"/>
+          <p class="error-text" v-if="errorText">{{ errorText }}</p>
         </div>
         <div class="group-input">
           <label for="confirmPass">Confirm Password</label>
-          <input type="password" />
+          <input type="password" v-model="confirmPass" :class="{ shake: confirmPassValid }"/>
+          <p class="error-text" v-if="errorText">{{ errorText }}</p>
         </div>
       </div>
 
       <div class="button-container">
-        <button type="submit" @click="checkInputs()">Proceed</button>
+        <button type="submit" @click="check">Proceed</button>
       </div>
     </div>
   </div>
@@ -90,7 +154,7 @@ function checkInputs() {
   display: flex;
   flex-direction: column;
   width: 400px;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 /* label needs to be a bit more over input */
@@ -139,5 +203,17 @@ function checkInputs() {
 .button-container button:hover {
   background-color: rgb(173, 170, 170);
   cursor: pointer;
+}
+
+
+
+/* error */
+.error-text {
+  margin: 0;
+  color: rgb(188, 70, 70);
+  font-family: var(--font-primary);
+  font-size: 15px;
+
+
 }
 </style>
