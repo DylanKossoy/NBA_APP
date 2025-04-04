@@ -37,6 +37,35 @@ const triggerError = (error) => {
   }, 1000)
 }
 
+
+
+// when everything is check and good then this will create the user
+const createUser = async (username, email, password) => {
+
+  const data = {
+    username,
+    email,
+    password
+  }
+
+
+  // register a user
+  const url = 'https://github.com/EliC23/csci-430/user';
+
+  const options = {
+    methods: 'POST',
+    headers: {
+      'Content-Type' : 'application/json',
+    },
+    body: JSON.stringify(data),
+  }
+
+
+  const response = await fetch(url, options);
+
+  console.log(response.status);
+}
+
 const check = async (event) => {
   event.preventDefault()
 
@@ -67,7 +96,7 @@ const check = async (event) => {
   }
 
   if(error) {
-    triggerError("* Empty Field *");
+    triggerError("* Empty Fields *");
     return;
   }
 
@@ -103,7 +132,7 @@ const check = async (event) => {
 
 
 
-
+  createUser();
 
 
 
@@ -138,24 +167,27 @@ const check = async (event) => {
         <div class="group-input">
           <div class="label-input" >Username</div>
           <input type="text" v-model="username" :class="{ shake: usernameValid}"/>
-          <p class="error-text" v-if="errorText">{{ errorText }}</p>
+
         </div>
         <div class="group-input">
           <div class="label-input">Email</div>
           <input type="email" v-model="email" :class="{ shake: emailValid}"/>
-          <p class="error-text" v-if="errorText">{{ errorText }}</p>
+
         </div>
         <div class="group-input">
           <div class="label-input" >Password</div>
           <input type="password" v-model="password" :class="{ shake: passwordValid}"/>
-          <p class="error-text" v-if="errorText">{{ errorText }}</p>
+
         </div>
         <div class="group-input">
           <div class="label-input">Confirm Password</div>
           <input type="password" id="confirmPass" v-model="confirmPass" :class="{ shake: confirmPassValid }"/>
-          <p class="error-text" v-if="errorText">{{ errorText }}</p>
+
         </div>
       </form>
+      <div class="error-container">
+        <p class="error-text" v-if="errorText">{{ errorText }}</p>
+      </div>
 
       <div class="button-container">
         <button type="submit" @click="check">Proceed</button>
@@ -179,6 +211,16 @@ const check = async (event) => {
   height: 600px;
   display: flex;
   justify-content: center;
+}
+
+
+/* error container */
+.error-container {
+
+  width: 500px;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 }
 
 
@@ -264,7 +306,7 @@ const check = async (event) => {
   margin: 0;
   color: rgb(188, 70, 70);
   font-family: var(--font-primary);
-  font-size: 15px;
+  font-size: 20px;
 
 
 }
