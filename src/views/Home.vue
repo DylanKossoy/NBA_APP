@@ -200,7 +200,7 @@ onMounted(() => {
 
 /* latest feed container. the two cards that have recent news about games and stats and things like that */
 .latest-feed-container .feed-card {
-  width: 600px;
+  width: 500px;
   height: 450px;
   background-color: rgba(0, 0, 0, 0.031);
   border: 1px solid black;

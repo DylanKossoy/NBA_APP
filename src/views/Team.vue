@@ -24,6 +24,26 @@
     <div class="left-side-container">
       <div class="team-cards-container">
         <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+        <div class="player-card"></div>
+  
       </div>
 
       <div class="season-selection-container">
@@ -61,11 +81,37 @@
 </template>
 
 <style scoped>
+
+
+
+
+/* player card inside the card containers  */
+.team-cards-container .player-card {
+  width: 100px;
+  height: 140px;
+  border: 1px solid white;
+  margin: .5rem;
+}
+
+
+
+
+
+
+
+
+
+
 /* team cards container */
 .left-side-container .team-cards-container {
   width: 100%;
   height: 500px;
   border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(3, 160px);
+  padding: 1rem;
+  
 }
 
 /* season selection container  */
@@ -82,7 +128,7 @@
 /* season option in the season selection container */
 
 .season-selection-container .season-option {
-  width: 580px;
+  width: 480px;
   height: 110px;
   border: 1px solid black;
   border-radius: 10px;
@@ -118,7 +164,7 @@
 
 /* left side container */
 .left-side-container {
-  width: 1200px;
+  width: 1000px;
   height: 750px;
   border: 0.1px solid black;
   margin-inline: 1rem;
@@ -195,58 +241,5 @@
   max-width: 50px;
 }
 
-@media (max-width: 1450px) {
-  /* left sidebar container */
-  .left-side-container {
-    width: 900px;
-  }
 
-  /* card container holding all the cards in left side container */
-  .left-side-container .team-cards-container {
-    height: 450px;
-  }
-
-  /* season options container */
-  .left-side-container .season-selection-container {
-    height: 200px;
-  }
-
-  /* season options inside container */
-  .left-side-container .season-selection-container .season-option {
-    width: 420px;
-    height: 80px;
-  }
-
-  /* right side container  */
-
-  .right-side-container {
-    width: 500px;
-  }
-
-  /* sidenav team selection  */
-  .right-side-container .sidenav-team-selection {
-    width: 130px;
-    border: 1px solid orange;
-  }
-
-  .sidenav-team-selection .team-option {
-    width: 130px;
-    height: 40px;
-  }
-
-  /*  */
-
-  .right-side-container .player-container {
-    height: 650px;
-  }
-  .right-side-container .player-container .player-selected-container {
-    width: 370px;
-    height: 500px;
-  }
-
-  .right-side-container .player-container .info-box-container {
-    width: 370px;
-    height: 150px;
-  }
-}
 </style>
