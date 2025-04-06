@@ -1,26 +1,24 @@
 <script setup></script>
 
 <template>
-      <div class="navbar">
-      <div class="logo-navbar">
-        <img src="../../public/basketballLogo.png" alt="" class="basketball-logo" />
-      </div>
+  <div class="navbar">
+    <div class="logo-navbar">
+      <img src="../../public/basketballLogo.png" alt="" class="basketball-logo" />
+    </div>
 
-      <div class="nav-links">
-        <RouterLink to="/home">Home</RouterLink>
-        <RouterLink to="/Gambling">Gambling</RouterLink>
-        <RouterLink to="/Games">Games</RouterLink>
-        <RouterLink to="/Stats">Stats</RouterLink>
-        <RouterLink to="/Profile">Profile</RouterLink>
-      </div>
+    <div class="nav-links">
+      <RouterLink to="/home">Home</RouterLink>
+      <RouterLink to="/Gambling">Gambling</RouterLink>
+      <RouterLink to="/Games">Games</RouterLink>
+      <RouterLink to="/Stats">Stats</RouterLink>
+      <RouterLink to="/Profile">Profile</RouterLink>
+    </div>
 
-      <div class="nav-username-container">
-        <img src="../../public/user.png" alt="" class="profile-user-img">
-        <div class="user-username">Username</div>
-      </div>
-
+    <div class="nav-username-container">
+      <img src="../../public/user.png" alt="" class="profile-user-img" />
+      <div class="user-username">Username</div>
+    </div>
   </div>
-
 
   <div class="content-container">
     <div class="left-side-container">
@@ -59,19 +57,10 @@
         <div class="info-box-container"></div>
       </div>
     </div>
-
   </div>
 </template>
 
 <style scoped>
-
-
-
-
-
-
-
-
 /* team cards container */
 .left-side-container .team-cards-container {
   width: 100%;
@@ -87,9 +76,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  padding: .5rem;
+  padding: 0.5rem;
 }
-
 
 /* season option in the season selection container */
 
@@ -100,8 +88,6 @@
   border-radius: 10px;
 }
 
-
-
 /* player selection container */
 .right-side-container .player-container {
   width: 450px;
@@ -109,13 +95,12 @@
   border: 1px solid black;
 }
 
-
 /* player container - player selected container */
 
 .player-container .player-selected-container {
   width: 450px;
   height: 500px;
-  border: 1px solid black
+  border: 1px solid black;
 }
 
 /* player container - information box */
@@ -124,8 +109,6 @@
   height: 250px;
   border: 1px solid black;
 }
-
-
 
 /* content container holding the left and right side */
 .content-container {
@@ -137,21 +120,19 @@
 .left-side-container {
   width: 1200px;
   height: 750px;
-  border: .1px solid black;
+  border: 0.1px solid black;
   margin-inline: 1rem;
   display: flex;
   flex-direction: column;
 }
 
-
 /* side nav for selecting the right team */
 .right-side-container .sidenav-team-selection {
   width: 200px;
   height: 750px;
-  border: .1px solid black;
+  border: 0.1px solid black;
   display: flex;
   flex-direction: column;
-
 }
 
 /* team-option inside the sidenav-team-selection */
@@ -166,9 +147,7 @@
   font-weight: 700;
   align-items: center;
   cursor: pointer;
-
 }
-
 
 /* team option hover and focus */
 .team-option:hover {
@@ -179,50 +158,95 @@
   background-color: rgba(101, 209, 219, 0.24);
 }
 
-
 /* right side container */
 
 .right-side-container {
   width: 650px;
   height: 750px;
-  border: .1px solid black;
+  border: 0.1px solid black;
   margin-inline: 1rem;
   display: flex;
 }
 
-
-
-
-
-
-
 /* nav links container in the middle of the nav bar */
 .nav-links {
-
-display: flex;
-gap: 3rem;
+  display: flex;
+  gap: 3rem;
 }
-
 
 /* nav username and profile img container */
 .nav-username-container {
-width: 250px;
-gap: 1.5rem;
-display: flex;
-align-items: center;
-justify-content: center;
-
+  width: 250px;
+  gap: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* nav-username-container username - so the real username of the user gosh */
 .user-username {
-font-size: 20px;
-font-family: var(--font-primary);
+  font-size: 20px;
+  font-family: var(--font-primary);
 }
-
 
 /* profile user img */
 
 .profile-user-img {
-max-width: 50px;
-}</style>
+  max-width: 50px;
+}
+
+@media (max-width: 1450px) {
+  /* left sidebar container */
+  .left-side-container {
+    width: 900px;
+  }
+
+  /* card container holding all the cards in left side container */
+  .left-side-container .team-cards-container {
+    height: 450px;
+  }
+
+  /* season options container */
+  .left-side-container .season-selection-container {
+    height: 200px;
+  }
+
+  /* season options inside container */
+  .left-side-container .season-selection-container .season-option {
+    width: 420px;
+    height: 80px;
+  }
+
+  /* right side container  */
+
+  .right-side-container {
+    width: 500px;
+  }
+
+  /* sidenav team selection  */
+  .right-side-container .sidenav-team-selection {
+    width: 130px;
+    border: 1px solid orange;
+  }
+
+  .sidenav-team-selection .team-option {
+    width: 130px;
+    height: 40px;
+  }
+
+  /*  */
+
+  .right-side-container .player-container {
+    height: 650px;
+  }
+  .right-side-container .player-container .player-selected-container {
+    width: 370px;
+    height: 500px;
+  }
+
+  .right-side-container .player-container .info-box-container {
+    width: 370px;
+    height: 150px;
+  }
+}
+</style>
