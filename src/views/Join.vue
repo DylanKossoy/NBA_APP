@@ -1,149 +1,137 @@
 <script setup>
 import { ref } from 'vue'
 import emailValidator from 'email-validator'
+import { useRouter } from 'vue-router'
 
+import { useUserStore } from '../../src/stores/user.js'
 
+const store = useUserStore()
 
-const errorText = ref('-');
+const router = useRouter()
 
-const username = ref('');
-const email = ref('');
-const password = ref('');
-const confirmPass = ref('');
+const errorText = ref('-')
 
+const username = ref('')
+const email = ref('')
+const password = ref('')
+const confirmPass = ref('')
 
-const usernameValid = ref(false);
-const emailValid = ref(false);
-const passwordValid = ref(false);
-const confirmPassValid = ref(false);
-
-
+const usernameValid = ref(false)
+const emailValid = ref(false)
+const passwordValid = ref(false)
+const confirmPassValid = ref(false)
 
 // triggershake to whatever element i need and a timer to set it back
 const triggerShake = (field) => {
-  field.value = true;
+  field.value = true
   setTimeout(() => {
-    field.value = false;
+    field.value = false
   }, 300)
 }
-
 
 // this will trigger a error text and then reset it
 
 const triggerError = (error) => {
-  errorText.value = error;
+  errorText.value = error
   setTimeout(() => {
-    errorText.value = '-';
+    errorText.value = '-'
   }, 1000)
 }
 
-
-
 // when everything is check and good then this will create the user
 const createUser = async (username, email, password) => {
-
   const data = {
     username,
     email,
-    password
+    password,
   }
 
-
   // register a user
-  const url = 'https://github.com/EliC23/csci-430/user';
+  const url = 'https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/user'
 
   const options = {
-    methods: 'POST',
+    method: 'POST',
     headers: {
-      'Content-Type' : 'application/json',
+      'Content-Type': 'application/json',
     },
     body: JSON.stringify(data),
   }
 
+  const response = await fetch(url, options)
 
-  const response = await fetch(url, options);
+  if (response.status === 201) {
+    const data = await response.json()
 
-  console.log(response.status);
+    console.log(data)
+
+    store.setUserData(data)
+
+    router.push({
+      path: '/home',
+    })
+  } else {
+    console.log('somethings wrong: ', response.status)
+  }
 }
 
 const check = async (event) => {
   event.preventDefault()
 
-
-  let error = false;
-
+  let error = false
 
   // checking
 
-  if(!username.value.trim()) {
+  if (!username.value.trim()) {
     triggerShake(usernameValid)
-    error = true;
-  }
-
-  if(!email.value.trim()) {
-    triggerShake(emailValid);
-    error = true;
-  }
-
-  if(!password.value.trim()) {
-    triggerShake(passwordValid);
-    error = true;
-  }
-
-  if(!confirmPass.value.trim()){
-    triggerShake(confirmPassValid);
     error = true
   }
 
-  if(error) {
-    triggerError("* Empty Fields *");
-    return;
+  if (!email.value.trim()) {
+    triggerShake(emailValid)
+    error = true
   }
 
+  if (!password.value.trim()) {
+    triggerShake(passwordValid)
+    error = true
+  }
 
+  if (!confirmPass.value.trim()) {
+    triggerShake(confirmPassValid)
+    error = true
+  }
+
+  if (error) {
+    triggerError('* Empty Fields *')
+    return
+  }
 
   // checking if the email is valid
-  if(!emailValidator.validate(email.value)) {
-    triggerShake(emailValid);
-    triggerError('* Invalid Email *');
-    return;
+  if (!emailValidator.validate(email.value)) {
+    triggerShake(emailValid)
+    triggerError('* Invalid Email *')
+    return
   }
-
 
   // check password length
 
-  if(password.value.length < 8) {
+  if (password.value.length < 8) {
     triggerShake(passwordValid)
-    triggerShake(confirmPassValid);
-    triggerError('* password needs to be 8 or more characters');
-    return;
+    triggerShake(confirmPassValid)
+    triggerError('* password needs to be 8 or more characters')
+    return
   }
-
-
 
   // checking if the passwords match
-  if(password.value !== confirmPass.value) {
-    triggerShake(passwordValid);
-    triggerShake(confirmPassValid);
-    triggerError("* Passwords do not match *")
-    return;
+  if (password.value !== confirmPass.value) {
+    triggerShake(passwordValid)
+    triggerShake(confirmPassValid)
+    triggerError('* Passwords do not match *')
+    return
   }
 
-
-
-
-  createUser();
-
-
-
-
-
-
+  createUser(username.value, email.value, password.value)
 }
-
-
-
-
 </script>
 
 <template>
@@ -165,24 +153,25 @@ const check = async (event) => {
 
       <form class="join-inputs-container">
         <div class="group-input">
-          <div class="label-input" >Username</div>
-          <input type="text" v-model="username" :class="{ shake: usernameValid}"/>
-
+          <div class="label-input">Username</div>
+          <input type="text" v-model="username" :class="{ shake: usernameValid }" />
         </div>
         <div class="group-input">
           <div class="label-input">Email</div>
-          <input type="email" v-model="email" :class="{ shake: emailValid}"/>
-
+          <input type="email" v-model="email" :class="{ shake: emailValid }" />
         </div>
         <div class="group-input">
-          <div class="label-input" >Password</div>
-          <input type="password" v-model="password" :class="{ shake: passwordValid}"/>
-
+          <div class="label-input">Password</div>
+          <input type="password" v-model="password" :class="{ shake: passwordValid }" />
         </div>
         <div class="group-input">
           <div class="label-input">Confirm Password</div>
-          <input type="password" id="confirmPass" v-model="confirmPass" :class="{ shake: confirmPassValid }"/>
-
+          <input
+            type="password"
+            id="confirmPass"
+            v-model="confirmPass"
+            :class="{ shake: confirmPassValid }"
+          />
         </div>
       </form>
       <div class="error-container">
@@ -213,17 +202,13 @@ const check = async (event) => {
   justify-content: center;
 }
 
-
 /* error container */
 .error-container {
-
   width: 500px;
   display: flex;
   justify-content: center;
   margin-top: 1rem;
 }
-
-
 
 /* label inputs for the input fields */
 .label-input {
@@ -255,7 +240,6 @@ const check = async (event) => {
   width: 400px;
   margin-top: 1rem;
 }
-
 
 /* styling the input  */
 .group-input input {
@@ -290,7 +274,6 @@ const check = async (event) => {
   border-radius: 5px;
   border: none;
   transition: background-color 1s ease;
-
 }
 
 /* button hover */
@@ -299,18 +282,13 @@ const check = async (event) => {
   cursor: pointer;
 }
 
-
-
 /* error */
 .error-text {
   margin: 0;
   color: rgb(188, 70, 70);
   font-family: var(--font-primary);
   font-size: 20px;
-
-
 }
-
 
 /* h2 title */
 h2 {

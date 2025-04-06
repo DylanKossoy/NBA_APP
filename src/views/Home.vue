@@ -1,35 +1,44 @@
-<script setup></script>
+<script setup>
+import { useUserStore } from '../stores/user.js'
+import { onMounted } from 'vue'
+import { RouterLink } from 'vue-router'
+
+const store = useUserStore()
+
+onMounted(() => {
+  console.log(store.userData.username)
+})
+</script>
 
 <template>
-    <div class="navbar">
-      <div class="logo-navbar">
-        <img src="../../public/basketballLogo.png" alt="" class="basketball-logo" />
-      </div>
+  <div class="navbar">
+    <div class="logo-navbar">
+      <img src="../../public/basketballLogo.png" alt="" class="basketball-logo" />
+    </div>
 
-      <div class="nav-links">
-        <RouterLink to="/Team">Team</RouterLink>
-        <RouterLink to="/Gambling">Gambling</RouterLink>
-        <RouterLink to="/Games">Games</RouterLink>
-        <RouterLink to="/Stats">Stats</RouterLink>
-        <RouterLink to="/Profile">Profile</RouterLink>
-      </div>
+    <div class="nav-links">
+      <RouterLink to="/Team">Team</RouterLink>
+      <RouterLink to="/Gambling">Gambling</RouterLink>
+      <RouterLink to="/Games">Games</RouterLink>
+      <RouterLink to="/Stats">Stats</RouterLink>
+      <RouterLink to="/Profile">Profile</RouterLink>
+    </div>
 
-      <div class="nav-username-container">
-        <img src="../../public/user.png" alt="" class="profile-user-img">
-        <div class="user-username">Username</div>
-      </div>
+    <div class="nav-username-container">
+      <img src="../../public/user.png" alt="" class="profile-user-img" />
+      <div class="user-username">{{ store.userData.username }}</div>
 
+      <RouterLink to="/join" class="logout-style" @click="store.userData.logout">Logout</RouterLink>
+    </div>
   </div>
-
-
 
   <div class="top-half-container">
     <div class="blue-team-members-container">
       <div class="blue-team-header">Blue Team</div>
 
       <div class="input-container">
-        <img src="../../public/search-interface-symbol.png" alt="" class="search-img">
-        <input type="text">
+        <img src="../../public/search-interface-symbol.png" alt="" class="search-img" />
+        <input type="text" />
       </div>
       <div class="blue-team-members">
         <div class="user-cell"></div>
@@ -41,13 +50,10 @@
         <div class="user-cell"></div>
         <div class="user-cell"></div>
       </div>
-
     </div>
     <div class="latest-feed-container">
       <div class="feed-card">news</div>
       <div class="feed-card">news</div>
-
-
     </div>
   </div>
 
@@ -55,7 +61,7 @@
     <div class="favorite-players-header">Favorite Players</div>
     <div class="card-container">
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -64,7 +70,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -73,7 +79,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -82,7 +88,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -91,7 +97,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -100,7 +106,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -109,7 +115,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -118,7 +124,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -127,7 +133,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -136,7 +142,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -145,7 +151,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -154,7 +160,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -163,7 +169,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -172,7 +178,7 @@
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img">
+        <img src="../../public/user.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -180,17 +186,17 @@
           <span class="stats-incard">ASS: 0</span>
         </div>
       </div>
-
-
     </div>
-
   </div>
 </template>
 
 <style scoped>
+/* nav logout container */
 
-
-
+.logout-style {
+  margin-left: 2.5rem;
+  color: rgb(138, 39, 39);
+}
 
 /* latest feed container. the two cards that have recent news about games and stats and things like that */
 .latest-feed-container .feed-card {
@@ -209,21 +215,6 @@
   justify-content: space-evenly;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* blue team members box that has the input and all the other blue team users inside it
 /* top half container blue team members container */
 
@@ -238,7 +229,6 @@
   font-family: var(--font-primary);
 }
 
-
 /* input container inside the blue team members box */
 .blue-team-members-container .input-container {
   width: 500px;
@@ -246,7 +236,6 @@
   justify-content: center;
   position: relative;
 }
-
 
 /* input in the input container in the blue team member box */
 .input-container input {
@@ -263,13 +252,10 @@
   left: 0;
   margin-top: 8px;
   margin-left: 10px;
-
 }
-
 
 /* blue team header over the input */
 .blue-team-header {
-
   font-size: 30px;
   color: rgb(0, 0, 133);
 }
@@ -290,33 +276,19 @@
   flex: 0 0 auto;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 /* nav links container in the middle of the nav bar */
 .nav-links {
-
   display: flex;
   gap: 3rem;
 }
 
-
 /* nav username and profile img container */
 .nav-username-container {
-  width: 250px;
-  gap: 1.5rem;
+  width: 300px;
+  gap: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 /* nav-username-container username - so the real username of the user gosh */
@@ -324,7 +296,6 @@
   font-size: 20px;
   font-family: var(--font-primary);
 }
-
 
 /* profile user img */
 
@@ -335,7 +306,6 @@
 /* top half of the home page that includes all the members of the blue team with a search bar */
 /* top half showing the latest game results */
 
-
 .top-half-container {
   height: 450px;
   display: flex;
@@ -344,25 +314,13 @@
   justify-content: space-between;
 }
 
-
-
-
-
-
-
-
-
 /* bottom half container */
 .bottom-half-container {
   height: 250px;
   border: 1px solid black;
   margin: 1rem;
   padding-bottom: 1rem;
-
-
-
 }
-
 
 /* bottom half container favorite players */
 .bottom-half-container .favorite-players-header {
@@ -372,7 +330,6 @@
   margin-bottom: 1.1rem;
 }
 
-
 /* bottom half container that holds the favorite player cards */
 .bottom-half-container .card-container {
   overflow-y: hidden;
@@ -381,11 +338,7 @@
   padding-inline: 1rem;
   display: flex;
   gap: 1rem;
-
-
-
 }
-
 
 /* favorite player cards inside the card container */
 
@@ -400,11 +353,7 @@
   padding: 1rem;
   align-items: center;
   justify-content: space-between;
-
-
 }
-
-
 
 /* span elements inside card that show stats (pTS, RBS, ASS) */
 
@@ -417,8 +366,41 @@
   width: 60px;
 }
 
+@media (max-width: 1450px) {
+  .top-half-container {
+    height: 350px;
+  }
 
+  .bottom-half-container {
+    height: 250px;
+  }
 
+  /* blue team member container */
+  .top-half-container .blue-team-members-container {
+    width: 400px;
+  }
 
+  /* input inside blue team member container */
+  .input-container input {
+    width: 400px;
+  }
 
+  /* search img */
+  .input-container .search-img {
+    left: 10%;
+  }
+
+  /* blue team member cells */
+  .blue-team-members .user-cell {
+    width: 400px;
+  }
+
+  /* feed container that is on the left side on the top half  feed card */
+  .latest-feed-container .feed-card {
+    width: 400px;
+    height: 350px;
+  }
+
+  /* bottom cards container */
+}
 </style>
