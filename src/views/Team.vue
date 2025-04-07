@@ -23,27 +23,196 @@
   <div class="content-container">
     <div class="left-side-container">
       <div class="team-cards-container">
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
-        <div class="player-card"></div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        <div class="player-card" tabindex="0">
+          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
+          <div class="player-card-player-name">Player Name</div>
+          <div class="player-card-player-number">#00</div>
+        
+        </div>
+        
+       
   
+     
       </div>
 
       <div class="season-selection-container">
@@ -73,7 +242,41 @@
       </div>
 
       <div class="player-container">
-        <div class="player-selected-container"></div>
+        <div class="player-selected-container">
+          <div class="profile-img-container">
+            <img src="../../public/player-selected.png" alt="" class="player-selected-user-img">
+            <div class="player-name-number">
+              <div class="player-selected-name">Player name</div>
+              <div class="player-selected-number"><span class="hash">#</span>00</div>
+              <div class="player-selected-country">Country</div>
+            </div>
+
+
+          </div>
+          <div class="info-player-container">
+            <div class="info-box-one">
+              <span class="player-selected-stat">Position: <span class="player-selected-stat-number">F</span></span>
+              <span class="player-selected-stat">height: <span class="player-selected-stat-number">6'9</span></span>
+              <span class="player-selected-stat">weight: <span class="player-selected-stat-number">250</span></span>
+              <span class="player-selected-stat">Points: <span class="player-selected-stat-number">0</span></span>
+              <span class="player-selected-stat">Team: <span class="player-selected-stat-number">Lakers</span></span>
+              <span class="player-selected-stat">City: <span class="player-selected-stat-number">Los Angeles</span></span>
+              <span class="player-selected-stat">Season: <span class="player-selected-stat-number">0</span></span>
+              
+            </div>
+            <div class="info-box-two">
+              <span class="player-selected-stat">Points: <span class="player-selected-stat-number">0</span></span>
+              <span class="player-selected-stat">Assists: <span class="player-selected-stat-number">0</span></span>
+              <span class="player-selected-stat">Turnovers: <span class="player-selected-stat-number">0</span></span>
+              <span class="player-selected-stat">Steals: <span class="player-selected-stat-number">0</span></span>
+              <span class="player-selected-stat">Rebounds: <span class="player-selected-stat-number">0</span></span>
+              <span class="player-selected-stat">Blocks: <span class="player-selected-stat-number">West</span></span>
+              <span class="player-selected-stat">College: <span class="player-selected-stat-number">Bridgewater</span></span>
+              
+
+            </div>
+          </div>
+        </div>
         <div class="info-box-container"></div>
       </div>
     </div>
@@ -83,14 +286,119 @@
 <style scoped>
 
 
+/* info box container when player is selected */
+.player-selected-container .info-player-container {
+  display: flex;
+}
+
+/* info boxes for players stats */
+
+.info-player-container .info-box-one, .info-player-container .info-box-two  {
+  width: 300px;
+ 
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  font-family: var(--font-primary);
+  font-weight: 700;
+  font-size: 15px;
+
+  
+}
+
+.player-selected-stat {
+  font-size: 20px;
+}
+
+.player-selected-stat-number {
+  font-weight: 100;
+  font-size: 15px;
+  margin-left: 1rem;
+}
+
+
+.player-selected-country {
+  font-size: 20px;
+
+}
+
+
+/* player selected profile picture image */
+.player-selected-user-img {
+  
+  width: 180px;
+}
+
+
+.profile-img-container {
+  display: flex;
+  padding: 2rem;
+  font-family: var(--font-primary);
+  border-bottom: .5px solid rgba(200, 196, 196, 0.289);
+}
+
+
+/* holding player name and number selected */
+.profile-img-container .player-name-number {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 200px;
+}
+
+
+/* pplayer selected and player number selected */
+.profile-img-container .player-selected-name {
+  font-size: 30px;
+  
+}
+.profile-img-container .player-selected-number {
+  font-size: 80px;
+}
+
+.hash {
+  font-size: 50px;
+}
+
 
 
 /* player card inside the card containers  */
 .team-cards-container .player-card {
   width: 100px;
   height: 140px;
-  border: 1px solid white;
-  margin: .5rem;
+  border: 1px solid black;;
+  margin: .25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content:  space-around;
+  font-family: var(--font-primary);
+  align-items: center;
+  cursor: pointer;
+  padding: .5rem;
+  border-radius: 10px;
+}
+
+
+/* hover over player card */
+.team-cards-container .player-card:hover {
+  background-color: rgba(136, 135, 135, 0.538);
+
+}
+
+
+/* whenever a player is selected inside the card container */
+.team-cards-container .player-card:focus {
+  background-color: rgb(187, 150, 150);
+}
+
+
+
+
+/* profile image inside the player card */
+.player-card .player-card-profile-img {
+  width: 50px;
 }
 
 
@@ -108,9 +416,10 @@
   height: 500px;
   border: 1px solid black;
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  grid-template-rows: repeat(3, 160px);
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(5, 160px);
   padding: 1rem;
+  overflow-y: auto;
   
 }
 
@@ -138,7 +447,6 @@
 .right-side-container .player-container {
   width: 450px;
   height: 750px;
-  border: 1px solid black;
 }
 
 /* player container - player selected container */
@@ -146,7 +454,7 @@
 .player-container .player-selected-container {
   width: 450px;
   height: 500px;
-  border: 1px solid black;
+  background: rgba(111, 120, 127, 0.35);
 }
 
 /* player container - information box */
