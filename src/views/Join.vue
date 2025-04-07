@@ -21,6 +21,38 @@ const emailValid = ref(false)
 const passwordValid = ref(false)
 const confirmPassValid = ref(false)
 
+// function to set the avator in local storage for the user
+function setUserAvatar(numberAvatar) {
+  let image = ''
+  switch (numberAvatar) {
+    case 1:
+      image = '../../public/avatar-option1.png'
+      break
+    case 2:
+      image = '../../public/avatar-option2.png'
+      break
+    case 3:
+      image = '../../public/avatar-option3.png'
+      break
+    case 4:
+      image = '../../public/avatar-option4.png'
+      break
+    case 5:
+      image = '../../public/avatar-option5.png'
+      break
+    case 6:
+      image = '../../public/avatar-option6.png'
+      break
+    default:
+      image = ''
+      return
+  }
+
+  localStorage.setItem('userAvatar', image)
+
+  console.log(localStorage.getItem('userAvatar'))
+}
+
 // triggershake to whatever element i need and a timer to set it back
 const triggerShake = (field) => {
   field.value = true
@@ -173,6 +205,26 @@ const check = async (event) => {
             :class="{ shake: confirmPassValid }"
           />
         </div>
+        <div class="avatar-selection-container">
+          <div class="avatar-container" tabindex="0" @click="setUserAvatar(1)">
+            <img src="../../public/avatar-option1.png" alt="" class="avatar-option-join" />
+          </div>
+          <div class="avatar-container" tabindex="0" @click="setUserAvatar(2)">
+            <img src="../../public/avatar-option2.png" alt="" class="avatar-option-join" />
+          </div>
+          <div class="avatar-container" tabindex="0" @click="setUserAvatar(3)">
+            <img src="../../public/avatar-option3.png" alt="" class="avatar-option-join" />
+          </div>
+          <div class="avatar-container" tabindex="0" @click="setUserAvatar(4)">
+            <img src="../../public/avatar-option4.png" alt="" class="avatar-option-join" />
+          </div>
+          <div class="avatar-container" tabindex="0" @click="setUserAvatar(5)">
+            <img src="../../public/avatar-option5.png" alt="" class="avatar-option-join" />
+          </div>
+          <div class="avatar-container" tabindex="0" @click="setUserAvatar(6)">
+            <img src="../../public/avatar-option6.png" alt="" class="avatar-option-join" />
+          </div>
+        </div>
       </form>
       <div class="error-container">
         <p class="error-text" v-if="errorText">{{ errorText }}</p>
@@ -186,6 +238,28 @@ const check = async (event) => {
 </template>
 
 <style scoped>
+/* container holding all the avatar options */
+.avatar-selection-container {
+  display: flex;
+  margin-top: 2rem;
+  gap: 2rem;
+}
+
+/* on hover of image i want it to scale */
+.avatar-container:hover {
+  scale: 1.5;
+  cursor: pointer;
+}
+
+/* when avatar is clicked */
+.avatar-container:focus {
+  scale: 1.5;
+}
+/* avatar sizes in join page */
+.avatar-option-join {
+  width: 40px;
+}
+
 .links-navbar {
   display: flex;
   margin-inline: 3rem;
@@ -259,7 +333,7 @@ const check = async (event) => {
 
 /* button container join prompt */
 .button-container {
-  margin-top: 1rem;
+  margin-bottom: 1rem;
   height: 100px;
   display: flex;
   justify-content: center;

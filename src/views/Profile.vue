@@ -20,9 +20,95 @@
       <div class="user-username">Username</div>
     </div>
   </div>
+  <div class="main-container">
+    <div class="profile-info-box-container">
+      <div class="profile-header-container">
+        <h1>User Information</h1>
+        <button class="edit-button">edit</button>
+      </div>
+      <div class="user-img-container">
+        <img src="../../public/user.png" alt="" class="user-img">
+      </div>
+      <div class="user-info-box">
+        <div >Username: <span class="user-username">username</span></div>
+        <div >Email: <span class="user-email">email@comcast.net</span></div>
+
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
+
+h1 {
+  margin: 0;
+  font-size: 40px;
+}
+
+/* spans that display the actual username and email */
+.user-username, .user-email {
+  font-size: 30px;
+}
+
+
+/* userinfo box inside the profile box container */
+.user-info-box {
+  display: flex;
+  height: 300px;
+  flex-direction: column;
+
+  font-size: 20px;
+  justify-content: top;
+}
+
+/* user iamge */
+.user-img {
+  width: 150px;
+}
+/* edit button */
+.edit-button {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+
+/* profile header container */
+.profile-header-container {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  margin: 1rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+
+/* profile box holding all the boxs and information */
+.profile-info-box-container {
+  width: 600px;
+  height: 700px;
+  background: grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+}
+
+/* main container holding up the profile info container box */
+.main-container {
+  height: 800px;
+  background: black;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-primary);
+}
 
 /* nav links container in the middle of the nav bar */
 .nav-links {
@@ -41,7 +127,7 @@
 
 /* nav-username-container username - so the real username of the user gosh */
 .user-username {
-  font-size: 20px;
+
   font-family: var(--font-primary);
 }
 
