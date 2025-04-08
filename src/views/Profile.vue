@@ -1,4 +1,17 @@
-<style setup></style>
+<script setup>
+import { ref } from 'vue'
+import { useUserStore } from '../../src/stores/user.js'
+
+const store = useUserStore()
+
+
+const userImg = ref(localStorage.getItem('userAvatar'))
+
+
+
+
+
+</script>
 
 
 <template>
@@ -16,8 +29,8 @@
     </div>
 
     <div class="nav-username-container">
-      <img src="../../public/user.png" alt="" class="profile-user-img" />
-      <div class="user-username">Username</div>
+      <img :src="userImg" alt="" class="profile-user-img" />
+      <div class="user-username"> {{ store.userData.username }}</div>
     </div>
   </div>
   <div class="main-container">
@@ -27,11 +40,11 @@
         <button class="edit-button">edit</button>
       </div>
       <div class="user-img-container">
-        <img src="../../public/user.png" alt="" class="user-img">
+        <img :src="userImg" alt="" class="user-img">
       </div>
       <div class="user-info-box">
-        <div >Username: <span class="user-username">username</span></div>
-        <div >Email: <span class="user-email">email@comcast.net</span></div>
+        <div >Username: <span class="user-username"> {{ store.userData.username }}</span></div>
+        <div >Email: <span class="user-email">{{ store.userData.email }}</span></div>
 
       </div>
     </div>
@@ -47,7 +60,7 @@ h1 {
 
 /* spans that display the actual username and email */
 .user-username, .user-email {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 
@@ -63,7 +76,7 @@ h1 {
 
 /* user iamge */
 .user-img {
-  width: 150px;
+  width: 250px;
 }
 /* edit button */
 .edit-button {
@@ -102,7 +115,7 @@ h1 {
 /* main container holding up the profile info container box */
 .main-container {
   height: 800px;
-  background: black;
+
   margin: 1rem;
   display: flex;
   justify-content: center;

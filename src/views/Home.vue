@@ -1,15 +1,33 @@
 <script setup>
 import { useUserStore } from '../stores/user.js'
-import { onMounted} from 'vue'
+import { onMounted, ref} from 'vue'
 import { RouterLink } from 'vue-router'
 
 const store = useUserStore()
+
+
+
+
+
+// const image = localStorage.getItem('userAvatar');
+const userImg = ref(store.userData.avatarImg);
+
 
 
 onMounted(() => {
   console.log(store.userData.username)
 
 })
+
+
+
+
+
+
+// function that controls the endpoint of the search input
+// function getEndpoint(endpoint) {
+
+// }
 
 
 
@@ -32,6 +50,11 @@ onMounted(() => {
 
     <div class="nav-username-container">
 
+
+
+
+      <img :src="userImg" alt="" class="profile-user-img">
+
       <div class="user-username">{{ store.userData.username }}</div>
 
       <RouterLink to="/join" class="logout-style" @click="store.logout">Logout</RouterLink>
@@ -41,9 +64,9 @@ onMounted(() => {
   <div class="top-half-container">
     <div class="blue-team-members-container">
       <div class="blue-team-header">
-        <button class="player-button-filter">Players</button>
-        <button class="player-button-filter">Teams</button>
-        <button class="player-button-filter">Games</button>
+        <button class="player-button-filter" @click="getEndpoint('players')">Players</button>
+        <button class="player-button-filter" @click="getEndpoint('players')">Teams</button>
+        <button class="player-button-filter" @click="getEndpoint('players')">Games</button>
       </div>
 
       <div class="input-container">
@@ -71,7 +94,7 @@ onMounted(() => {
     <div class="favorite-players-header">Favorite Players</div>
     <div class="card-container">
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -80,7 +103,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -89,7 +112,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -98,7 +121,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -107,7 +130,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -116,7 +139,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -125,7 +148,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -134,7 +157,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -143,7 +166,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -152,7 +175,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -161,7 +184,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -170,7 +193,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -179,7 +202,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -188,7 +211,7 @@ onMounted(() => {
         </div>
       </div>
       <div class="favorite-player-card">
-        <img src="../../public/user.png" alt="" class="stats-user-img" />
+        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
         <div class="player-name-incard">player name</div>
         <div class="player-stats-incard">
           <span class="stats-incard">PTS: 0</span>
@@ -196,6 +219,7 @@ onMounted(() => {
           <span class="stats-incard">ASS: 0</span>
         </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -204,7 +228,7 @@ onMounted(() => {
 /* nav logout container */
 
 .logout-style {
-  margin-left: 2.5rem;
+  margin-inline: 2.5rem;
   color: rgb(138, 39, 39);
 }
 
@@ -266,8 +290,8 @@ onMounted(() => {
 
 /* blue team header over the input */
 .blue-team-header {
-  height: 100px;
-  color: rgb(0, 0, 133);
+  height: 150px;
+
   display: flex;
   gap: 2rem;
 }
@@ -281,12 +305,15 @@ onMounted(() => {
   border-bottom-color: rgba(0, 0, 0, 0);
   cursor: pointer;
   margin-block: 1rem;
+  color: white;
+  font-size: 25px;
 
 
 }
 
 .blue-team-header button:hover {
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid rgb(188, 184, 184);
+  color: rgb(202, 193, 193);
 }
 
 
@@ -310,15 +337,17 @@ onMounted(() => {
 .nav-links {
   display: flex;
   gap: 3rem;
+  width: 700px;
+  justify-content: right;
 }
 
 /* nav username and profile img container */
 .nav-username-container {
-  width: 300px;
+  width: 400px;
   gap: 1rem;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: right;
 }
 
 /* nav-username-container username - so the real username of the user gosh */

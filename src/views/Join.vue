@@ -78,6 +78,8 @@ const createUser = async (username, email, password) => {
     password,
   }
 
+  const image = localStorage.getItem('userAvatar');
+
   // register a user
   const url = 'https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/user'
 
@@ -96,7 +98,7 @@ const createUser = async (username, email, password) => {
 
     console.log(data)
 
-    store.setUserData(data)
+    store.setUserData(data, image)
 
     router.push({
       path: '/home',
@@ -182,7 +184,7 @@ const check = async (event) => {
     </div>
     <div class="links-navbar">
       <RouterLink to="/">Welcome</RouterLink>
-      <RouterLink to="/signin">Sign In</RouterLink>
+      <RouterLink to="/signin" class="signin-button">Log In</RouterLink>
     </div>
   </div>
 
@@ -236,7 +238,7 @@ const check = async (event) => {
         </div>
       </form>
       <div class="error-container">
-        <p class="error-text" v-if="errorText">{{ errorText }}</p>
+        <p class="error-text" >{{ errorText }}</p>
       </div>
 
       <div class="button-container">
@@ -247,6 +249,18 @@ const check = async (event) => {
 </template>
 
 <style scoped>
+
+
+
+
+
+/* sign in button */
+
+.signin-button {
+  color: rgb(138, 39, 39);
+}
+
+
 /* container holding all the avatar options */
 .avatar-selection-container {
   display: flex;

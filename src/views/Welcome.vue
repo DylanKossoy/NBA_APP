@@ -9,7 +9,7 @@ import { RouterLink } from 'vue-router'
     </div>
     <div class="links-navbar">
       <RouterLink to="/join">Join</RouterLink>
-      <RouterLink to="/signin">Sign In</RouterLink>
+      <RouterLink to="/signin" class="signin-button">Log In</RouterLink>
     </div>
   </div>
   <div class="welcome-message-container">
@@ -18,6 +18,11 @@ import { RouterLink } from 'vue-router'
 </template>
 
 <style scoped>
+
+
+.signin-button {
+  color: rgb(138, 39, 39);
+}
 .links-navbar {
   display: flex;
   margin-inline: 3rem;
