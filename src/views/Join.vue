@@ -20,6 +20,9 @@ const usernameValid = ref(false)
 const emailValid = ref(false)
 const passwordValid = ref(false)
 const confirmPassValid = ref(false)
+const avatarValid = ref(false)
+
+localStorage.clear()
 
 // function to set the avator in local storage for the user
 function setUserAvatar(numberAvatar) {
@@ -44,13 +47,10 @@ function setUserAvatar(numberAvatar) {
       image = '../../public/avatar-option6.png'
       break
     default:
-      image = ''
       return
   }
 
   localStorage.setItem('userAvatar', image)
-
-  console.log(localStorage.getItem('userAvatar'))
 }
 
 // triggershake to whatever element i need and a timer to set it back
@@ -109,6 +109,8 @@ const createUser = async (username, email, password) => {
 const check = async (event) => {
   event.preventDefault()
 
+
+
   let error = false
 
   // checking
@@ -138,7 +140,16 @@ const check = async (event) => {
     return
   }
 
+  // check if user picked a avatar
+
+  if (!localStorage.getItem('userAvatar')) {
+    triggerShake(avatarValid)
+    triggerError('* Forgot to pick Avatar *')
+    return
+  }
+
   // checking if the email is valid
+
   if (!emailValidator.validate(email.value)) {
     triggerShake(emailValid)
     triggerError('* Invalid Email *')
@@ -205,7 +216,7 @@ const check = async (event) => {
             :class="{ shake: confirmPassValid }"
           />
         </div>
-        <div class="avatar-selection-container">
+        <div class="avatar-selection-container" :class="{ shake: avatarValid }">
           <div class="avatar-container" tabindex="0" @click="setUserAvatar(1)">
             <img src="../../public/avatar-option1.png" alt="" class="avatar-option-join" />
           </div>

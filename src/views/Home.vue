@@ -8,6 +8,16 @@ const store = useUserStore()
 onMounted(() => {
   console.log(store.userData.username)
 })
+
+
+const image = localStorage.getItem('userAvatar');
+
+document.getElementById('')
+
+
+
+
+
 </script>
 
 <template>
@@ -25,7 +35,7 @@ onMounted(() => {
     </div>
 
     <div class="nav-username-container">
-      <img src="../../public/user.png" alt="" class="profile-user-img" />
+      <img src="imagesrc" alt="" class="profile-user-img" />
       <div class="user-username">{{ store.userData.username }}</div>
 
       <RouterLink to="/join" class="logout-style" @click="store.userData.logout">Logout</RouterLink>
@@ -34,7 +44,11 @@ onMounted(() => {
 
   <div class="top-half-container">
     <div class="blue-team-members-container">
-      <div class="blue-team-header">Blue Team</div>
+      <div class="blue-team-header">
+        <button class="player-button-filter">Players</button>
+        <button class="player-button-filter">Teams</button>
+        <button class="player-button-filter">Games</button>
+      </div>
 
       <div class="input-container">
         <img src="../../public/search-interface-symbol.png" alt="" class="search-img" />
@@ -256,9 +270,29 @@ onMounted(() => {
 
 /* blue team header over the input */
 .blue-team-header {
-  font-size: 30px;
+  height: 100px;
   color: rgb(0, 0, 133);
+  display: flex;
+  gap: 2rem;
 }
+
+/* buttons in blue team header */
+
+.blue-team-header button {
+  background: transparent;
+  border: none;
+  transition: border-bottom-color 1s ease-in-out;
+  border-bottom-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  margin-block: 1rem;
+
+
+}
+
+.blue-team-header button:hover {
+  border-bottom: 1px solid black;
+}
+
 
 /* blue members cell container holding each blue team member */
 .blue-team-members {
