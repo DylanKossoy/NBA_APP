@@ -109,8 +109,6 @@ const createUser = async (username, email, password) => {
 const check = async (event) => {
   event.preventDefault()
 
-
-
   let error = false
 
   // checking
@@ -242,7 +240,7 @@ const check = async (event) => {
       </div>
 
       <div class="button-container">
-        <button type="submit" @click="check">Proceed</button>
+        <button type="submit" @click.prevent="check">Proceed</button>
       </div>
     </div>
   </div>

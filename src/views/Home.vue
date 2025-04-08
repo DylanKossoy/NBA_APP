@@ -1,19 +1,15 @@
 <script setup>
 import { useUserStore } from '../stores/user.js'
-import { onMounted } from 'vue'
+import { onMounted} from 'vue'
 import { RouterLink } from 'vue-router'
 
 const store = useUserStore()
 
+
 onMounted(() => {
   console.log(store.userData.username)
+
 })
-
-
-const image = localStorage.getItem('userAvatar');
-
-document.getElementById('')
-
 
 
 
@@ -35,10 +31,10 @@ document.getElementById('')
     </div>
 
     <div class="nav-username-container">
-      <img src="imagesrc" alt="" class="profile-user-img" />
+
       <div class="user-username">{{ store.userData.username }}</div>
 
-      <RouterLink to="/join" class="logout-style" @click="store.userData.logout">Logout</RouterLink>
+      <RouterLink to="/join" class="logout-style" @click="store.logout">Logout</RouterLink>
     </div>
   </div>
 
