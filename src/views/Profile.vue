@@ -4,18 +4,42 @@ import { useUserStore } from '../../src/stores/user.js'
 
 const store = useUserStore()
 
-
 const userImg = ref(localStorage.getItem('userAvatar'))
 
 
 
 
 
+
+// function to delete account
+
+
+const deleteAccount = async () => {
+
+// url to delete user
+
+const url = 'https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/user/me'
+
+const options = {
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}
+
+
+const response = await fetch(url, options);
+
+console.log(response.status);
+
+
+
+
+}
 </script>
 
-
 <template>
-    <div class="navbar">
+  <div class="navbar">
     <div class="logo-navbar">
       <img src="../../public/basketballLogo.png" alt="" class="basketball-logo" />
     </div>
@@ -30,22 +54,30 @@ const userImg = ref(localStorage.getItem('userAvatar'))
 
     <div class="nav-username-container">
       <img :src="userImg" alt="" class="profile-user-img" />
-      <div class="user-username"> {{ store.userData.username }}</div>
+      <div class="user-username">{{ store.userData.username }}</div>
     </div>
   </div>
   <div class="main-container">
     <div class="profile-info-box-container">
       <div class="profile-header-container">
         <h1>User Information</h1>
-        <button class="edit-button">edit</button>
+        <div class="button-container">
+          <button class="edit-button">Edit</button>
+          <button class="delete-button" @click="deleteAccount">Delete</button>
+        </div>
       </div>
       <div class="user-img-container">
-        <img :src="userImg" alt="" class="user-img">
+        <img :src="userImg" alt="" class="user-img" />
       </div>
       <div class="user-info-box">
-        <div >Username: <span class="user-username"> {{ store.userData.username }}</span></div>
-        <div >Email: <span class="user-email">{{ store.userData.email }}</span></div>
-
+        <div class="user-info">
+          <div class="label-info">Username:</div>
+          <span class="user-info-username"> {{ store.userData.username }}</span>
+        </div>
+        <div class="user-info">
+          <div class="label-info">Email:</div>
+          <span class="user-info-email">{{ store.userData.email }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -53,25 +85,56 @@ const userImg = ref(localStorage.getItem('userAvatar'))
 
 <style scoped>
 
+
+
+.label-info {
+  transform: translateY(-25px) translateX(20px);
+  font-weight: 700;
+  width: 100px;
+}
+
+
+
 h1 {
   margin: 0;
   font-size: 40px;
 }
 
 /* spans that display the actual username and email */
-.user-username, .user-email {
-  font-size: 20px;
+.user-info-username,
+.user-info-email {
+  font-size: 30px;
+  transform: translateY(-25px) translateX(40px);
 }
 
+
+
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  background: rgba(0, 221, 255, 0.193);
+  height: 50px;
+  border-radius: 30px;
+  position: relative;
+}
+
+.user-username {
+  font-size: 20px;
+
+}
 
 /* userinfo box inside the profile box container */
 .user-info-box {
   display: flex;
-  height: 300px;
+  height: 200px;
+  width: 500px;
+
   flex-direction: column;
 
+
   font-size: 20px;
-  justify-content: top;
+  justify-content: space-evenly;
 }
 
 /* user iamge */
@@ -79,7 +142,8 @@ h1 {
   width: 250px;
 }
 /* edit button */
-.edit-button {
+.edit-button,
+.delete-button {
   width: 100px;
   height: 40px;
   border-radius: 10px;
@@ -87,8 +151,19 @@ h1 {
   border: none;
   font-size: 20px;
   cursor: pointer;
+  background: rgba(203, 206, 207, 0.393);
 }
 
+.edit-button:hover,
+.delete-button:hover {
+  background: rgb(119, 116, 116);
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
 /* profile header container */
 .profile-header-container {
@@ -109,7 +184,6 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-
 }
 
 /* main container holding up the profile info container box */
@@ -140,7 +214,6 @@ h1 {
 
 /* nav-username-container username - so the real username of the user gosh */
 .user-username {
-
   font-family: var(--font-primary);
 }
 

@@ -1,35 +1,18 @@
 <script setup>
 import { useUserStore } from '../stores/user.js'
-import { onMounted, ref} from 'vue'
+import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import Search from '../components/Search.vue'
 
 const store = useUserStore()
 
 
-
-
-
 // const image = localStorage.getItem('userAvatar');
-const userImg = ref(store.userData.avatarImg);
-
-
+const userImg = ref(store.userData.avatarImg)
 
 onMounted(() => {
   console.log(store.userData.username)
-
 })
-
-
-
-
-
-
-// function that controls the endpoint of the search input
-// function getEndpoint(endpoint) {
-
-// }
-
-
 
 
 </script>
@@ -49,11 +32,7 @@ onMounted(() => {
     </div>
 
     <div class="nav-username-container">
-
-
-
-
-      <img :src="userImg" alt="" class="profile-user-img">
+      <img :src="userImg" alt="" class="profile-user-img" />
 
       <div class="user-username">{{ store.userData.username }}</div>
 
@@ -62,28 +41,7 @@ onMounted(() => {
   </div>
 
   <div class="top-half-container">
-    <div class="blue-team-members-container">
-      <div class="blue-team-header">
-        <button class="player-button-filter" @click="getEndpoint('players')">Players</button>
-        <button class="player-button-filter" @click="getEndpoint('players')">Teams</button>
-        <button class="player-button-filter" @click="getEndpoint('players')">Games</button>
-      </div>
-
-      <div class="input-container">
-        <img src="../../public/search-interface-symbol.png" alt="" class="search-img" />
-        <input type="text" />
-      </div>
-      <div class="blue-team-members">
-        <div class="user-cell"></div>
-        <div class="user-cell"></div>
-        <div class="user-cell"></div>
-        <div class="user-cell"></div>
-        <div class="user-cell"></div>
-        <div class="user-cell"></div>
-        <div class="user-cell"></div>
-        <div class="user-cell"></div>
-      </div>
-    </div>
+    <Search></Search>
     <div class="latest-feed-container">
       <div class="feed-card">news</div>
       <div class="feed-card">news</div>
@@ -219,12 +177,29 @@ onMounted(() => {
           <span class="stats-incard">ASS: 0</span>
         </div>
       </div>
-
     </div>
   </div>
 </template>
 
 <style scoped>
+/* searching player/team/games button*/
+.searchButton {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(183, 183, 183, 0.187);
+  font-size: 17px;
+  font-family: var(--font-primary);
+  color: black;
+}
+.searchButton:hover {
+  background: grey;
+}
+
 /* nav logout container */
 
 .logout-style {
@@ -277,6 +252,7 @@ onMounted(() => {
   height: 40px;
   padding-left: 3rem;
   font-size: 20px;
+  pointer-events: none;
 }
 
 /* search image */
@@ -286,6 +262,15 @@ onMounted(() => {
   left: 0;
   margin-top: 8px;
   margin-left: 10px;
+}
+
+.searchInputContainer {
+  border: none;
+  border-radius: 8px;
+}
+
+.searchInputContainer::placeholder {
+  color: rgb(94, 93, 93);
 }
 
 /* blue team header over the input */
@@ -307,15 +292,12 @@ onMounted(() => {
   margin-block: 1rem;
   color: white;
   font-size: 25px;
-
-
 }
 
 .blue-team-header button:hover {
   border-bottom: 2px solid rgb(188, 184, 184);
   color: rgb(202, 193, 193);
 }
-
 
 /* blue members cell container holding each blue team member */
 .blue-team-members {

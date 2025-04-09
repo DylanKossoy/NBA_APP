@@ -78,33 +78,37 @@ const createUser = async (username, email, password) => {
     password,
   }
 
-  const image = localStorage.getItem('userAvatar');
+  const image = localStorage.getItem('userAvatar')
 
-  // register a user
-  const url = 'https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/user'
+  try {
+    // register a user
+    const url = 'https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/user'
 
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  }
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    }
 
-  const response = await fetch(url, options)
+    const response = await fetch(url, options)
 
-  if (response.status === 201) {
-    const data = await response.json()
+    if (response.status === 201) {
+      const data = await response.json()
 
-    console.log(data)
+      console.log(data)
 
-    store.setUserData(data, image)
+      store.setUserData(data, image)
 
-    router.push({
-      path: '/home',
-    })
-  } else {
-    console.log('somethings wrong: ', response.status)
+      router.push({
+        path: '/home',
+      })
+    } else {
+      console.log('somethings wrong: ', response.status)
+    }
+  } catch (err) {
+    console.log("fetch error: " + err);
   }
 }
 
@@ -238,7 +242,7 @@ const check = async (event) => {
         </div>
       </form>
       <div class="error-container">
-        <p class="error-text" >{{ errorText }}</p>
+        <p class="error-text">{{ errorText }}</p>
       </div>
 
       <div class="button-container">
@@ -249,17 +253,11 @@ const check = async (event) => {
 </template>
 
 <style scoped>
-
-
-
-
-
 /* sign in button */
 
 .signin-button {
   color: rgb(138, 39, 39);
 }
-
 
 /* container holding all the avatar options */
 .avatar-selection-container {
