@@ -13,14 +13,14 @@ export const useUserStore = defineStore('userStore', () => {
     avatarImg: '',
   })
 
-  function setUserData(data, image) {
+  function setUserData(data) {
     userToken.value = data.token
     userData.username = data.user.username
     userData.email = data.user.email
     userData.favoritePlayers = data.user.favoritePlayers
     userData.favoriteTeams = data.user.favoriteTeams
     userData.betIds = data.user.betIds
-    userData.avatarImg = image
+    userData.avatarImg = localStorage.getItem('userAvatar');
   }
 
   function logout() {

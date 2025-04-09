@@ -36,6 +36,12 @@ function close() {
 </template>
 
 <style scoped>
+
+
+
+
+
+
 .modal-backdrop {
     position: fixed;
     top: 0;
@@ -54,8 +60,11 @@ function close() {
     display: flex;
     flex-direction: column;
     background: rgba(0, 0, 0, 0.463);
-    max-width: 500px;
-    width: 90%;
+    min-width: 500px;
+    height: 700px;
+    justify-content: center;
+    align-items: center;
+
     backdrop-filter: blur(5px);
     border-radius: 20px;
 }

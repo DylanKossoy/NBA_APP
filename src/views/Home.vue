@@ -7,8 +7,8 @@ import Search from '../components/Search.vue'
 const store = useUserStore()
 
 
-// const image = localStorage.getItem('userAvatar');
-const userImg = ref(store.userData.avatarImg)
+const image = localStorage.getItem('userAvatar');
+const userImg = ref(image);
 
 onMounted(() => {
   console.log(store.userData.username)

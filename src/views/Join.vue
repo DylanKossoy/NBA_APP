@@ -51,6 +51,7 @@ function setUserAvatar(numberAvatar) {
   }
 
   localStorage.setItem('userAvatar', image)
+
 }
 
 // triggershake to whatever element i need and a timer to set it back
@@ -78,7 +79,12 @@ const createUser = async (username, email, password) => {
     password,
   }
 
-  const image = localStorage.getItem('userAvatar')
+
+
+
+
+
+
 
   try {
     // register a user
@@ -99,7 +105,7 @@ const createUser = async (username, email, password) => {
 
       console.log(data)
 
-      store.setUserData(data, image)
+      store.setUserData(data)
 
       router.push({
         path: '/home',

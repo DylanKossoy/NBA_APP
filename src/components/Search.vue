@@ -1,10 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 const searchInput = ref(null)
+const searchTerm = ref('');
+let urlEndpoint = '';
 
 // function that controls the endpoint of the search input
 function getEndpoint(endpoint) {
-  let urlEndpoint = ''
+
 
   switch (endpoint) {
     case 1:
@@ -33,6 +35,97 @@ function getEndpoint(endpoint) {
 
   console.log(urlEndpoint)
 }
+
+
+
+
+
+function createCards(data) {
+  for(let i = 0; i < data.length; i++) {
+    console.log(i);
+  }
+
+
+
+
+}
+
+
+// 3 functions of searching either teams/ players/ or games/
+
+async function searchPlayers() {
+
+
+
+
+  const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/${urlEndpoint}?name-search=lebron-james`
+
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+  const response = await fetch(url, options)
+
+  if(response.status === 200) {
+    const data = await response.json();
+
+
+    console.log(data);
+
+    createCards(data);
+  } else {
+    console.log(response.status)
+  }
+
+}
+
+function searchTeams() {
+
+}
+
+function searchGames() {
+
+}
+
+
+
+
+// function that fetches what the user input searched
+
+const searchBasketball = async () => {
+
+
+
+  if(!searchInput.value || !urlEndpoint) {
+    return;
+  }
+
+
+
+  switch(urlEndpoint) {
+    case 'players':
+      searchPlayers();
+      break;
+    case 'teams':
+      searchTeams();
+      break;
+    case 'games':
+      searchGames();
+      break;
+    default:
+      return;
+  }
+
+
+
+
+
+
+}
 </script>
 <template>
   <div class="blue-team-members-container">
@@ -45,12 +138,13 @@ function getEndpoint(endpoint) {
     <div class="input-container">
       <img src="../../public/search-interface-symbol.png" alt="" class="search-img" />
       <input
-        type="text"
         ref="searchInput"
+        type="text"
+        v-model="searchTerm"
         class="searchInputContainer"
         placeholder="Choose a Option Above"
       />
-      <button class="searchButton">Search →</button>
+      <button class="searchButton" @click="searchBasketball">Search →</button>
     </div>
     <div class="blue-team-members">
       <div class="user-cell"></div>
@@ -193,7 +287,7 @@ function getEndpoint(endpoint) {
 }
 
 .blue-team-members .user-cell {
-  height: 60px;
+  height: 100px;
   border: 1px solid black;
   width: 500px;
   flex: 0 0 auto;
