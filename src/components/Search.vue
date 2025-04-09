@@ -12,17 +12,20 @@ function getEndpoint(endpoint) {
 
       searchInput.value.style.backgroundColor = '#e665654f'
       searchInput.value.placeholder = 'Enter Player Name'
+      searchInput.value.style['pointer-events']= "auto"
 
       break
-    case 2:
-      urlEndpoint = 'teams'
-      searchInput.value.style.backgroundColor = '#6590e64f'
-      searchInput.value.placeholder = 'Enter Team Name'
-      break
-    case 3:
-      urlEndpoint = 'games'
-      searchInput.value.style.backgroundColor = '#7fa6db4f'
-      searchInput.value.placeholder = 'Enter Game Name'
+      case 2:
+        urlEndpoint = 'teams'
+        searchInput.value.style.backgroundColor = '#6590e64f'
+        searchInput.value.placeholder = 'Enter Team Name'
+        searchInput.value.style['pointer-events']= "auto"
+        break
+        case 3:
+          urlEndpoint = 'games'
+          searchInput.value.style.backgroundColor = '#7fa6db4f'
+          searchInput.value.placeholder = 'Enter Game Name'
+          searchInput.value.style['pointer-events']= "auto"
       break
     default:
       return
