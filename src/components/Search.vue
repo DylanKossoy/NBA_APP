@@ -3,6 +3,17 @@ import { ref } from 'vue'
 const searchInput = ref(null)
 const searchTerm = ref('');
 const advancedOption = ref(false);
+
+// refs for advanced search
+
+const advancedSeason = ref('');
+const advancedConference = ref('');
+
+
+
+
+
+
 let urlEndpoint = '';
 
 // function that controls the endpoint of the search input
@@ -115,6 +126,9 @@ const searchBasketball = async () => {
 
 
 
+
+
+
   switch(urlEndpoint) {
     case 'players':
       searchPlayers();
@@ -167,33 +181,25 @@ const searchBasketball = async () => {
 
 
       <div class="advanced-option">
-        <div class="season-year-label">
+        <div class="label">
           Choose Season:
         </div>
-        <input type="number" min="2000" max="2100" placeholder="Choose Season" class="season-year">
+        <input type="number" min="2000" max="2100" placeholder="Choose Season" class="season-year" v-model="advancedSeason">
 
       </div>
       <div class="advanced-option">
-        <div class="season-year-label">
-          Choose Season:
+        <div class="label">
+          Choose Conference:
         </div>
-        <input type="number" min="2000" max="2100" placeholder="Choose Season" class="season-year">
+        <select name="conference" class="conferenceSelect">
+          <option value="west">West</option>
+          <option value="east">East</option>
+        </select>
+
 
       </div>
-      <div class="advanced-option">
-        <div class="season-year-label">
-          Choose Season:
-        </div>
-        <input type="number" min="2000" max="2100" placeholder="Choose Season" class="season-year">
 
-      </div>
-      <div class="advanced-option">
-        <div class="season-year-label">
-          Choose Season:
-        </div>
-        <input type="number" min="2000" max="2100" placeholder="Choose Season" class="season-year">
 
-      </div>
 
     </div>
     <div class="blue-team-members">
@@ -211,12 +217,22 @@ const searchBasketball = async () => {
 
 <style scoped>
 
-.season-year-label {
+.label {
   font-size: 10px;
 }
 
+
+
+.conferenceSelect {
+  width: 100px;
+}
 .season-year {
   width: 100px;
+}
+
+
+.advanced-option {
+  width: 200px;
 }
 
 
@@ -243,6 +259,10 @@ const searchBasketball = async () => {
   border-radius: 30px;
   border: none;
   background: rgb(146, 144, 144);
+}
+
+.advancedSearchButton:hover {
+  background: rgb(96, 96, 96);
 }
 
 
