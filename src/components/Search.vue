@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 const searchInput = ref(null)
 const searchTerm = ref('');
+const advancedOption = ref(false);
 let urlEndpoint = '';
 
 // function that controls the endpoint of the search input
@@ -92,6 +93,14 @@ function searchGames() {
 }
 
 
+function toggleAdvanced() {
+
+  advancedOption.value = !advancedOption.value
+
+
+}
+
+
 
 
 // function that fetches what the user input searched
@@ -145,6 +154,47 @@ const searchBasketball = async () => {
         placeholder="Choose a Option Above"
       />
       <button class="searchButton" @click="searchBasketball">Search →</button>
+
+    </div>
+    <div class="advanced-button-container">
+
+      <button class="advancedSearchButton" @click="toggleAdvanced">Advanced Search</button>
+    </div>
+
+
+
+    <div class="advanced-inputs-container" v-if="advancedOption">
+
+
+      <div class="advanced-option">
+        <div class="season-year-label">
+          Choose Season:
+        </div>
+        <input type="number" min="2000" max="2100" placeholder="Choose Season" class="season-year">
+
+      </div>
+      <div class="advanced-option">
+        <div class="season-year-label">
+          Choose Season:
+        </div>
+        <input type="number" min="2000" max="2100" placeholder="Choose Season" class="season-year">
+
+      </div>
+      <div class="advanced-option">
+        <div class="season-year-label">
+          Choose Season:
+        </div>
+        <input type="number" min="2000" max="2100" placeholder="Choose Season" class="season-year">
+
+      </div>
+      <div class="advanced-option">
+        <div class="season-year-label">
+          Choose Season:
+        </div>
+        <input type="number" min="2000" max="2100" placeholder="Choose Season" class="season-year">
+
+      </div>
+
     </div>
     <div class="blue-team-members">
       <div class="user-cell"></div>
@@ -160,6 +210,45 @@ const searchBasketball = async () => {
 </template>
 
 <style scoped>
+
+.season-year-label {
+  font-size: 10px;
+}
+
+.season-year {
+  width: 100px;
+}
+
+
+.advanced-inputs-container {
+  display: flex;
+  gap: 1rem;
+}
+
+
+.advanced-button-container {
+
+  display: flex;
+  justify-content: right;
+  width: 500px;
+  margin: 10px;
+}
+
+
+.advancedSearchButton {
+  width: 100px;
+  height: 20px;
+  font-size: 10px;
+  cursor: pointer;
+  border-radius: 30px;
+  border: none;
+  background: rgb(146, 144, 144);
+}
+
+
+
+
+
 /* searching player/team/games button*/
 .searchButton {
   position: absolute;
