@@ -1,4 +1,10 @@
-<script setup></script>
+<script setup>
+import Search from '../components/Search.vue'
+
+
+
+
+</script>
 
 <template>
   <div class="navbar">
@@ -242,41 +248,8 @@
       </div>
 
       <div class="player-container">
-        <div class="player-selected-container">
-          <div class="profile-img-container">
-            <img src="../../public/player-selected.png" alt="" class="player-selected-user-img">
-            <div class="player-name-number">
-              <div class="player-selected-name">Player name</div>
-              <div class="player-selected-number"><span class="hash">#</span>00</div>
-              <div class="player-selected-country">Country</div>
-            </div>
 
-
-          </div>
-          <div class="info-player-container">
-            <div class="info-box-one">
-              <span class="player-selected-stat">Position: <span class="player-selected-stat-number">F</span></span>
-              <span class="player-selected-stat">height: <span class="player-selected-stat-number">6'9</span></span>
-              <span class="player-selected-stat">weight: <span class="player-selected-stat-number">250</span></span>
-              <span class="player-selected-stat">Points: <span class="player-selected-stat-number">0</span></span>
-              <span class="player-selected-stat">Team: <span class="player-selected-stat-number">Lakers</span></span>
-              <span class="player-selected-stat">City: <span class="player-selected-stat-number">Los Angeles</span></span>
-              <span class="player-selected-stat">Season: <span class="player-selected-stat-number">0</span></span>
-
-            </div>
-            <div class="info-box-two">
-              <span class="player-selected-stat">Points: <span class="player-selected-stat-number">0</span></span>
-              <span class="player-selected-stat">Assists: <span class="player-selected-stat-number">0</span></span>
-              <span class="player-selected-stat">Turnovers: <span class="player-selected-stat-number">0</span></span>
-              <span class="player-selected-stat">Steals: <span class="player-selected-stat-number">0</span></span>
-              <span class="player-selected-stat">Rebounds: <span class="player-selected-stat-number">0</span></span>
-              <span class="player-selected-stat">Blocks: <span class="player-selected-stat-number">West</span></span>
-              <span class="player-selected-stat">College: <span class="player-selected-stat-number">Bridgewater</span></span>
-
-
-            </div>
-          </div>
-        </div>
+        <Search></Search>
         <div class="info-box-container"></div>
       </div>
     </div>

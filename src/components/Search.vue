@@ -1,45 +1,40 @@
 <script setup>
 import { ref } from 'vue'
 const searchInput = ref(null)
-const searchTerm = ref('');
-const advancedOption = ref(false);
+const searchTerm = ref('')
+const advancedOption = ref(false)
 
 // refs for advanced search
 
-const advancedSeason = ref('');
-const advancedConference = ref('');
+const advancedSeason = ref('')
+const advancedConference = ref('')
 
+const searchResults = ref([])
 
-
-
-
-
-let urlEndpoint = '';
+let urlEndpoint = ''
 
 // function that controls the endpoint of the search input
 function getEndpoint(endpoint) {
-
-
   switch (endpoint) {
     case 1:
       urlEndpoint = 'players'
 
       searchInput.value.style.backgroundColor = '#e665654f'
       searchInput.value.placeholder = 'Enter Player Name'
-      searchInput.value.style['pointer-events']= "auto"
+      searchInput.value.style['pointer-events'] = 'auto'
 
       break
-      case 2:
-        urlEndpoint = 'teams'
-        searchInput.value.style.backgroundColor = '#6590e64f'
-        searchInput.value.placeholder = 'Enter Team Name'
-        searchInput.value.style['pointer-events']= "auto"
-        break
-        case 3:
-          urlEndpoint = 'games'
-          searchInput.value.style.backgroundColor = '#7fa6db4f'
-          searchInput.value.placeholder = 'Enter Game Name'
-          searchInput.value.style['pointer-events']= "auto"
+    case 2:
+      urlEndpoint = 'teams'
+      searchInput.value.style.backgroundColor = '#6590e64f'
+      searchInput.value.placeholder = 'Enter Team Name'
+      searchInput.value.style['pointer-events'] = 'auto'
+      break
+    case 3:
+      urlEndpoint = 'games'
+      searchInput.value.style.backgroundColor = '#7fa6db4f'
+      searchInput.value.placeholder = 'Enter Game Name'
+      searchInput.value.style['pointer-events'] = 'auto'
       break
     default:
       return
@@ -48,180 +43,146 @@ function getEndpoint(endpoint) {
   console.log(urlEndpoint)
 }
 
-
-
-
-
-function createCards(data) {
-  for(let i = 0; i < data.length; i++) {
-    console.log(i);
-  }
-
-
-
-
-}
-
-
 // 3 functions of searching either teams/ players/ or games/
 
 async function searchPlayers() {
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/${urlEndpoint}`
 
-
-
-
-  const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/${urlEndpoint}?name-search=lebron-james`
-
+  if (advancedConference.value || advancedSeason.value || searchTerm.value) {
+    url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/${urlEndpoint}?name-search=${searchTerm.value}`
+  }
 
   const options = {
     method: 'GET',
     headers: {
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    },
   }
 
   const response = await fetch(url, options)
 
-  if(response.status === 200) {
-    const data = await response.json();
+  if (response.status === 200) {
+    const dataObject = await response.json()
 
+    console.log(dataObject.data[0])
 
-    console.log(data);
-
-    createCards(data);
+    searchResults.value = dataObject.data[0]
   } else {
     console.log(response.status)
   }
-
 }
 
-function searchTeams() {
+function searchTeams() {}
 
-}
-
-function searchGames() {
-
-}
-
+function searchGames() {}
 
 function toggleAdvanced() {
-
   advancedOption.value = !advancedOption.value
-
-
 }
-
-
-
 
 // function that fetches what the user input searched
 
 const searchBasketball = async () => {
-
-
-
-  if(!searchInput.value || !urlEndpoint) {
-    return;
+  if (!searchInput.value || !urlEndpoint) {
+    return
   }
 
-
-
-
-
-
-  switch(urlEndpoint) {
+  switch (urlEndpoint) {
     case 'players':
-      searchPlayers();
-      break;
+      searchPlayers()
+      break
     case 'teams':
-      searchTeams();
-      break;
+      searchTeams()
+      break
     case 'games':
-      searchGames();
-      break;
+      searchGames()
+      break
     default:
-      return;
+      return
   }
-
-
-
-
-
-
 }
 </script>
 <template>
   <div class="blue-team-members-container">
-    <div class="blue-team-header">
-      <button class="player-button-filter" @click="getEndpoint(1)">Players</button>
-      <button class="player-button-filter" @click="getEndpoint(2)">Teams</button>
-      <button class="player-button-filter" @click="getEndpoint(3)">Games</button>
-    </div>
-
-    <div class="input-container">
-      <img src="../../public/search-interface-symbol.png" alt="" class="search-img" />
-      <input
-        ref="searchInput"
-        type="text"
-        v-model="searchTerm"
-        class="searchInputContainer"
-        placeholder="Choose a Option Above"
-      />
-      <button class="searchButton" @click="searchBasketball">Search →</button>
-
-    </div>
-    <div class="advanced-button-container">
-
-      <button class="advancedSearchButton" @click="toggleAdvanced">Advanced Search</button>
-    </div>
-
-
-
-    <div class="advanced-inputs-container" v-if="advancedOption">
-
-
-      <div class="advanced-option">
-        <div class="label">
-          Choose Season:
-        </div>
-        <input type="number" min="2000" max="2100" placeholder="Choose Season" class="season-year" v-model="advancedSeason">
-
-      </div>
-      <div class="advanced-option">
-        <div class="label">
-          Choose Conference:
-        </div>
-        <select name="conference" class="conferenceSelect">
-          <option value="west">West</option>
-          <option value="east">East</option>
-        </select>
-
-
+    <div class="top-of-search-container">
+      <div class="blue-team-header">
+        <button class="player-button-filter" @click="getEndpoint(1)">Players</button>
+        <button class="player-button-filter" @click="getEndpoint(2)">Teams</button>
+        <button class="player-button-filter" @click="getEndpoint(3)">Games</button>
       </div>
 
-
-
+      <div class="input-container">
+        <img src="../../public/search-interface-symbol.png" alt="" class="search-img" />
+        <input
+          ref="searchInput"
+          type="text"
+          v-model="searchTerm"
+          class="searchInputContainer"
+          placeholder="Choose a Option Above"
+        />
+        <button class="searchButton" @click="searchBasketball">Search →</button>
+      </div>
+      <div class="advanced-button-container">
+        <div class="advanced-inputs-container" v-if="advancedOption">
+          <div class="advanced-option">
+            <div class="label">Choose Season:</div>
+            <input
+              type="number"
+              min="2000"
+              max="2100"
+              placeholder="Choose Season"
+              class="season-year"
+              v-model="advancedSeason"
+            />
+          </div>
+          <div class="advanced-option">
+            <div class="label">Choose Conference:</div>
+            <select name="conference" class="conferenceSelect">
+              <option value="west">West</option>
+              <option value="east">East</option>
+            </select>
+          </div>
+        </div>
+        <button class="advancedSearchButton" @click="toggleAdvanced">Advanced Search</button>
+      </div>
     </div>
-    <div class="blue-team-members">
-      <div class="user-cell"></div>
-      <div class="user-cell"></div>
-      <div class="user-cell"></div>
-      <div class="user-cell"></div>
-      <div class="user-cell"></div>
-      <div class="user-cell"></div>
-      <div class="user-cell"></div>
-      <div class="user-cell"></div>
+    <div class="blue-team-members" >
+      <div class="user-cell" v-for="result in searchResults" :key="result.id">
+        <span class="results-stats">{{ result.firstname }}</span>
+        <span class="results-stats"></span>
+        <span class="results-stats"></span>
+        <span class="results-stats"></span>
+        <span class="results-stats"></span>
+        <span class="results-stats"></span>
+
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
 
-.label {
-  font-size: 10px;
+.result-stats {
+  color: red;
 }
 
 
+
+
+.top-of-search-container {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  border-bottom: 0.5px solid rgb(78, 69, 69);
+}
+
+.label {
+  font-size: 10px;
+}
 
 .conferenceSelect {
   width: 100px;
@@ -230,26 +191,22 @@ const searchBasketball = async () => {
   width: 100px;
 }
 
-
 .advanced-option {
-  width: 200px;
+  width: 150px;
 }
-
 
 .advanced-inputs-container {
   display: flex;
   gap: 1rem;
 }
 
-
 .advanced-button-container {
-
   display: flex;
   justify-content: right;
   width: 500px;
+  min-height: 50px;
   margin: 10px;
 }
-
 
 .advancedSearchButton {
   width: 100px;
@@ -264,10 +221,6 @@ const searchBasketball = async () => {
 .advancedSearchButton:hover {
   background: rgb(96, 96, 96);
 }
-
-
-
-
 
 /* searching player/team/games button*/
 .searchButton {
@@ -393,6 +346,8 @@ const searchBasketball = async () => {
   flex-direction: column;
   overflow-y: auto;
   margin-top: 2rem;
+  width: 500px;
+
 }
 
 .blue-team-members .user-cell {
@@ -400,6 +355,7 @@ const searchBasketball = async () => {
   border: 1px solid black;
   width: 500px;
   flex: 0 0 auto;
+
 }
 
 /* nav links container in the middle of the nav bar */
