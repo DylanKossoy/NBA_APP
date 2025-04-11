@@ -3,6 +3,9 @@ import { ref } from 'vue'
 import Search from '../components/Search.vue'
 import Player from '../components/Player.vue'
 import Deck from '../components/Deck.vue'
+import { useUserStore } from '../stores/user.js'
+
+const store = useUserStore();
 
 const selectedPlayer = ref(null)
 
@@ -25,7 +28,7 @@ const selectedPlayer = ref(null)
 
     <div class="nav-username-container">
       <img src="../../public/user.png" alt="" class="profile-user-img" />
-      <div class="user-username">Username</div>
+      <div class="user-username">{{ store.userData.username }}</div>
     </div>
   </div>
 

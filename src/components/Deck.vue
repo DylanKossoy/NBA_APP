@@ -1,54 +1,38 @@
 <script setup>
-import { ref} from 'vue'
+import { ref, watch } from 'vue'
 
 const props = defineProps({
   player: Object,
 })
 
-
-console.log(props.player.team.id + "deck")
-
-const playerTeamId = props.player.team.id
+console.log(props.player.team.id + ' deck')
 
 
 
-
-
+watch(() => props.player.team.id, (newId) => {
+  console.log("change" + newId)
+  showDeck()
+})
 
 const showDeck = async () => {
-
-
-
   const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/teams`
 
   const options = {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-    }
+    },
   }
 
-  const response = await fetch(url, options);
+  const response = await fetch(url, options)
 
-
-  if(response.status === 200) {
-    const data = response.json()
-    console.log("this is data collected from user chosen team: " + data)
-
-
+  if (response.status === 200) {
+    const data = await response.json()
+    console.log('this is data collected from user chosen team: ' + data)
   } else {
     console.log(response.data)
   }
-
-
-
 }
-
-
-
-
-
-
 </script>
 
 <template>
