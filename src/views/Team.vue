@@ -1,7 +1,10 @@
 <script setup>
+import { ref } from 'vue'
 import Search from '../components/Search.vue'
+import Player from '../components/Player.vue'
+import Deck from '../components/Deck.vue'
 
-
+const selectedPlayer = ref(null)
 
 
 </script>
@@ -28,241 +31,24 @@ import Search from '../components/Search.vue'
 
   <div class="content-container">
     <div class="left-side-container">
-      <div class="team-cards-container">
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-        <div class="player-card" tabindex="0">
-          <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img">
-          <div class="player-card-player-name">Player Name</div>
-          <div class="player-card-player-number">#00</div>
-
-        </div>
-
-
-
-
-      </div>
+      <Deck v-if="selectedPlayer" :player="selectedPlayer"></Deck>
 
       <div class="season-selection-container">
-        <div class="season-option"></div>
-        <div class="season-option"></div>
-        <div class="season-option"></div>
-        <div class="season-option"></div>
+        <Player v-if="selectedPlayer" :player="selectedPlayer"></Player>
       </div>
     </div>
     <div class="right-side-container">
-      <div class="sidenav-team-selection">
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-        <div class="team-option" tabindex="0">Team 1</div>
-      </div>
-
       <div class="player-container">
-
-        <Search></Search>
-        <div class="info-box-container"></div>
+        <Search v-model:selected-player="selectedPlayer"></Search>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-
-
 .player-card-player-name {
   font-size: 12px;
 }
-
 
 /* info box container when player is selected */
 .player-selected-container .info-player-container {
@@ -271,7 +57,8 @@ import Search from '../components/Search.vue'
 
 /* info boxes for players stats */
 
-.info-player-container .info-box-one, .info-player-container .info-box-two  {
+.info-player-container .info-box-one,
+.info-player-container .info-box-two {
   width: 300px;
 
   height: 230px;
@@ -281,8 +68,6 @@ import Search from '../components/Search.vue'
   font-family: var(--font-primary);
   font-weight: 700;
   font-size: 15px;
-
-
 }
 
 .player-selected-stat {
@@ -295,27 +80,21 @@ import Search from '../components/Search.vue'
   margin-left: 1rem;
 }
 
-
 .player-selected-country {
   font-size: 20px;
-
 }
-
 
 /* player selected profile picture image */
 .player-selected-user-img {
-
   width: 180px;
 }
-
 
 .profile-img-container {
   display: flex;
   padding: 2rem;
   font-family: var(--font-primary);
-  border-bottom: .5px solid rgba(200, 196, 196, 0.289);
+  border-bottom: 0.5px solid rgba(200, 196, 196, 0.289);
 }
-
 
 /* holding player name and number selected */
 .profile-img-container .player-name-number {
@@ -326,11 +105,9 @@ import Search from '../components/Search.vue'
   width: 200px;
 }
 
-
 /* pplayer selected and player number selected */
 .profile-img-container .player-selected-name {
   font-size: 30px;
-
 }
 .profile-img-container .player-selected-number {
   font-size: 80px;
@@ -340,53 +117,36 @@ import Search from '../components/Search.vue'
   font-size: 50px;
 }
 
-
-
 /* player card inside the card containers  */
 .team-cards-container .player-card {
   width: 100px;
   height: 140px;
-  border: 1px solid black;;
-  margin: .25rem;
+  border: 1px solid black;
+  margin: 0.25rem;
   display: flex;
   flex-direction: column;
-  justify-content:  space-around;
+  justify-content: space-around;
   font-family: var(--font-primary);
   align-items: center;
   cursor: pointer;
-  padding: .5rem;
+  padding: 0.5rem;
   border-radius: 10px;
 }
-
 
 /* hover over player card */
 .team-cards-container .player-card:hover {
   background-color: rgba(136, 135, 135, 0.538);
-
 }
-
 
 /* whenever a player is selected inside the card container */
 .team-cards-container .player-card:focus {
   background-color: rgb(187, 150, 150);
 }
 
-
-
-
 /* profile image inside the player card */
 .player-card .player-card-profile-img {
   width: 50px;
 }
-
-
-
-
-
-
-
-
-
 
 /* team cards container */
 .left-side-container .team-cards-container {
@@ -398,7 +158,6 @@ import Search from '../components/Search.vue'
   grid-template-rows: repeat(5, 160px);
   padding: 1rem;
   overflow-y: auto;
-
 }
 
 /* season selection container  */
@@ -423,8 +182,9 @@ import Search from '../components/Search.vue'
 
 /* player selection container */
 .right-side-container .player-container {
-  width: 450px;
+  width: 500px;
   height: 750px;
+  overflow-y: auto;
 }
 
 /* player container - player selected container */
@@ -498,6 +258,8 @@ import Search from '../components/Search.vue'
   border: 0.1px solid black;
   margin-inline: 1rem;
   display: flex;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.217);
 }
 
 /* nav links container in the middle of the nav bar */
@@ -526,6 +288,4 @@ import Search from '../components/Search.vue'
 .profile-user-img {
   max-width: 50px;
 }
-
-
 </style>

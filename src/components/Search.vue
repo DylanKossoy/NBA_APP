@@ -1,7 +1,15 @@
 <script setup>
 import { ref } from 'vue'
+
+
+
+
+const playerSelected = defineModel("selected-player")
+
+
 const searchInput = ref(null)
 const searchTerm = ref('')
+const resultsContainerValid = ref(false);
 const advancedOption = ref(false)
 
 // refs for advanced search
@@ -9,7 +17,9 @@ const advancedOption = ref(false)
 const advancedSeason = ref('')
 const advancedConference = ref('')
 
-const searchResults = ref([])
+
+
+const searchPlayerResults = ref([])
 
 let urlEndpoint = ''
 
@@ -43,9 +53,36 @@ function getEndpoint(endpoint) {
   console.log(urlEndpoint)
 }
 
+
+
+// function to show userstats below there team
+
+const showUserStats = async (data) => {
+  playerSelected.value = null;
+  setTimeout(() => {
+    playerSelected.value = data;
+
+  },100)
+
+
+
+
+}
+
+
+
+
+
 // 3 functions of searching either teams/ players/ or games/
 
 async function searchPlayers() {
+
+
+
+
+
+
+
   let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/${urlEndpoint}`
 
   if (advancedConference.value || advancedSeason.value || searchTerm.value) {
@@ -66,8 +103,12 @@ async function searchPlayers() {
 
     console.log(dataObject.data[0])
 
-    searchResults.value = dataObject.data[0]
+    searchPlayerResults.value.push(dataObject.data[0])
+    searchTerm.value = ''
+    resultsContainerValid.value = true;
+
   } else {
+    resultsContainerValid.value = false;
     console.log(response.status)
   }
 }
@@ -83,6 +124,16 @@ function toggleAdvanced() {
 // function that fetches what the user input searched
 
 const searchBasketball = async () => {
+
+  resultsContainerValid.value = false;
+  searchPlayerResults.value = []
+
+
+
+
+
+
+
   if (!searchInput.value || !urlEndpoint) {
     return
   }
@@ -146,28 +197,50 @@ const searchBasketball = async () => {
         <button class="advancedSearchButton" @click="toggleAdvanced">Advanced Search</button>
       </div>
     </div>
-    <div class="blue-team-members" >
-      <div class="user-cell" v-for="result in searchResults" :key="result.id">
-        <span class="results-stats">{{ result.firstname }}</span>
-        <span class="results-stats"></span>
-        <span class="results-stats"></span>
-        <span class="results-stats"></span>
-        <span class="results-stats"></span>
-        <span class="results-stats"></span>
-
+    <div class="blue-team-members" v-if="resultsContainerValid" >
+      <div class="user-cell" v-for="result in searchPlayerResults" :key="result.id" tabindex="0" @click="showUserStats(result)">
+        <div class="user-info-box">
+          <span class="label-info-player">First Name: </span>
+          <span class="stat-number">{{ result.first_name }}</span>
+        </div>
+        <div class="user-info-box">
+          <span class="label-info-player">Last Name: </span>
+          <span class="stat-number">{{ result.last_name }}</span>
+        </div>
+        <div class="user-info-box">
+          <span class="label-info-player">Jersey: </span>
+          <span class="stat-number">{{ result.jersey_number }}</span>
+        </div>
+        <div class="user-info-box">
+          <span class="label-info-player">Height: </span>
+          <span class="stat-number">{{ result.height }}</span>
+        </div>
+        <div class="user-info-box">
+          <span class="label-info-player">Conference: </span>
+          <span class="stat-number">{{ result.team.conference }}</span>
+        </div>
+        <div class="user-info-box">
+          <span class="label-info-player">Team: </span>
+          <span class="stat-number">{{ result.team.name }}</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.label-info-player {
+  font-size: 12px;
+  color: rgb(111, 19, 19);
 
+}
 .result-stats {
   color: red;
 }
 
-
-
+.stat-number {
+  font-size: 15px;
+}
 
 .top-of-search-container {
   display: flex;
@@ -186,9 +259,13 @@ const searchBasketball = async () => {
 
 .conferenceSelect {
   width: 100px;
+  background: rgb(119, 119, 119);
+  border: 1px solid black;
 }
 .season-year {
   width: 100px;
+  background: rgb(119, 119, 119);
+  border: 1px solid black;
 }
 
 .advanced-option {
@@ -198,6 +275,14 @@ const searchBasketball = async () => {
 .advanced-inputs-container {
   display: flex;
   gap: 1rem;
+}
+
+.user-info-box {
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-primary);
+  padding: 1rem;
 }
 
 .advanced-button-container {
@@ -330,13 +415,13 @@ const searchBasketball = async () => {
   border-bottom-color: rgba(0, 0, 0, 0);
   cursor: pointer;
   margin-block: 1rem;
-  color: white;
+  color: rgb(41, 40, 40);
   font-size: 25px;
 }
 
 .blue-team-header button:hover {
-  border-bottom: 2px solid rgb(188, 184, 184);
-  color: rgb(202, 193, 193);
+  border-bottom: 2px solid black;
+  color: black;
 }
 
 /* blue members cell container holding each blue team member */
@@ -347,7 +432,6 @@ const searchBasketball = async () => {
   overflow-y: auto;
   margin-top: 2rem;
   width: 500px;
-
 }
 
 .blue-team-members .user-cell {
@@ -355,98 +439,21 @@ const searchBasketball = async () => {
   border: 1px solid black;
   width: 500px;
   flex: 0 0 auto;
-
-}
-
-/* nav links container in the middle of the nav bar */
-.nav-links {
   display: flex;
-  gap: 3rem;
-  width: 700px;
-  justify-content: right;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  background: rgba(210, 206, 206, 0.624);
+
 }
 
-/* nav username and profile img container */
-.nav-username-container {
-  width: 400px;
-  gap: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: right;
+.user-cell:hover {
+  background: rgba(23, 125, 193, 0.206)
 }
 
-/* nav-username-container username - so the real username of the user gosh */
-.user-username {
-  font-size: 20px;
-  font-family: var(--font-primary);
+.user-cell:focus {
+  background: rgba(39, 71, 134, 0.389);
 }
 
-/* profile user img */
 
-.profile-user-img {
-  max-width: 50px;
-}
 
-/* top half of the home page that includes all the members of the blue team with a search bar */
-/* top half showing the latest game results */
-
-.top-half-container {
-  height: 450px;
-  display: flex;
-  margin: 1rem;
-  margin-top: 2rem;
-  justify-content: space-between;
-}
-
-/* bottom half container */
-.bottom-half-container {
-  height: 250px;
-  border: 1px solid black;
-  margin: 1rem;
-  padding-bottom: 1rem;
-}
-
-/* bottom half container favorite players */
-.bottom-half-container .favorite-players-header {
-  font-size: 20px;
-  font-family: var(--font-primary);
-  margin-left: 1rem;
-  margin-bottom: 1.1rem;
-}
-
-/* bottom half container that holds the favorite player cards */
-.bottom-half-container .card-container {
-  overflow-y: hidden;
-  overflow-x: auto;
-  height: 200px;
-  padding-inline: 1rem;
-  display: flex;
-  gap: 1rem;
-}
-
-/* favorite player cards inside the card container */
-
-.card-container .favorite-player-card {
-  width: 125px;
-  height: 175px;
-  border: 1px solid black;
-  border-radius: 5px;
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* span elements inside card that show stats (pTS, RBS, ASS) */
-
-.favorite-player-card .stats-incard {
-  font-size: 10px;
-}
-
-/* profile image in the favorite player cards */
-.favorite-player-card .stats-user-img {
-  width: 60px;
-}
 </style>
