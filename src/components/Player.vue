@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 const props = defineProps({
   player: Object,
 })
@@ -6,9 +7,50 @@ const props = defineProps({
 console.log('player component: ' + Object.keys(props.player.team))
 
 const data = props.player
+const showInfo = ref(false);
+
+const playerStatsData = ref(null);
+
+
+const toggleInfoContainer = () => {
+
+  showInfo.value = !showInfo.value
 
 
 
+}
+
+
+const getPlayerInfo = async () => {
+
+
+const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/players/${data.id}`
+
+const options = {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json'
+  }
+}
+
+
+const response = await fetch(url, options)
+
+
+
+if(response.status === 200) {
+  const data = await response.json()
+
+  playerStatsData.value = data.stats.data[0]
+  console.log(playerStatsData.value)
+} else {
+  console.log(response.status);
+}
+
+}
+
+
+getPlayerInfo();
 
 </script>
 
@@ -16,8 +58,9 @@ const data = props.player
   <div class="main-container">
     <div class="image-player-container">
       <img src="../../public/player-selected.png" alt="" class="player-selected-img" />
+      <button class="more-info-button" @click="toggleInfoContainer">More Info</button>
     </div>
-    <div class="player-selected-info-container">
+    <div class="player-selected-info-container" v-if="!showInfo">
       <div class="info-box">
         <div class="info-piece">
           <span class="label-info-piece">Id:</span>
@@ -99,6 +142,88 @@ const data = props.player
         </div>
       </div>
     </div>
+    <div class="player-selected-info-container" v-if="showInfo">
+      <div class="info-box">
+        <div class="info-piece">
+          <span class="label-info-piece">Season: </span>
+          <span class="info-piece-stat">{{ playerStatsData?.season }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Games Played: </span>
+          <span class="info-piece-stat">{{ playerStatsData?.games_played }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Minutes Per Game: </span>
+          <span class="info-piece-stat">{{ playerStatsData?.min }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Points Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.pts }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Rebounds Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.reb }}</span>
+        </div>
+      </div>
+      <div class="info-box">
+        <div class="info-piece">
+          <span class="label-info-piece">Defensive Rebounds Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.dreb }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Offensive Rebounds Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.oreb }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Assists Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.ast }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Steals Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.stl }}</span>
+        </div>
+      </div>
+      <div class="info-box">
+        <div class="info-piece">
+          <span class="label-info-piece">Blocks Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.blk}}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Turnovers Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.turnover }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">P Fouls Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.pf }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Three Point Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.fg3m }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Three Point A Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.fg3a }}</span>
+        </div>
+      </div>
+      <div class="info-box">
+        <div class="info-piece">
+          <span class="label-info-piece">Three Point Percentage:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.fg3_pct }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Free Throws Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.ftm }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Free Throws A Per Game:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.fta }}</span>
+        </div>
+        <div class="info-piece">
+          <span class="label-info-piece">Free Throw Percentage:</span>
+          <span class="info-piece-stat">{{ playerStatsData?.ft_pct }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -108,6 +233,24 @@ const data = props.player
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+}
+
+.more-info-button {
+  position: absolute;
+  top: 0;
+  right: -15px;
+  border-radius: 10px;
+  border: none;
+  width: 100px;
+  font-family: var(--font-primary);
+  background: rgba(144, 144, 149, 0.513);
+  cursor: pointer;
+}
+
+.more-info-button:hover {
+  background: rgb(126, 124, 124);
+
 }
 
 .player-selected-img {
@@ -134,7 +277,7 @@ const data = props.player
 }
 
 .label-info-piece {
-  font-size: 15px;
+  font-size: 12px;
   color: rgb(143, 7, 7);
   font-weight: 700;
 }

@@ -15,7 +15,7 @@ watch(() => props.player.team.id, (newId) => {
 })
 
 const showDeck = async () => {
-  const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/teams`
+  const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/players?name-search=${props.player.team.name}`
 
   const options = {
     method: 'GET',
@@ -28,6 +28,7 @@ const showDeck = async () => {
 
   if (response.status === 200) {
     const data = await response.json()
+
     console.log('this is data collected from user chosen team: ' + data)
   } else {
     console.log(response.data)

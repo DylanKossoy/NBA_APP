@@ -1,23 +1,18 @@
 <script setup>
 import { ref } from 'vue'
 
-
-
-
-const playerSelected = defineModel("selected-player")
-
+const playerSelected = defineModel('selected-player')
+const playerSelectedTeam = ref(null)
 
 const searchInput = ref(null)
 const searchTerm = ref('')
-const resultsContainerValid = ref(false);
+const resultsContainerValid = ref(false)
 const advancedOption = ref(false)
 
 // refs for advanced search
 
 const advancedSeason = ref('')
 const advancedConference = ref('')
-
-
 
 const searchPlayerResults = ref([])
 
@@ -53,20 +48,40 @@ function getEndpoint(endpoint) {
   console.log(urlEndpoint)
 }
 
-
-
 // function to show userstats below there team
 
 const showUserStats = async (data) => {
-  playerSelected.value = null;
+  playerSelected.value = null
   setTimeout(() => {
-    playerSelected.value = data;
-
-  },100)
-
+    playerSelected.value = data
+  }, 100)
 
 
+  getPlayerTeam(data)
 
+}
+
+const getPlayerTeam = async (data) => {
+
+  console.log("player team: " + data.team.id)
+
+  const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/teams/${data.team.id}`
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+
+  const response = await fetch(url, options)
+
+  if (response.status === 200) {
+    const dataObject = await response.json()
+    console.log('this is data collected from user chosen team: ' + Object.keys(dataObject.team))
+  } else {
+    console.log(response.status)
+  }
 }
 
 
@@ -76,13 +91,6 @@ const showUserStats = async (data) => {
 // 3 functions of searching either teams/ players/ or games/
 
 async function searchPlayers() {
-
-
-
-
-
-
-
   let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/${urlEndpoint}`
 
   if (advancedConference.value || advancedSeason.value || searchTerm.value) {
@@ -101,14 +109,16 @@ async function searchPlayers() {
   if (response.status === 200) {
     const dataObject = await response.json()
 
-    console.log(dataObject.data[0])
+
 
     searchPlayerResults.value.push(dataObject.data[0])
-    searchTerm.value = ''
-    resultsContainerValid.value = true;
 
+
+
+    searchTerm.value = ''
+    resultsContainerValid.value = true
   } else {
-    resultsContainerValid.value = false;
+    resultsContainerValid.value = false
     console.log(response.status)
   }
 }
@@ -124,15 +134,9 @@ function toggleAdvanced() {
 // function that fetches what the user input searched
 
 const searchBasketball = async () => {
-
-  resultsContainerValid.value = false;
+  resultsContainerValid.value = false
   searchPlayerResults.value = []
-
-
-
-
-
-
+  playerSelectedTeam.value = null
 
   if (!searchInput.value || !urlEndpoint) {
     return
@@ -197,8 +201,14 @@ const searchBasketball = async () => {
         <button class="advancedSearchButton" @click="toggleAdvanced">Advanced Search</button>
       </div>
     </div>
-    <div class="blue-team-members" v-if="resultsContainerValid" >
-      <div class="user-cell" v-for="result in searchPlayerResults" :key="result.id" tabindex="0" @click="showUserStats(result)">
+    <div class="blue-team-members" v-if="resultsContainerValid">
+      <div
+        class="user-cell"
+        v-for="result in searchPlayerResults"
+        :key="result.id"
+        tabindex="0"
+        @click="showUserStats(result)"
+      >
         <div class="user-info-box">
           <span class="label-info-player">First Name: </span>
           <span class="stat-number">{{ result.first_name }}</span>
@@ -232,7 +242,6 @@ const searchBasketball = async () => {
 .label-info-player {
   font-size: 12px;
   color: rgb(111, 19, 19);
-
 }
 .result-stats {
   color: red;
@@ -294,9 +303,9 @@ const searchBasketball = async () => {
 }
 
 .advancedSearchButton {
-  width: 100px;
-  height: 20px;
-  font-size: 10px;
+  width: 120px;
+  height: 30px;
+  font-size: 12px;
   cursor: pointer;
   border-radius: 30px;
   border: none;
@@ -313,7 +322,7 @@ const searchBasketball = async () => {
   right: 0;
   cursor: pointer;
   width: 100px;
-  height: 40px;
+  height: 50px;
   border: none;
   border-radius: 10px;
   background: rgba(183, 183, 183, 0.187);
@@ -385,13 +394,15 @@ const searchBasketball = async () => {
   position: absolute;
   width: 25px;
   left: 0;
-  margin-top: 8px;
+  margin-top: 10px;
   margin-left: 10px;
 }
 
 .searchInputContainer {
   border: none;
   border-radius: 8px;
+  min-height: 50px;
+
 }
 
 .searchInputContainer::placeholder {
@@ -400,10 +411,12 @@ const searchBasketball = async () => {
 
 /* blue team header over the input */
 .blue-team-header {
-  height: 150px;
+  min-height: 100px;
+  margin-top: 1rem;
 
   display: flex;
-  gap: 2rem;
+
+
 }
 
 /* buttons in blue team header */
@@ -411,18 +424,21 @@ const searchBasketball = async () => {
 .blue-team-header button {
   background: transparent;
   border: none;
-  transition: border-bottom-color 1s ease-in-out;
-  border-bottom-color: rgba(0, 0, 0, 0);
+  border-left: .25px solid black;
+  border-right: .25px solid black;
   cursor: pointer;
   margin-block: 1rem;
   color: rgb(41, 40, 40);
   font-size: 25px;
+  width: 150px;
 }
 
-.blue-team-header button:hover {
-  border-bottom: 2px solid black;
-  color: black;
+.player-button-filter:hover {
+  background: rgba(255, 255, 255, 0.114);
+
 }
+
+
 
 /* blue members cell container holding each blue team member */
 .blue-team-members {
@@ -443,17 +459,13 @@ const searchBasketball = async () => {
   cursor: pointer;
   backdrop-filter: blur(10px);
   background: rgba(210, 206, 206, 0.624);
-
 }
 
 .user-cell:hover {
-  background: rgba(23, 125, 193, 0.206)
+  background: rgba(23, 125, 193, 0.206);
 }
 
 .user-cell:focus {
   background: rgba(39, 71, 134, 0.389);
 }
-
-
-
 </style>

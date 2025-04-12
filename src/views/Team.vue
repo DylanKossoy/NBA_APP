@@ -10,6 +10,8 @@ const store = useUserStore();
 const selectedPlayer = ref(null)
 
 
+
+
 </script>
 
 <template>
@@ -34,7 +36,10 @@ const selectedPlayer = ref(null)
 
   <div class="content-container">
     <div class="left-side-container">
-      <Deck v-if="selectedPlayer" :player="selectedPlayer"></Deck>
+      <div class="playerDeckContainer">
+        <Deck v-if="selectedPlayer" :player="selectedPlayer"></Deck>
+
+      </div>
 
       <div class="season-selection-container">
         <Player v-if="selectedPlayer" :player="selectedPlayer"></Player>
@@ -49,6 +54,14 @@ const selectedPlayer = ref(null)
 </template>
 
 <style scoped>
+
+
+
+.playerDeckContainer {
+  min-height: 500px;
+}
+
+
 .player-card-player-name {
   font-size: 12px;
 }
