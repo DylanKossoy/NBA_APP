@@ -88,6 +88,7 @@ async function searchPlayers() {
 
   if (response.status === 200) {
     const dataObject = await response.json()
+    console.log(dataObject)
 
 
 

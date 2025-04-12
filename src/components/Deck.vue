@@ -7,6 +7,55 @@ const store = useUserStore()
 const favoritePlayers = ref(true)
 const favoriteTeams = ref(false)
 
+
+
+
+// all team logo images
+const teamLogos = {
+  Hawks: '',
+  Celtics: '',
+  Nets: '',
+  Hornets: '',
+  Bulls: '',
+  Cavaliers: '',
+  Mavericks: '',
+  Nuggets: '',
+  Pistons: '',
+  Warriors: '',
+  Rockets: '',
+  Pacers: '',
+  Clippers: '',
+  Lakers: '',
+  Grizzlies: '',
+  Heat: '',
+  Bucks: '',
+  Timberwolves: '',
+  Pelicans: '',
+  Knicks: '',
+  Thunder: '',
+  Magic: '',
+  '76ers': '',
+  Suns: '',
+  TrailBlazers: '',
+  Kings: '',
+  Spurs: '',
+  Raptors: '',
+  Jazz: '',
+  Wizards: ''
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 const togglePlayers = () => {
   favoriteTeams.value = false
   favoritePlayers.value = true
@@ -40,11 +89,26 @@ const toggleTeams = () => {
   </div>
 
   <div class="favorite-teams-container" v-if="favoriteTeams">
-    <h1>h</h1>
+
+    <div class="team-card">
+      <span class="info-team-card">Team Name</span>
+    </div>
+
   </div>
 </template>
 
 <style scoped>
+
+
+.team-card {
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+
+}
 
 
 .player-card-player-name {
@@ -123,7 +187,7 @@ const toggleTeams = () => {
   border: 1px solid black;
   max-height: 440px;
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 160px);
   padding: 1rem;
   overflow-y: auto;
