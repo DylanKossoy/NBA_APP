@@ -37,7 +37,7 @@ const selectedPlayer = ref(null)
   <div class="content-container">
     <div class="left-side-container">
       <div class="playerDeckContainer">
-        <Deck v-if="selectedPlayer" :player="selectedPlayer"></Deck>
+        <Deck></Deck>
 
       </div>
 

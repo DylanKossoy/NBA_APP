@@ -1,43 +1,32 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
+import { useUserStore } from '../stores/user.js'
 
-const props = defineProps({
-  player: Object,
-})
+const store = useUserStore()
 
-console.log(props.player.team.id + ' deck')
+const favoritePlayers = ref(true)
+const favoriteTeams = ref(false)
 
-
-
-watch(() => props.player.team.id, (newId) => {
-  console.log("change" + newId)
-  showDeck()
-})
-
-const showDeck = async () => {
-  const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/players?name-search=${props.player.team.name}`
-
-  const options = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
-
-  const response = await fetch(url, options)
-
-  if (response.status === 200) {
-    const data = await response.json()
-
-    console.log('this is data collected from user chosen team: ' + data)
-  } else {
-    console.log(response.data)
-  }
+const togglePlayers = () => {
+  favoriteTeams.value = false
+  favoritePlayers.value = true
 }
+
+const toggleTeams = () => {
+  favoritePlayers.value = false
+  favoriteTeams.value = true
+}
+
+// const showDeck = async () => {}
 </script>
 
 <template>
-  <div class="team-cards-container">
+
+  <div class="favoriteOptions">
+    <button @click="togglePlayers" class="favoriteOptionButton">Players</button>
+    <button @click="toggleTeams" class="favoriteOptionButton">Teams</button>
+  </div>
+  <div class="team-cards-container" v-if="favoritePlayers">
     <div class="player-card" tabindex="0">
       <img src="../../public/basketball-player.png" alt="" class="player-card-profile-img" />
       <div class="player-card-player-name">Player Name</div>
@@ -49,9 +38,43 @@ const showDeck = async () => {
       <div class="player-card-player-number">#00</div>
     </div>
   </div>
+
+  <div class="favorite-teams-container" v-if="favoriteTeams">
+    <h1>h</h1>
+  </div>
 </template>
 
 <style scoped>
+
+
+.player-card-player-name {
+  font-size: 12px;
+}
+
+.favoriteOptionButton {
+  background: rgba(196, 196, 198, 0.556);
+  border: none;
+  border-radius: 20px;
+  width: 70px;
+  font-family: var(--font-primary);
+  font-size: 12px;
+  height: 30px;
+  box-shadow: 1px 1px 15px 2px black;
+  cursor: pointer;
+}
+
+.favoriteOptionButton:hover {
+  background: rgba(135, 135, 135, 0.639);
+}
+
+
+.favoriteOptions {
+  display: flex;
+  height: 30px;
+  gap: 1rem;
+  margin: 1rem;
+}
+
 /* player card inside the card containers  */
 .team-cards-container .player-card {
   width: 100px;
@@ -84,10 +107,21 @@ const showDeck = async () => {
 }
 
 /* team cards container */
-.left-side-container .team-cards-container {
+.team-cards-container {
   width: 100%;
-  min-height: 500px;
   border: 1px solid black;
+  max-height: 440px;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(5, 160px);
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.favorite-teams-container {
+  width: 100%;
+  border: 1px solid black;
+  max-height: 440px;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(5, 160px);

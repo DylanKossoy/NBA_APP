@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 const playerSelected = defineModel('selected-player')
-const playerSelectedTeam = ref(null)
+
 
 const searchInput = ref(null)
 const searchTerm = ref('')
@@ -15,6 +15,7 @@ const advancedSeason = ref('')
 const advancedConference = ref('')
 
 const searchPlayerResults = ref([])
+
 
 let urlEndpoint = ''
 
@@ -57,32 +58,11 @@ const showUserStats = async (data) => {
   }, 100)
 
 
-  getPlayerTeam(data)
+
 
 }
 
-const getPlayerTeam = async (data) => {
 
-  console.log("player team: " + data.team.id)
-
-  const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/teams/${data.team.id}`
-
-  const options = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  }
-
-  const response = await fetch(url, options)
-
-  if (response.status === 200) {
-    const dataObject = await response.json()
-    console.log('this is data collected from user chosen team: ' + Object.keys(dataObject.team))
-  } else {
-    console.log(response.status)
-  }
-}
 
 
 
@@ -136,7 +116,7 @@ function toggleAdvanced() {
 const searchBasketball = async () => {
   resultsContainerValid.value = false
   searchPlayerResults.value = []
-  playerSelectedTeam.value = null
+
 
   if (!searchInput.value || !urlEndpoint) {
     return

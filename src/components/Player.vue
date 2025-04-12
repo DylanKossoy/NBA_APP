@@ -59,6 +59,7 @@ getPlayerInfo();
     <div class="image-player-container">
       <img src="../../public/player-selected.png" alt="" class="player-selected-img" />
       <button class="more-info-button" @click="toggleInfoContainer">More Info</button>
+      <button class="addFavoriteButton">+</button>
     </div>
     <div class="player-selected-info-container" v-if="!showInfo">
       <div class="info-box">
@@ -228,6 +229,28 @@ getPlayerInfo();
 </template>
 
 <style scoped>
+
+.addFavoriteButton {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 0;
+  left: 0;
+  border-radius: 50%;
+  border: none;
+  font-family: var(--font-primary);
+  cursor: pointer;
+  background: rgba(144, 144, 149, 0.513);
+  font-size: 30px;
+
+}
+
+.addFavoriteButton:hover {
+  background: rgb(126, 124, 124);
+}
+
+
+
 .image-player-container {
   width: 250px;
   display: flex;
