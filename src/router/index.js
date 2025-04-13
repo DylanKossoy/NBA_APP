@@ -3,7 +3,7 @@ import Home from '../views/Home.vue'
 import Welcome from '../views/Welcome.vue'
 import Join from '../views/Join.vue'
 import SignIn from '../views/SignIn.vue'
-import Team from '../views/Team.vue'
+import Hub from '../views/Hub.vue'
 import Profile from '../views/Profile.vue'
 
 const router = createRouter({
@@ -30,15 +30,15 @@ const router = createRouter({
       component: Home,
     },
     {
-      path: '/team',
-      name: 'team',
-      component: Team,
+      path: '/hub',
+      name: 'hub',
+      component: Hub,
     },
     {
       path: '/profile',
       name: 'profile',
       component: Profile,
-    }
+    },
   ],
 })
 

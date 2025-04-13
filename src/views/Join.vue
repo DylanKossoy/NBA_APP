@@ -51,7 +51,6 @@ function setUserAvatar(numberAvatar) {
   }
 
   localStorage.setItem('userAvatar', image)
-
 }
 
 // triggershake to whatever element i need and a timer to set it back
@@ -78,13 +77,6 @@ const createUser = async (username, email, password) => {
     email,
     password,
   }
-
-
-
-
-
-
-
 
   try {
     // register a user
@@ -114,7 +106,7 @@ const createUser = async (username, email, password) => {
       console.log('somethings wrong: ', response.status)
     }
   } catch (err) {
-    console.log("fetch error: " + err);
+    console.log('fetch error: ' + err)
   }
 }
 

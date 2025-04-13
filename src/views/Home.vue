@@ -24,7 +24,7 @@ onMounted(() => {
     </div>
 
     <div class="nav-links">
-      <RouterLink to="/Team">Team</RouterLink>
+      <RouterLink to="/Hub">Hub</RouterLink>
       <RouterLink to="/Gambling">Gambling</RouterLink>
       <RouterLink to="/Games">Games</RouterLink>
       <RouterLink to="/Stats">Stats</RouterLink>

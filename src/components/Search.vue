@@ -3,10 +3,10 @@ import { ref } from 'vue'
 
 const playerSelected = defineModel('selected-player')
 
-
 const searchInput = ref(null)
 const searchTerm = ref('')
 const resultsContainerValid = ref(false)
+const teamContainerValid = ref(false)
 const advancedOption = ref(false)
 
 // refs for advanced search
@@ -15,7 +15,42 @@ const advancedSeason = ref('')
 const advancedConference = ref('')
 
 const searchPlayerResults = ref([])
+const teamResults = ref([])
 
+
+// all team logo images
+const teamLogos = {
+  Hawks: '../../public/hawksLogo.avif',
+  Celtics: '../../public/celticsLogo.png',
+  Nets: '../../public/netsLogo.png',
+  Hornets: '../../public/hornetsLogo.svg',
+  Bulls: '../../public/bullsLogo.svg',
+  Cavaliers: '../../public/cavsLogo.svg',
+  Mavericks: '../../public/mavsLogo.svg',
+  Nuggets: '../../public/nuggetsLogo.svg',
+  Pistons: '../../public/pistonsLogo.svg',
+  Warriors: '../../public/warriorsLogo.svg',
+  Rockets: '../../public/rocketsLogo.svg',
+  Pacers: '../../public/pacersLogo.svg',
+  Clippers: '../../public/clippersLogo.svg',
+  Lakers: '../../public/lakersLogo.svg',
+  Grizzlies: '../../public/grizzliesLogo.svg',
+  Heat: '../../public/heatLogo.svg',
+  Bucks: '../../public/bucksLogo.svg',
+  Timberwolves: '../../public/timberwolvesLogo.svg',
+  Pelicans: '../../public/pelicansLogo.svg',
+  Knicks: '../../public/knicksLogo.svg',
+  Thunder: '../../public/thunderLogo.svg',
+  Magic: '../../public/magicLogo.svg',
+  '76ers': '../../public/sixersLogo.svg',
+  Suns: '../../public/sunsLogo.png',
+  'Trail Blazers': '../../public/trailblazersLogo.svg',
+  Kings: '../../public/kingsLogo.svg',
+  Spurs: '../../public/spursLogo.svg',
+  Raptors: '../../public/raptorsLogo.svg',
+  Jazz: '../../public/jazzLogo.svg',
+  Wizards: '../../public/wizardsLogo.svg',
+}
 
 let urlEndpoint = ''
 
@@ -56,25 +91,15 @@ const showUserStats = async (data) => {
   setTimeout(() => {
     playerSelected.value = data
   }, 100)
-
-
-
-
 }
-
-
-
-
-
-
 
 // 3 functions of searching either teams/ players/ or games/
 
 async function searchPlayers() {
-  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/${urlEndpoint}`
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/players`
 
   if (advancedConference.value || advancedSeason.value || searchTerm.value) {
-    url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/${urlEndpoint}?name-search=${searchTerm.value}`
+    url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/players?name-search=${searchTerm.value}`
   }
 
   const options = {
@@ -90,21 +115,71 @@ async function searchPlayers() {
     const dataObject = await response.json()
     console.log(dataObject)
 
-
-
     searchPlayerResults.value.push(dataObject.data[0])
-
-
 
     searchTerm.value = ''
     resultsContainerValid.value = true
+    teamContainerValid.value = false
   } else {
     resultsContainerValid.value = false
+    teamContainerValid.value = false
     console.log(response.status)
   }
 }
 
-function searchTeams() {}
+async function searchTeams() {
+
+
+
+
+
+
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/teams`
+
+
+
+  if(searchTerm.value) {
+    url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/teams?team-search=${searchTerm.value}`
+  }
+
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+
+  const response = await fetch(url, options)
+
+  if (response.status === 200) {
+    const data = await response.json()
+
+    if(url === `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/teams`) {
+      data.data.splice(30, 15)
+
+    }
+
+
+    teamResults.value = data.data
+    resultsContainerValid.value = false
+    teamContainerValid.value = true
+
+    console.log(data)
+  } else {
+    console.log("didnt work")
+    return;
+  }
+
+
+
+
+
+
+  for(let i = 0; i < teamResults.value.length; i++) {
+
+  }
+}
 
 function searchGames() {}
 
@@ -117,7 +192,6 @@ function toggleAdvanced() {
 const searchBasketball = async () => {
   resultsContainerValid.value = false
   searchPlayerResults.value = []
-
 
   if (!searchInput.value || !urlEndpoint) {
     return
@@ -216,10 +290,52 @@ const searchBasketball = async () => {
         </div>
       </div>
     </div>
+    <div class="team-container" v-if="teamContainerValid">
+      <div class="team-card" tabindex="0" v-for="team in teamResults" :key="team.id">
+        <img :src="teamLogos[team.name]" alt="" class="teamImg" />
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.team-container {
+  margin-top: 2rem;
+  width: 500px;
+  height: 500px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(15, 1fr);
+}
+
+.team-card {
+  width: 220px;
+  height: 220px;
+  margin: 1rem;
+  border-radius: 30px;
+
+  background: rgba(203, 203, 203, 0.393);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.team-card:hover {
+  background: rgba(23, 125, 193, 0.206);
+}
+
+.team-card:focus {
+  background: rgba(39, 71, 134, 0.389);
+}
+
+.teamImg {
+  max-width: 120px;
+}
+
 .label-info-player {
   font-size: 12px;
   color: rgb(111, 19, 19);
@@ -383,7 +499,6 @@ const searchBasketball = async () => {
   border: none;
   border-radius: 8px;
   min-height: 50px;
-
 }
 
 .searchInputContainer::placeholder {
@@ -396,8 +511,6 @@ const searchBasketball = async () => {
   margin-top: 1rem;
 
   display: flex;
-
-
 }
 
 /* buttons in blue team header */
@@ -405,8 +518,8 @@ const searchBasketball = async () => {
 .blue-team-header button {
   background: transparent;
   border: none;
-  border-left: .25px solid black;
-  border-right: .25px solid black;
+  border-left: 0.25px solid black;
+  border-right: 0.25px solid black;
   cursor: pointer;
   margin-block: 1rem;
   color: rgb(41, 40, 40);
@@ -416,10 +529,7 @@ const searchBasketball = async () => {
 
 .player-button-filter:hover {
   background: rgba(255, 255, 255, 0.114);
-
 }
-
-
 
 /* blue members cell container holding each blue team member */
 .blue-team-members {

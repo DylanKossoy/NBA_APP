@@ -3,15 +3,18 @@ import { ref } from 'vue'
 import Search from '../components/Search.vue'
 import Player from '../components/Player.vue'
 import Deck from '../components/Deck.vue'
+import Team from '../components/Team.vue'
+
 import { useUserStore } from '../stores/user.js'
 
-const store = useUserStore();
+const store = useUserStore()
 
 const selectedPlayer = ref(null)
+const selectedTeam = ref(null)
 
-
-
-
+const handlePlayer = (player) => {
+  selectedPlayer.value = player
+}
 </script>
 
 <template>
@@ -37,12 +40,12 @@ const selectedPlayer = ref(null)
   <div class="content-container">
     <div class="left-side-container">
       <div class="playerDeckContainer">
-        <Deck></Deck>
-
+        <Deck @playerChoice="handlePlayer"></Deck>
       </div>
 
       <div class="season-selection-container">
         <Player v-if="selectedPlayer" :player="selectedPlayer"></Player>
+        <Team v-if="selectedTeam" :team="selectedTeam"></Team>
       </div>
     </div>
     <div class="right-side-container">
@@ -54,13 +57,9 @@ const selectedPlayer = ref(null)
 </template>
 
 <style scoped>
-
-
-
 .playerDeckContainer {
   min-height: 500px;
 }
-
 
 .player-card-player-name {
   font-size: 12px;

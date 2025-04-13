@@ -4,36 +4,34 @@ import { useUserStore } from '../stores/user.js'
 
 const store = useUserStore()
 const props = defineProps({
-  player: Object,
+  team: Object,
 })
 
-console.log('player component: ' + Object.keys(props.player.team))
 
-const data = computed(() => props.player)
+const data = computed(() => props.team)
 const showInfo = ref(false)
 
 const isValid = ref(false)
 
-const playerStatsData = ref(null)
 
 const toggleInfoContainer = () => {
   showInfo.value = !showInfo.value
 }
 
 // function to add the player to favorite teams array in pinia
-const addFavoritePlayer = () => {
-  let favoritePlayers = store.userData.favoritePlayers
+const addFavoriteTeam = () => {
+  let favoriteTeams = store.userData.favoriteTeams
   let pass = true
 
-  for (let i = 0; i < favoritePlayers.length; i++) {
-    if (props.player.first_name === favoritePlayers[i].first_name) {
+  for (let i = 0; i < favoriteTeams.length; i++) {
+    if (props.player.first_name === favoriteTeams[i].first_name) {
       console.log('cant add try again')
       pass = false
     }
   }
 
   if (pass) {
-    store.userData.favoritePlayers.push(props.player)
+    store.userData.favoriteTeams.push(props.team)
     triggerIsValid()
   }
 }
@@ -45,8 +43,8 @@ const triggerIsValid = () => {
   }, 1000)
 }
 
-const getPlayerInfo = async () => {
-  const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/players/${data.value.id}`
+const getTeamInfo = async () => {
+  const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/teams/${data.value.id}`
 
   const options = {
     method: 'GET',
@@ -60,14 +58,14 @@ const getPlayerInfo = async () => {
   if (response.status === 200) {
     const data = await response.json()
 
-    playerStatsData.value = data.stats.data[0]
-    console.log(playerStatsData.value)
+
+    console.log(data);
   } else {
     console.log(response.status)
   }
 }
 
-getPlayerInfo()
+
 </script>
 
 <template>
@@ -76,7 +74,7 @@ getPlayerInfo()
       <div class="playerNumberSelected">#{{ data.jersey_number }}</div>
       <img src="../../public/player-selected.png" alt="" class="player-selected-img" />
       <button class="more-info-button" @click="toggleInfoContainer">More Info</button>
-      <button class="addFavoriteButton" @click="addFavoritePlayer">+</button>
+      <button class="addFavoriteButton" @click="addFavoriteTeam">+</button>
       <div class="added-successful" v-if="isValid">Added ✓</div>
     </div>
     <div class="player-selected-info-container" v-if="!showInfo">

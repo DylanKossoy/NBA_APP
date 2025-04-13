@@ -4,73 +4,28 @@ import { useUserStore } from '../stores/user.js'
 
 const store = useUserStore()
 
+const emit = defineEmits(['playerChoice'])
+
 const favoritePlayers = ref(true)
 const favoriteTeams = ref(false)
 
-
 const favoriteTeamImg = ref('../../public/mavsLogo.svg')
 
+const userFavoritePlayers = ref([])
 
-const userFavoritePlayers = ref([]);
+userFavoritePlayers.value = store.userData.favoritePlayers
 
-userFavoritePlayers.value = store.userData.favoritePlayers;
-
-// all team logo images
-const teamLogos = {
-  Hawks: '',
-  Celtics: '',
-  Nets: '',
-  Hornets: '',
-  Bulls: '',
-  Cavaliers: '',
-  Mavericks: '',
-  Nuggets: '',
-  Pistons: '',
-  Warriors: '',
-  Rockets: '',
-  Pacers: '',
-  Clippers: '',
-  Lakers: '',
-  Grizzlies: '',
-  Heat: '',
-  Bucks: '',
-  Timberwolves: '',
-  Pelicans: '',
-  Knicks: '',
-  Thunder: '',
-  Magic: '',
-  '76ers': '',
-  Suns: '',
-  TrailBlazers: '',
-  Kings: '',
-  Spurs: '',
-  Raptors: '',
-  Jazz: '',
-  Wizards: ''
-};
-
-
-
-
-
-
-
-const removeFavoritePlayer = () => {
-
-
-
-
-console.log("helloworld")
-
-
-
-
+const removeFavoritePlayer = (player) => {
+  for (let i = 0; i < userFavoritePlayers.value.length; i++) {
+    if (player === userFavoritePlayers.value[i]) {
+      userFavoritePlayers.value.splice(i, 1)
+      console.log('removed')
+      return
+    }
+  }
 }
 
-
-
-
-
+// toggling favorite players or teams
 const togglePlayers = () => {
   favoriteTeams.value = false
   favoritePlayers.value = true
@@ -81,43 +36,42 @@ const toggleTeams = () => {
   favoriteTeams.value = true
 }
 
-// const showDeck = async () => {}
+const showDetails = (player) => {
+  emit('playerChoice', player)
+}
 </script>
 
 <template>
-
   <div class="favoriteOptions">
     <button @click="togglePlayers" class="favoriteOptionButton">Players</button>
     <button @click="toggleTeams" class="favoriteOptionButton">Teams</button>
   </div>
   <div class="team-cards-container" v-if="favoritePlayers">
-    <div class="player-card" tabindex="0" v-for="player in userFavoritePlayers" :key="player.id">
+    <div
+      class="player-card"
+      tabindex="0"
+      v-for="player in userFavoritePlayers"
+      :key="player.id"
+      @click="showDetails(player)"
+    >
       <img src="../../public/player-selected.png" alt="" class="player-card-profile-img" />
-      <div class="player-card-player-name">{{ player.first_name + " " + player.last_name }}</div>
+      <div class="player-card-player-name">{{ player.first_name + ' ' + player.last_name }}</div>
       <div class="player-card-player-number">#{{ player.jersey_number }}</div>
-      <button class="removeFavoriteButton" @click="removeFavoritePlayer">-</button>
+      <button class="removeFavoriteButton" @click="removeFavoritePlayer(player)">-</button>
     </div>
-
   </div>
 
   <div class="favorite-teams-container" v-if="favoriteTeams">
-
     <div class="team-card" tabindex="0">
       <div class="team-image-container">
-        <img src="../../public/spursLogo.svg" alt="" class="team-logo-img" >
+        <img src="../../public/spursLogo.svg" alt="" class="team-logo-img" />
         <button class="removeFavoriteButton">-</button>
       </div>
-
     </div>
-
   </div>
 </template>
 
 <style scoped>
-
-
-
-
 .removeFavoriteButton {
   position: absolute;
   top: 0;
@@ -125,7 +79,7 @@ const toggleTeams = () => {
   border-radius: 50%;
   background: rgba(144, 144, 149, 0.513);
   border: none;
-  margin: .5rem;
+  margin: 0.5rem;
   width: 30px;
   height: 30px;
   cursor: pointer;
@@ -136,16 +90,11 @@ const toggleTeams = () => {
 .removeFavoriteButton:hover {
   background: rgb(114, 5, 5);
   color: white;
-
-
 }
-
-
 
 .team-logo-img {
   min-width: 150px;
 }
-
 
 .team-card {
   width: 200px;
@@ -158,9 +107,7 @@ const toggleTeams = () => {
   border-radius: 10px;
   cursor: pointer;
   position: relative;
-
 }
-
 
 .team-card:hover {
   background: rgba(136, 135, 135, 0.538);
@@ -168,10 +115,7 @@ const toggleTeams = () => {
 
 .team-card:focus {
   background: rgb(187, 150, 150);
-
-
 }
-
 
 .player-card-player-name {
   font-size: 16px;
@@ -196,7 +140,6 @@ const toggleTeams = () => {
 .favoriteOptionButton:hover {
   background: rgba(135, 135, 135, 0.639);
 }
-
 
 .favoriteOptions {
   display: flex;
