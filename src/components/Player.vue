@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+import { useUserStore } from '../stores/user.js'
+
+const store = useUserStore()
 const props = defineProps({
   player: Object,
 })
@@ -7,51 +10,68 @@ const props = defineProps({
 console.log('player component: ' + Object.keys(props.player.team))
 
 const data = props.player
-const showInfo = ref(false);
+const showInfo = ref(false)
 
-const playerStatsData = ref(null);
+const isValid = ref(false)
 
+const playerStatsData = ref(null)
 
 const toggleInfoContainer = () => {
-
   showInfo.value = !showInfo.value
+}
 
+// function to add the player to favorite teams array in pinia
+const addFavoritePlayer = () => {
+  let favoritePlayers = store.userData.favoritePlayers
+  let pass = true;
+
+  for (let i = 0; i < favoritePlayers.length; i++) {
+    if (props.player.first_name === favoritePlayers[i].first_name) {
+      console.log('cant add try again')
+      pass = false
+    }
+  }
+
+
+  if(pass) {
+    store.userData.favoritePlayers.push(props.player)
+    triggerIsValid()
+
+  }
 
 
 }
 
+const triggerIsValid = () => {
+  isValid.value = true
+  setTimeout(() => {
+    isValid.value = false
+  }, 1000)
+}
 
 const getPlayerInfo = async () => {
+  const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/players/${data.id}`
 
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
 
-const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/players/${data.id}`
+  const response = await fetch(url, options)
 
-const options = {
-  method: 'GET',
-  headers: {
-    'Content-Type': 'application/json'
+  if (response.status === 200) {
+    const data = await response.json()
+
+    playerStatsData.value = data.stats.data[0]
+    console.log(playerStatsData.value)
+  } else {
+    console.log(response.status)
   }
 }
 
-
-const response = await fetch(url, options)
-
-
-
-if(response.status === 200) {
-  const data = await response.json()
-
-  playerStatsData.value = data.stats.data[0]
-  console.log(playerStatsData.value)
-} else {
-  console.log(response.status);
-}
-
-}
-
-
-getPlayerInfo();
-
+getPlayerInfo()
 </script>
 
 <template>
@@ -59,7 +79,8 @@ getPlayerInfo();
     <div class="image-player-container">
       <img src="../../public/player-selected.png" alt="" class="player-selected-img" />
       <button class="more-info-button" @click="toggleInfoContainer">More Info</button>
-      <button class="addFavoriteButton">+</button>
+      <button class="addFavoriteButton" @click="addFavoritePlayer">+</button>
+      <div class="added-successful" v-if="isValid">Added ✓</div>
     </div>
     <div class="player-selected-info-container" v-if="!showInfo">
       <div class="info-box">
@@ -187,7 +208,7 @@ getPlayerInfo();
       <div class="info-box">
         <div class="info-piece">
           <span class="label-info-piece">Blocks Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.blk}}</span>
+          <span class="info-piece-stat">{{ playerStatsData?.blk }}</span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Turnovers Per Game:</span>
@@ -229,6 +250,12 @@ getPlayerInfo();
 </template>
 
 <style scoped>
+.added-successful {
+  position: absolute;
+  color: rgba(2, 65, 2, 0.696);
+  top: 20%;
+  left: 0;
+}
 
 .addFavoriteButton {
   position: absolute;
@@ -242,14 +269,12 @@ getPlayerInfo();
   cursor: pointer;
   background: rgba(144, 144, 149, 0.513);
   font-size: 30px;
-
 }
 
 .addFavoriteButton:hover {
-  background: rgb(126, 124, 124);
+  background: rgb(7, 77, 29);
+  color: white;
 }
-
-
 
 .image-player-container {
   width: 250px;
@@ -273,7 +298,6 @@ getPlayerInfo();
 
 .more-info-button:hover {
   background: rgb(126, 124, 124);
-
 }
 
 .player-selected-img {
