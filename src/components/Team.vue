@@ -2,16 +2,31 @@
 import { ref, computed } from 'vue'
 import { useUserStore } from '../stores/user.js'
 
+
+
+
+
 const store = useUserStore()
 const props = defineProps({
   team: Object,
+  teamImg: String,
 })
 
-
 const data = computed(() => props.team)
+const teamImage = computed(() => props.teamImg)
 const showInfo = ref(false)
 
 const isValid = ref(false)
+
+
+
+const teamInfo = ref(null);
+
+
+
+
+
+
 
 
 const toggleInfoContainer = () => {
@@ -58,23 +73,22 @@ const getTeamInfo = async () => {
   if (response.status === 200) {
     const data = await response.json()
 
+    teamInfo.value = data.standings
 
-    console.log(data);
+    console.log(teamInfo.value)
   } else {
     console.log(response.status)
   }
 }
 
 getTeamInfo()
-
-
 </script>
 
 <template>
   <div class="main-container">
     <div class="image-player-container">
-      <div class="playerNumberSelected">#{{ data.jersey_number }}</div>
-      <img src="../../public/player-selected.png" alt="" class="player-selected-img" />
+
+      <img :src="teamImage" alt="" class="player-selected-img" />
       <button class="more-info-button" @click="toggleInfoContainer">More Info</button>
       <button class="addFavoriteButton" @click="addFavoriteTeam">+</button>
       <div class="added-successful" v-if="isValid">Added ✓</div>
@@ -86,78 +100,30 @@ getTeamInfo()
           <span class="info-piece-stat">{{ data.id }}</span>
         </div>
         <div class="info-piece">
-          <span class="label-info-piece">First Name:</span>
-          <span class="info-piece-stat">{{ data.first_name }}</span>
+          <span class="label-info-piece">Name:</span>
+          <span class="info-piece-stat">{{ data.name }}</span>
         </div>
         <div class="info-piece">
-          <span class="label-info-piece">Last Name:</span>
-          <span class="info-piece-stat">{{ data.last_name }}</span>
+          <span class="label-info-piece">Full Name:</span>
+          <span class="info-piece-stat">{{ data.full_name }}</span>
         </div>
         <div class="info-piece">
-          <span class="label-info-piece">Position:</span>
-          <span class="info-piece-stat">{{ data.position }}</span>
+          <span class="label-info-piece">Abbreviation:</span>
+          <span class="info-piece-stat">{{ data.abbreviation }}</span>
         </div>
         <div class="info-piece">
-          <span class="label-info-piece">Height:</span>
-          <span class="info-piece-stat">{{ data.height }}</span>
-        </div>
-      </div>
-      <div class="info-box">
-        <div class="info-piece">
-          <span class="label-info-piece">Weight:</span>
-          <span class="info-piece-stat">{{ data.weight }}</span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Jersey:</span>
-          <span class="info-piece-stat">{{ data.jersey_number }}</span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">College:</span>
-          <span class="info-piece-stat">{{ data.college }}</span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Country:</span>
-          <span class="info-piece-stat">{{ data.country }}</span>
+          <span class="label-info-piece">Division:</span>
+          <span class="info-piece-stat">{{ data.division }}</span>
         </div>
       </div>
       <div class="info-box">
         <div class="info-piece">
-          <span class="label-info-piece">Draft Year:</span>
-          <span class="info-piece-stat">{{ data.draft_year }}</span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Draft Round:</span>
-          <span class="info-piece-stat">{{ data.draft_round }}</span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Draft Number:</span>
-          <span class="info-piece-stat">{{ data.draft_number }}</span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Team:</span>
-          <span class="info-piece-stat">{{ data.team.name }}</span>
+          <span class="label-info-piece">City:</span>
+          <span class="info-piece-stat">{{ data.city }}</span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Conference:</span>
-          <span class="info-piece-stat">{{ data.team.conference }}</span>
-        </div>
-      </div>
-      <div class="info-box">
-        <div class="info-piece">
-          <span class="label-info-piece">Division:</span>
-          <span class="info-piece-stat">{{ data.team.division }}</span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">City:</span>
-          <span class="info-piece-stat">{{ data.team.city }}</span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Full Team Name:</span>
-          <span class="info-piece-stat">{{ data.team.full_name }}</span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Team Abbreviation:</span>
-          <span class="info-piece-stat">{{ data.team.abbreviation }}</span>
+          <span class="info-piece-stat">{{ data.conference }}</span>
         </div>
       </div>
     </div>
@@ -165,81 +131,41 @@ getTeamInfo()
       <div class="info-box">
         <div class="info-piece">
           <span class="label-info-piece">Season: </span>
-          <span class="info-piece-stat"></span>
+          <span class="info-piece-stat">{{ teamInfo.season }}</span>
         </div>
         <div class="info-piece">
-          <span class="label-info-piece">Games Played: </span>
-          <span class="info-piece-stat"></span>
+          <span class="label-info-piece">Conference Record: </span>
+          <span class="info-piece-stat">{{ teamInfo.conference_record }}</span>
         </div>
         <div class="info-piece">
-          <span class="label-info-piece">Minutes Per Game: </span>
-          <span class="info-piece-stat"></span>
+          <span class="label-info-piece">Conference Rank: </span>
+          <span class="info-piece-stat">{{ teamInfo.conference_rank }}</span>
         </div>
         <div class="info-piece">
-          <span class="label-info-piece">Points Per Game:</span>
-          <span class="info-piece-stat"></span>
+          <span class="label-info-piece">Division Record:</span>
+          <span class="info-piece-stat">{{ teamInfo.division_record }}</span>
         </div>
         <div class="info-piece">
-          <span class="label-info-piece">Rebounds Per Game:</span>
-          <span class="info-piece-stat"></span>
-        </div>
-      </div>
-      <div class="info-box">
-        <div class="info-piece">
-          <span class="label-info-piece">Defensive Rebounds Per Game:</span>
-          <span class="info-piece-stat"></span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Offensive Rebounds Per Game:</span>
-          <span class="info-piece-stat"></span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Assists Per Game:</span>
-          <span class="info-piece-stat"></span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Steals Per Game:</span>
-          <span class="info-piece-stat"></span>
+          <span class="label-info-piece">Division Rank:</span>
+          <span class="info-piece-stat">{{ teamInfo.division_rank }}</span>
         </div>
       </div>
       <div class="info-box">
         <div class="info-piece">
-          <span class="label-info-piece">Blocks Per Game:</span>
-          <span class="info-piece-stat"></span>
+          <span class="label-info-piece">Wins:</span>
+          <span class="info-piece-stat">{{ teamInfo.wins }}</span>
         </div>
         <div class="info-piece">
-          <span class="label-info-piece">Turnovers Per Game:</span>
-          <span class="info-piece-stat"></span>
+          <span class="label-info-piece">Losses:</span>
+          <span class="info-piece-stat">{{ teamInfo.losses }}</span>
         </div>
         <div class="info-piece">
-          <span class="label-info-piece">P Fouls Per Game:</span>
-          <span class="info-piece-stat"></span>
+          <span class="label-info-piece">Home Record:</span>
+          <span class="info-piece-stat">{{ teamInfo.home_record }}</span>
         </div>
         <div class="info-piece">
-          <span class="label-info-piece">Three Point Per Game:</span>
-          <span class="info-piece-stat"></span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Three Point A Per Game:</span>
-          <span class="info-piece-stat"></span>
-        </div>
-      </div>
-      <div class="info-box">
-        <div class="info-piece">
-          <span class="label-info-piece">Three Point Percentage:</span>
-          <span class="info-piece-stat"></span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Free Throws Per Game:</span>
-          <span class="info-piece-stat"></span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Free Throws A Per Game:</span>
-          <span class="info-piece-stat"></span>
-        </div>
-        <div class="info-piece">
-          <span class="label-info-piece">Free Throw Percentage:</span>
-          <span class="info-piece-stat"></span>
+          <span class="label-info-piece">Road Record:</span>
+          <span class="info-piece-stat">{{ teamInfo.road_record }}</span>
         </div>
       </div>
     </div>
@@ -307,7 +233,7 @@ getTeamInfo()
 }
 
 .player-selected-img {
-  max-width: 200px;
+  max-width: 150px;
 }
 
 .player-selected-info-container {

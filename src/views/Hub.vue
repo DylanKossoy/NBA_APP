@@ -12,6 +12,11 @@ const store = useUserStore()
 const selectedPlayer = ref(null)
 const selectedTeam = ref(null)
 
+
+
+
+const teamImg = ref(null);
+
 const handlePlayer = (player) => {
   selectedPlayer.value = player
 }
@@ -45,12 +50,12 @@ const handlePlayer = (player) => {
 
       <div class="season-selection-container">
         <Player v-if="selectedPlayer" :player="selectedPlayer"></Player>
-        <Team v-if="selectedTeam" :team="selectedTeam"></Team>
+        <Team v-if="selectedTeam" :team="selectedTeam" :teamImg="teamImg"></Team>
       </div>
     </div>
     <div class="right-side-container">
       <div class="player-container">
-        <Search v-model:selected-player="selectedPlayer" v-model:selected-team="selectedTeam"></Search>
+        <Search v-model:selected-player="selectedPlayer" v-model:selected-team="selectedTeam" v-model:team-img="teamImg"></Search>
       </div>
     </div>
   </div>

@@ -12,8 +12,11 @@ const favoriteTeams = ref(false)
 const favoriteTeamImg = ref('../../public/mavsLogo.svg')
 
 const userFavoritePlayers = ref([])
+const userFavoriteTeams = ref([]);
 
 userFavoritePlayers.value = store.userData.favoritePlayers
+userFavoriteTeams.value = store.userData.favoriteTeams
+
 
 const removeFavoritePlayer = (player) => {
   for (let i = 0; i < userFavoritePlayers.value.length; i++) {
@@ -62,7 +65,7 @@ const showDetails = (player) => {
   </div>
 
   <div class="favorite-teams-container" v-if="favoriteTeams">
-    <div class="team-card" tabindex="0">
+    <div class="team-card" tabindex="0" v-for="team in userFavoriteTeams" :key="team.id">
       <div class="team-image-container">
         <img src="../../public/spursLogo.svg" alt="" class="team-logo-img" />
         <button class="removeFavoriteButton">-</button>

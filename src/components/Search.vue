@@ -3,6 +3,7 @@ import { ref } from 'vue'
 
 const playerSelected = defineModel('selected-player')
 const teamSelected = defineModel('selected-team');
+const teamImg = defineModel('team-img')
 
 const searchInput = ref(null)
 const searchTerm = ref('')
@@ -89,6 +90,7 @@ function getEndpoint(endpoint) {
 
 const showUserStats = (data) => {
   playerSelected.value = null
+  teamSelected.value = null;
   setTimeout(() => {
     playerSelected.value = data
   }, 100)
@@ -140,6 +142,8 @@ const showTeamStats = (team) => {
   playerSelected.value = null
 
   teamSelected.value = null;
+
+  teamImg.value = teamLogos[team.name]
 
   setTimeout(() => {
     teamSelected.value = team

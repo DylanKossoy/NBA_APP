@@ -5,6 +5,7 @@ import { useUserStore } from '../stores/user.js'
 const store = useUserStore()
 const props = defineProps({
   player: Object,
+
 })
 
 console.log('player component: ' + Object.keys(props.player.team))
