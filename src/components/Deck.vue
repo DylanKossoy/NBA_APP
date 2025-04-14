@@ -4,12 +4,54 @@ import { useUserStore } from '../stores/user.js'
 
 const store = useUserStore()
 
-const emit = defineEmits(['playerChoice'])
+const emit = defineEmits(['playerChoice', 'teamChoice', 'teamImgChoice'])
+
+
+
 
 const favoritePlayers = ref(true)
 const favoriteTeams = ref(false)
 
-const favoriteTeamImg = ref('../../public/mavsLogo.svg')
+
+
+// all team logo images
+const teamLogos = {
+  Hawks: '../../public/hawksLogo.avif',
+  Celtics: '../../public/celticsLogo.png',
+  Nets: '../../public/netsLogo.png',
+  Hornets: '../../public/hornetsLogo.svg',
+  Bulls: '../../public/bullsLogo.svg',
+  Cavaliers: '../../public/cavsLogo.svg',
+  Mavericks: '../../public/mavsLogo.svg',
+  Nuggets: '../../public/nuggetsLogo.svg',
+  Pistons: '../../public/pistonsLogo.svg',
+  Warriors: '../../public/warriorsLogo.svg',
+  Rockets: '../../public/rocketsLogo.svg',
+  Pacers: '../../public/pacersLogo.svg',
+  Clippers: '../../public/clippersLogo.svg',
+  Lakers: '../../public/lakersLogo.svg',
+  Grizzlies: '../../public/grizzliesLogo.svg',
+  Heat: '../../public/heatLogo.svg',
+  Bucks: '../../public/bucksLogo.svg',
+  Timberwolves: '../../public/timberwolvesLogo.svg',
+  Pelicans: '../../public/pelicansLogo.svg',
+  Knicks: '../../public/knicksLogo.svg',
+  Thunder: '../../public/thunderLogo.svg',
+  Magic: '../../public/magicLogo.svg',
+  '76ers': '../../public/sixersLogo.svg',
+  Suns: '../../public/sunsLogo.png',
+  'Trail Blazers': '../../public/trailblazersLogo.svg',
+  Kings: '../../public/kingsLogo.svg',
+  Spurs: '../../public/spursLogo.svg',
+  Raptors: '../../public/raptorsLogo.svg',
+  Jazz: '../../public/jazzLogo.svg',
+  Wizards: '../../public/wizardsLogo.svg',
+}
+
+
+
+
+
 
 const userFavoritePlayers = ref([])
 const userFavoriteTeams = ref([]);
@@ -28,6 +70,25 @@ const removeFavoritePlayer = (player) => {
   }
 }
 
+
+const removeFavoriteTeam = (team) => {
+
+
+
+  for(let i = 0; i < userFavoriteTeams.value.length; i++) {
+    if(team === userFavoriteTeams.value[i]) {
+      userFavoriteTeams.value.splice(i, 1);
+      return;
+    }
+  }
+
+
+
+
+  console.log(team)
+  console.log(userFavoriteTeams.value)
+}
+
 // toggling favorite players or teams
 const togglePlayers = () => {
   favoriteTeams.value = false
@@ -41,6 +102,11 @@ const toggleTeams = () => {
 
 const showDetails = (player) => {
   emit('playerChoice', player)
+}
+
+const showTeamDetails = (team, img) => {
+  emit('teamChoice', team)
+  emit('teamImgChoice', img)
 }
 </script>
 
@@ -65,10 +131,10 @@ const showDetails = (player) => {
   </div>
 
   <div class="favorite-teams-container" v-if="favoriteTeams">
-    <div class="team-card" tabindex="0" v-for="team in userFavoriteTeams" :key="team.id">
+    <div class="team-card" tabindex="0" v-for="team in userFavoriteTeams" :key="team.id" @click="showTeamDetails(team, teamLogos[team.name])">
       <div class="team-image-container">
-        <img src="../../public/spursLogo.svg" alt="" class="team-logo-img" />
-        <button class="removeFavoriteButton">-</button>
+        <img :src="teamLogos[team.name]" alt="" class="team-logo-img" />
+        <button class="removeFavoriteButton" @click="removeFavoriteTeam(team)">-</button>
       </div>
     </div>
   </div>
@@ -96,7 +162,8 @@ const showDetails = (player) => {
 }
 
 .team-logo-img {
-  min-width: 150px;
+  width: 150px;
+  max-width: 150px;
 }
 
 .team-card {
@@ -110,6 +177,7 @@ const showDetails = (player) => {
   border-radius: 10px;
   cursor: pointer;
   position: relative;
+  margin: 1rem;
 }
 
 .team-card:hover {
@@ -202,8 +270,9 @@ const showDetails = (player) => {
   max-height: 440px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(5, 160px);
+  grid-template-rows: repeat(5, 220px);
   padding: 1rem;
+
   overflow-y: auto;
 }
 </style>

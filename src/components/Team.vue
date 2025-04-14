@@ -2,15 +2,16 @@
 import { ref, computed } from 'vue'
 import { useUserStore } from '../stores/user.js'
 
-
-
-
-
 const store = useUserStore()
 const props = defineProps({
   team: Object,
   teamImg: String,
 })
+
+
+
+
+
 
 const data = computed(() => props.team)
 const teamImage = computed(() => props.teamImg)
@@ -18,14 +19,7 @@ const showInfo = ref(false)
 
 const isValid = ref(false)
 
-
-
-const teamInfo = ref(null);
-
-
-
-
-
+const teamInfo = ref(null)
 
 
 
@@ -47,6 +41,8 @@ const addFavoriteTeam = () => {
 
   if (pass) {
     store.userData.favoriteTeams.push(props.team)
+
+
     triggerIsValid()
   }
 }
@@ -87,7 +83,6 @@ getTeamInfo()
 <template>
   <div class="main-container">
     <div class="image-player-container">
-
       <img :src="teamImage" alt="" class="player-selected-img" />
       <button class="more-info-button" @click="toggleInfoContainer">More Info</button>
       <button class="addFavoriteButton" @click="addFavoriteTeam">+</button>

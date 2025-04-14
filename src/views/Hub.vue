@@ -20,6 +20,18 @@ const teamImg = ref(null);
 const handlePlayer = (player) => {
   selectedPlayer.value = player
 }
+
+
+
+
+const handleTeam = (team) => {
+  selectedTeam.value = team;
+}
+
+
+const handleImg = (img) => {
+  teamImg.value = img
+}
 </script>
 
 <template>
@@ -45,7 +57,7 @@ const handlePlayer = (player) => {
   <div class="content-container">
     <div class="left-side-container">
       <div class="playerDeckContainer">
-        <Deck @playerChoice="handlePlayer"></Deck>
+        <Deck @playerChoice="handlePlayer" @teamChoice="handleTeam" @teamImgChoice="handleImg"></Deck>
       </div>
 
       <div class="season-selection-container">
