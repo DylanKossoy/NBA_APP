@@ -50,7 +50,7 @@ const handlePlayer = (player) => {
     </div>
     <div class="right-side-container">
       <div class="player-container">
-        <Search v-model:selected-player="selectedPlayer"></Search>
+        <Search v-model:selected-player="selectedPlayer" v-model:selected-team="selectedTeam"></Search>
       </div>
     </div>
   </div>

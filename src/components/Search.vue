@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 const playerSelected = defineModel('selected-player')
+const teamSelected = defineModel('selected-team');
 
 const searchInput = ref(null)
 const searchTerm = ref('')
@@ -86,12 +87,16 @@ function getEndpoint(endpoint) {
 
 // function to show userstats below there team
 
-const showUserStats = async (data) => {
+const showUserStats = (data) => {
   playerSelected.value = null
   setTimeout(() => {
     playerSelected.value = data
   }, 100)
 }
+
+
+
+
 
 // 3 functions of searching either teams/ players/ or games/
 
@@ -125,6 +130,23 @@ async function searchPlayers() {
     teamContainerValid.value = false
     console.log(response.status)
   }
+
+}
+
+
+
+const showTeamStats = (team) => {
+
+  playerSelected.value = null
+
+  teamSelected.value = null;
+
+  setTimeout(() => {
+    teamSelected.value = team
+  }, 300)
+
+
+
 }
 
 async function searchTeams() {
@@ -176,9 +198,7 @@ async function searchTeams() {
 
 
 
-  for(let i = 0; i < teamResults.value.length; i++) {
 
-  }
 }
 
 function searchGames() {}
@@ -291,7 +311,7 @@ const searchBasketball = async () => {
       </div>
     </div>
     <div class="team-container" v-if="teamContainerValid">
-      <div class="team-card" tabindex="0" v-for="team in teamResults" :key="team.id">
+      <div class="team-card" tabindex="0" v-for="team in teamResults" :key="team.id" @click="showTeamStats(team)">
         <img :src="teamLogos[team.name]" alt="" class="teamImg" />
       </div>
     </div>

@@ -24,7 +24,7 @@ const addFavoriteTeam = () => {
   let pass = true
 
   for (let i = 0; i < favoriteTeams.length; i++) {
-    if (props.player.first_name === favoriteTeams[i].first_name) {
+    if (props.team.id === favoriteTeams[i].id) {
       console.log('cant add try again')
       pass = false
     }
@@ -64,6 +64,8 @@ const getTeamInfo = async () => {
     console.log(response.status)
   }
 }
+
+getTeamInfo()
 
 
 </script>
@@ -163,81 +165,81 @@ const getTeamInfo = async () => {
       <div class="info-box">
         <div class="info-piece">
           <span class="label-info-piece">Season: </span>
-          <span class="info-piece-stat">{{ playerStatsData?.season }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Games Played: </span>
-          <span class="info-piece-stat">{{ playerStatsData?.games_played }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Minutes Per Game: </span>
-          <span class="info-piece-stat">{{ playerStatsData?.min }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Points Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.pts }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Rebounds Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.reb }}</span>
+          <span class="info-piece-stat"></span>
         </div>
       </div>
       <div class="info-box">
         <div class="info-piece">
           <span class="label-info-piece">Defensive Rebounds Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.dreb }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Offensive Rebounds Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.oreb }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Assists Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.ast }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Steals Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.stl }}</span>
+          <span class="info-piece-stat"></span>
         </div>
       </div>
       <div class="info-box">
         <div class="info-piece">
           <span class="label-info-piece">Blocks Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.blk }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Turnovers Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.turnover }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">P Fouls Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.pf }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Three Point Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.fg3m }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Three Point A Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.fg3a }}</span>
+          <span class="info-piece-stat"></span>
         </div>
       </div>
       <div class="info-box">
         <div class="info-piece">
           <span class="label-info-piece">Three Point Percentage:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.fg3_pct }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Free Throws Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.ftm }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Free Throws A Per Game:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.fta }}</span>
+          <span class="info-piece-stat"></span>
         </div>
         <div class="info-piece">
           <span class="label-info-piece">Free Throw Percentage:</span>
-          <span class="info-piece-stat">{{ playerStatsData?.ft_pct }}</span>
+          <span class="info-piece-stat"></span>
         </div>
       </div>
     </div>
