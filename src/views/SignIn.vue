@@ -77,6 +77,9 @@ const signIn = async (email, password) => {
       path: '/home',
     })
   } else {
+    triggerShake(emailValid);
+    triggerShake(passwordValid)
+    triggerError('* Invalid Email or Password *')
     console.log('somethings wrong: ', response.status)
   }
 
@@ -192,6 +195,12 @@ h2 {
 
 
 
+
+.links-navbar {
+  display: flex;
+  margin-inline: 3rem;
+  gap: 2rem;
+}
 
 /* holds the join prompt with everything. just to make sure everything is layed out in the middle */
 

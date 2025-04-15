@@ -250,8 +250,8 @@ getPlayerInfo()
 <style scoped>
 .playerNumberSelected {
   position: absolute;
-  right: -15px;
-  top: 20px;
+  right: 10px;
+  top: 30px;
   font-family: var(--font-primary);
   font-size: 40px;
 }
@@ -260,16 +260,16 @@ getPlayerInfo()
   position: absolute;
   color: rgb(1, 48, 1);
 
-  top: 20%;
-  left: 0;
+  top: 23%;
+  left: 10px;
 }
 
 .addFavoriteButton {
   position: absolute;
   width: 40px;
   height: 40px;
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 10px;
   border-radius: 50%;
   border: none;
   font-family: var(--font-primary);
@@ -284,17 +284,18 @@ getPlayerInfo()
 }
 
 .image-player-container {
-  width: 250px;
+  width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+  height: 250px;
 }
 
 .more-info-button {
   position: absolute;
-  top: 0;
-  right: -15px;
+  top: 10px;
+  right: 10px;
   border-radius: 10px;
   border: none;
   width: 100px;
@@ -313,17 +314,19 @@ getPlayerInfo()
 
 .player-selected-info-container {
   width: 700px;
-  height: 240px;
+  height: 249px;
   display: flex;
-  margin-left: 2rem;
+
 }
 
 .info-box {
-  width: 1200px;
+  min-width: 170px;
+
 
   font-family: var(--font-primary);
-  border: 0.5px solid black;
-  padding-left: 0.5rem;
+  border-left: 0.5px solid black;
+  padding-inline: 0.5rem;
+  padding-top: 0.5rem;
 }
 
 .main-container {

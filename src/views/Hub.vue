@@ -198,6 +198,7 @@ const handleImg = (img) => {
   width: 100%;
   height: 250px;
   border: 1px solid black;
+  border-top: 5px solid rgb(76, 75, 75);
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;

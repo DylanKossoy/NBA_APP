@@ -180,8 +180,8 @@ getTeamInfo()
   position: absolute;
   color: rgb(1, 48, 1);
 
-  top: 20%;
-  left: 0;
+  top: 23%;
+  left: 10px;
 }
 
 .addFavoriteButton {

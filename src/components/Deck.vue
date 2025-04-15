@@ -6,13 +6,8 @@ const store = useUserStore()
 
 const emit = defineEmits(['playerChoice', 'teamChoice', 'teamImgChoice'])
 
-
-
-
 const favoritePlayers = ref(true)
 const favoriteTeams = ref(false)
-
-
 
 // all team logo images
 const teamLogos = {
@@ -48,17 +43,11 @@ const teamLogos = {
   Wizards: '../../public/wizardsLogo.svg',
 }
 
-
-
-
-
-
 const userFavoritePlayers = ref([])
-const userFavoriteTeams = ref([]);
+const userFavoriteTeams = ref([])
 
 userFavoritePlayers.value = store.userData.favoritePlayers
 userFavoriteTeams.value = store.userData.favoriteTeams
-
 
 const removeFavoritePlayer = (player) => {
   for (let i = 0; i < userFavoritePlayers.value.length; i++) {
@@ -70,52 +59,36 @@ const removeFavoritePlayer = (player) => {
   }
 }
 
-
 const removeFavoriteTeam = (team) => {
-
-
-
-  for(let i = 0; i < userFavoriteTeams.value.length; i++) {
-    if(team === userFavoriteTeams.value[i]) {
-      userFavoriteTeams.value.splice(i, 1);
-      return;
+  for (let i = 0; i < userFavoriteTeams.value.length; i++) {
+    if (team === userFavoriteTeams.value[i]) {
+      userFavoriteTeams.value.splice(i, 1)
+      return
     }
   }
-
-
-
 
   console.log(team)
   console.log(userFavoriteTeams.value)
 }
 
-
-
-
 const triggerPlayerRefresh = (player) => {
   emit('playerChoice', null)
-  emit('teamChoice', null);
-
+  emit('teamChoice', null)
 
   setTimeout(() => {
     emit('playerChoice', player)
-
   }, 100)
 }
 
 const triggerTeamRefresh = (team, img) => {
-  emit('playerChoice', null);
-  emit('teamChoice', null);
+  emit('playerChoice', null)
+  emit('teamChoice', null)
 
   setTimeout(() => {
     emit('teamChoice', team)
-    emit('teamImgChoice', img);
+    emit('teamImgChoice', img)
   }, 100)
 }
-
-
-
-
 
 // toggling favorite players or teams
 const togglePlayers = () => {
@@ -129,19 +102,18 @@ const toggleTeams = () => {
 }
 
 const showDetails = (player) => {
-
-  triggerPlayerRefresh(player);
+  triggerPlayerRefresh(player)
 }
 
 const showTeamDetails = (team, img) => {
-  triggerTeamRefresh(team, img);
+  triggerTeamRefresh(team, img)
 }
 </script>
 
 <template>
   <div class="favoriteOptions">
-    <button @click="togglePlayers" class="favoriteOptionButton">Players</button>
-    <button @click="toggleTeams" class="favoriteOptionButton">Teams</button>
+    <button @click="togglePlayers" class="favoriteOptionButton" >Favorite Players</button>
+    <button @click="toggleTeams" class="favoriteOptionButton" >Favorite Teams</button>
   </div>
   <div class="team-cards-container" v-if="favoritePlayers">
     <div
@@ -159,10 +131,12 @@ const showTeamDetails = (team, img) => {
   </div>
 
   <div class="favorite-teams-container" v-if="favoriteTeams">
-    <div class="team-card" tabindex="0" v-for="team in userFavoriteTeams" :key="team.id" @click="showTeamDetails(team, teamLogos[team.name])">
-      <div class="team-image-container">
-        <img :src="teamLogos[team.name]" alt="" class="team-logo-img" />
-        <button class="removeFavoriteButton" @click="removeFavoriteTeam(team)">-</button>
+    <div class="team-card-container" v-for="team in userFavoriteTeams" :key="team.id">
+      <div class="team-card" tabindex="0" @click="showTeamDetails(team, teamLogos[team.name])">
+        <div class="team-image-container">
+          <img :src="teamLogos[team.name]" alt="" class="team-logo-img" />
+          <button class="removeFavoriteButton" @click="removeFavoriteTeam(team)">-</button>
+        </div>
       </div>
     </div>
   </div>
@@ -190,8 +164,13 @@ const showTeamDetails = (team, img) => {
 }
 
 .team-logo-img {
-  width: 150px;
-  max-width: 150px;
+  width: 100px;
+}
+
+.team-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .team-card {
@@ -205,7 +184,6 @@ const showTeamDetails = (team, img) => {
   border-radius: 10px;
   cursor: pointer;
   position: relative;
-  margin: 1rem;
 }
 
 .team-card:hover {
@@ -226,14 +204,19 @@ const showTeamDetails = (team, img) => {
 
 .favoriteOptionButton {
   background: rgba(196, 196, 198, 0.556);
-  border: none;
-  border-radius: 20px;
-  width: 70px;
+  border: 0.125px solid black;
+
+  width: 499px;
   font-family: var(--font-primary);
-  font-size: 12px;
-  height: 30px;
-  box-shadow: 1px 1px 15px 2px black;
+  font-size: 20px;
+  height: 46px;
+
   cursor: pointer;
+}
+
+.favoriteOptionButton:focus {
+  background: rgb(50, 50, 57);
+  color: white;
 }
 
 .favoriteOptionButton:hover {
@@ -243,8 +226,8 @@ const showTeamDetails = (team, img) => {
 .favoriteOptions {
   display: flex;
   height: 30px;
-  gap: 1rem;
-  margin: 1rem;
+  width: 1000px;
+  margin-bottom: 1rem;
 }
 
 /* player card inside the card containers  */
@@ -282,7 +265,7 @@ const showTeamDetails = (team, img) => {
 
 /* team cards container */
 .team-cards-container {
-  width: 100%;
+  width: 1000px;
   border: 1px solid black;
   max-height: 440px;
   display: grid;
@@ -295,11 +278,10 @@ const showTeamDetails = (team, img) => {
 .favorite-teams-container {
   width: 100%;
   border: 1px solid black;
-  max-height: 440px;
+  max-height: 455px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(5, 220px);
-  padding: 1rem;
 
   overflow-y: auto;
 }
