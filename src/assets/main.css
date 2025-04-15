@@ -109,26 +109,8 @@ body {
   overflow: hidden;
 }
 
-.navbar {
-  margin: 1rem;
-  background: var(--color-navbar-background);
-  height: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
-.navbar a {
-  text-decoration: none;
-  font-family: var(--font-primary);
-  font-size: 20px;
-  color: black;
-}
 
-.basketball-logo {
-  height: 50px;
-  margin: 1.5rem;
-}
 
 
 

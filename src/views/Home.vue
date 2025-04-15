@@ -2,6 +2,7 @@
 import { useUserStore } from '../stores/user.js'
 import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
+import Header from '../components/Header.vue'
 import Search from '../components/Search.vue'
 
 const store = useUserStore()
@@ -18,27 +19,34 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="navbar">
-    <div class="logo-navbar">
-      <img src="../../public/basketballLogo.png" alt="" class="basketball-logo" />
-    </div>
 
-    <div class="nav-links">
+  <Header>
+    <template #links>
       <RouterLink to="/Hub">Hub</RouterLink>
       <RouterLink to="/Gambling">Gambling</RouterLink>
       <RouterLink to="/Games">Games</RouterLink>
       <RouterLink to="/Stats">Stats</RouterLink>
       <RouterLink to="/Profile">Profile</RouterLink>
-    </div>
 
-    <div class="nav-username-container">
+    </template>
+
+    <template #user>
+
       <img :src="userImg" alt="" class="profile-user-img" />
 
       <div class="user-username">{{ store.userData.username }}</div>
 
       <RouterLink to="/join" class="logout-style" @click="store.logout">Logout</RouterLink>
-    </div>
-  </div>
+
+
+
+    </template>
+
+  </Header>
+
+
+
+
 
   <div class="top-half-container">
     <Search></Search>

@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import emailValidator from 'email-validator'
 import { useRouter } from 'vue-router'
+import Header from '../components/Header.vue'
 
 import { useUserStore } from '../../src/stores/user.js'
 
@@ -180,15 +181,19 @@ const check = async (event) => {
 </script>
 
 <template>
-  <div class="navbar">
-    <div class="logo-navbar">
-      <img src="../../public/basketballLogo.png" alt="" class="basketball-logo" />
-    </div>
-    <div class="links-navbar">
+
+
+
+
+
+  <Header>
+    <template #user>
       <RouterLink to="/">Welcome</RouterLink>
       <RouterLink to="/signin" class="signin-button">Log In</RouterLink>
-    </div>
-  </div>
+
+    </template>
+  </Header>
+
 
   <div class="join-container">
     <div class="join-prompt">

@@ -340,6 +340,7 @@ const searchBasketball = async () => {
   height: 220px;
   margin: 1rem;
   border-radius: 30px;
+  border: 2px solid black;
 
   background: rgba(203, 203, 203, 0.393);
   display: flex;
@@ -532,27 +533,34 @@ const searchBasketball = async () => {
 /* blue team header over the input */
 .blue-team-header {
   min-height: 100px;
-  margin-top: 1rem;
+  margin-top: 2rem;
+  gap: 1rem;
+
 
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 
 /* buttons in blue team header */
 
 .blue-team-header button {
-  background: transparent;
+  box-shadow: 1px 1px 5px 1px black;
+  background: rgba(163, 163, 166, 0.646);
+  border-radius: 40px;
   border: none;
-  border-left: 0.25px solid black;
-  border-right: 0.25px solid black;
-  cursor: pointer;
-  margin-block: 1rem;
+  font-family: var(--font-primary);
+
   color: rgb(41, 40, 40);
   font-size: 25px;
   width: 150px;
+  height: 40px;
+  cursor: pointer;
 }
 
 .player-button-filter:hover {
-  background: rgba(255, 255, 255, 0.114);
+  background: rgba(255, 255, 255, 0.667);
 }
 
 /* blue members cell container holding each blue team member */
@@ -566,7 +574,7 @@ const searchBasketball = async () => {
 }
 
 .blue-team-members .user-cell {
-  height: 100px;
+  height: 150px;
   border: 1px solid black;
   width: 500px;
   flex: 0 0 auto;

@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import Search from '../components/Search.vue'
 import Player from '../components/Player.vue'
 import Deck from '../components/Deck.vue'
+import Header from '../components/Header.vue'
 import Team from '../components/Team.vue'
 
 import { useUserStore } from '../stores/user.js'
@@ -12,22 +13,15 @@ const store = useUserStore()
 const selectedPlayer = ref(null)
 const selectedTeam = ref(null)
 
-
-
-
-const teamImg = ref(null);
+const teamImg = ref(null)
 
 const handlePlayer = (player) => {
   selectedPlayer.value = player
 }
 
-
-
-
 const handleTeam = (team) => {
-  selectedTeam.value = team;
+  selectedTeam.value = team
 }
-
 
 const handleImg = (img) => {
   teamImg.value = img
@@ -35,29 +29,32 @@ const handleImg = (img) => {
 </script>
 
 <template>
-  <div class="navbar">
-    <div class="logo-navbar">
-      <img src="../../public/basketballLogo.png" alt="" class="basketball-logo" />
-    </div>
-
-    <div class="nav-links">
+  <Header>
+    <template #links>
       <RouterLink to="/home">Home</RouterLink>
       <RouterLink to="/Gambling">Gambling</RouterLink>
       <RouterLink to="/Games">Games</RouterLink>
       <RouterLink to="/Stats">Stats</RouterLink>
       <RouterLink to="/Profile">Profile</RouterLink>
-    </div>
 
-    <div class="nav-username-container">
+    </template>
+
+
+    <template #user>
       <img src="../../public/user.png" alt="" class="profile-user-img" />
       <div class="user-username">{{ store.userData.username }}</div>
-    </div>
-  </div>
+    </template>
+  </Header>
+
 
   <div class="content-container">
     <div class="left-side-container">
       <div class="playerDeckContainer">
-        <Deck @playerChoice="handlePlayer" @teamChoice="handleTeam" @teamImgChoice="handleImg"></Deck>
+        <Deck
+          @playerChoice="handlePlayer"
+          @teamChoice="handleTeam"
+          @teamImgChoice="handleImg"
+        ></Deck>
       </div>
 
       <div class="season-selection-container">
@@ -67,7 +64,11 @@ const handleImg = (img) => {
     </div>
     <div class="right-side-container">
       <div class="player-container">
-        <Search v-model:selected-player="selectedPlayer" v-model:selected-team="selectedTeam" v-model:team-img="teamImg"></Search>
+        <Search
+          v-model:selected-player="selectedPlayer"
+          v-model:selected-team="selectedTeam"
+          v-model:team-img="teamImg"
+        ></Search>
       </div>
     </div>
   </div>
@@ -200,7 +201,6 @@ const handleImg = (img) => {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  padding: 0.5rem;
 }
 
 /* season option in the season selection container */

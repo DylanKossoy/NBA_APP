@@ -1,17 +1,28 @@
 <script setup>
 import { RouterLink } from 'vue-router'
+import Header from '../components/Header.vue'
 </script>
 
 <template>
-  <div class="navbar">
-    <div class="logo-navbar">
-      <img src="../../public/basketballLogo.png" alt="" class="basketball-logo" />
-    </div>
-    <div class="links-navbar">
-      <RouterLink to="/join">Join</RouterLink>
-      <RouterLink to="/signin" class="signin-button">Log In</RouterLink>
-    </div>
-  </div>
+
+
+
+<Header>
+  <template #user>
+
+    <RouterLink to="/join">Join</RouterLink>
+    <RouterLink to="/signin" class="signin-button">Log In</RouterLink>
+
+  </template>
+
+</Header>
+
+
+
+
+
+
+
   <div class="welcome-message-container">
     <h1 class="welcome-message">Welcome! Please Sign In</h1>
   </div>

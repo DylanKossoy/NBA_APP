@@ -188,8 +188,8 @@ getTeamInfo()
   position: absolute;
   width: 40px;
   height: 40px;
-  top: 0;
-  left: 0;
+  top: 10px;
+  left: 10px;
   border-radius: 50%;
   border: none;
   font-family: var(--font-primary);
@@ -204,17 +204,19 @@ getTeamInfo()
 }
 
 .image-player-container {
-  width: 250px;
+  width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
+
+  height: 250px;
 }
 
 .more-info-button {
   position: absolute;
-  top: 0;
-  right: -15px;
+  top: 10px;
+  right: 10px;
   border-radius: 10px;
   border: none;
   width: 100px;
@@ -233,17 +235,20 @@ getTeamInfo()
 
 .player-selected-info-container {
   width: 700px;
-  height: 240px;
+  height: 249px;
   display: flex;
-  margin-left: 2rem;
+
 }
 
 .info-box {
-  width: 1200px;
+  min-width: 350px;
 
   font-family: var(--font-primary);
-  border: 0.5px solid black;
-  padding-left: 0.5rem;
+  border: none;
+  border-left: .5px solid black;
+  padding-inline: 0.5rem;
+  padding-top: 0.5rem;
+  margin: 0;
 }
 
 .main-container {

@@ -2,6 +2,12 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '../../src/stores/user.js'
+import Header from '../components/Header.vue'
+
+
+
+
+
 
 const store = useUserStore()
 
@@ -109,15 +115,20 @@ const check = (event) => {
 </script>
 
 <template>
-  <div class="navbar">
-    <div class="logo-navbar">
-      <img src="../../public/basketballLogo.png" alt="" class="basketball-logo" />
-    </div>
-    <div class="links-navbar">
+  <Header>
+    <template #user>
       <RouterLink to="/">Welcome</RouterLink>
-      <RouterLink to="/join">Join</RouterLink>
-    </div>
-  </div>
+      <RouterLink to="/join" >Join</RouterLink>
+
+    </template>
+  </Header>
+
+
+
+
+
+
+
 
   <div class="join-container">
     <div class="join-prompt">
@@ -181,12 +192,6 @@ h2 {
 
 
 
-
-.links-navbar {
-  display: flex;
-  margin-inline: 3rem;
-  gap: 2rem;
-}
 
 /* holds the join prompt with everything. just to make sure everything is layed out in the middle */
 

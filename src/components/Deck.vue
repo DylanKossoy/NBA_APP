@@ -89,6 +89,34 @@ const removeFavoriteTeam = (team) => {
   console.log(userFavoriteTeams.value)
 }
 
+
+
+
+const triggerPlayerRefresh = (player) => {
+  emit('playerChoice', null)
+  emit('teamChoice', null);
+
+
+  setTimeout(() => {
+    emit('playerChoice', player)
+
+  }, 100)
+}
+
+const triggerTeamRefresh = (team, img) => {
+  emit('playerChoice', null);
+  emit('teamChoice', null);
+
+  setTimeout(() => {
+    emit('teamChoice', team)
+    emit('teamImgChoice', img);
+  }, 100)
+}
+
+
+
+
+
 // toggling favorite players or teams
 const togglePlayers = () => {
   favoriteTeams.value = false
@@ -101,12 +129,12 @@ const toggleTeams = () => {
 }
 
 const showDetails = (player) => {
-  emit('playerChoice', player)
+
+  triggerPlayerRefresh(player);
 }
 
 const showTeamDetails = (team, img) => {
-  emit('teamChoice', team)
-  emit('teamImgChoice', img)
+  triggerTeamRefresh(team, img);
 }
 </script>
 
