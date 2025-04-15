@@ -179,6 +179,7 @@ getTeamInfo()
 .added-successful {
   position: absolute;
   color: rgb(1, 48, 1);
+  font-family: var(--font-primary);
 
   top: 23%;
   left: 10px;

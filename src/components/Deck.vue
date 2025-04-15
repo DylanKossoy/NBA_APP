@@ -9,6 +9,12 @@ const emit = defineEmits(['playerChoice', 'teamChoice', 'teamImgChoice'])
 const favoritePlayers = ref(true)
 const favoriteTeams = ref(false)
 
+
+
+
+
+
+
 // all team logo images
 const teamLogos = {
   Hawks: '../../public/hawksLogo.avif',
@@ -174,7 +180,7 @@ const showTeamDetails = (team, img) => {
 }
 
 .team-card {
-  width: 200px;
+  width: 230px;
   height: 200px;
   border: 1px solid black;
   display: flex;
@@ -206,7 +212,7 @@ const showTeamDetails = (team, img) => {
   background: rgba(196, 196, 198, 0.556);
   border: 0.125px solid black;
 
-  width: 499px;
+  width: 500px;
   font-family: var(--font-primary);
   font-size: 20px;
   height: 46px;
@@ -267,7 +273,7 @@ const showTeamDetails = (team, img) => {
 .team-cards-container {
   width: 1000px;
   border: 1px solid black;
-  max-height: 440px;
+  max-height: 455px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: repeat(5, 210px);

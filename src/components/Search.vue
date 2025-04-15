@@ -1,9 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import { useUserStore  } from '../stores/user.js'
+import { useUserStore } from '../stores/user.js'
 
-const store = useUserStore();
-
+const store = useUserStore()
 
 const userFavoritePlayers = ref([])
 const userFavoriteTeams = ref([])
@@ -16,7 +15,9 @@ const searchInput = ref(null)
 const searchTerm = ref('')
 const resultsContainerValid = ref(false)
 const teamContainerValid = ref(false)
+const gamesContainerValid = ref(false);
 const advancedOption = ref(false)
+const isValid = ref(false);
 
 // refs for advanced search
 
@@ -25,6 +26,7 @@ const advancedConference = ref('')
 
 const searchPlayerResults = ref([])
 const teamResults = ref([])
+const gameResults = ref([])
 
 // all team logo images
 const teamLogos = {
@@ -62,33 +64,24 @@ const teamLogos = {
 
 let urlEndpoint = ''
 
-
-
 const addFavoritePlayer = (player) => {
-  userFavoritePlayers.value = store.userData.favoritePlayers;
+  userFavoritePlayers.value = store.userData.favoritePlayers
 
-
-
-  for(let i = 0; i < userFavoritePlayers.value.length; i++) {
-    if(player.id === userFavoritePlayers.value[i].id) {
-      console.log("cant do it");
-      return;
+  for (let i = 0; i < userFavoritePlayers.value.length; i++) {
+    if (player.id === userFavoritePlayers.value[i].id) {
+      console.log('cant do it')
+      return
     }
   }
 
-
-  userFavoritePlayers.value.push(player);
+  userFavoritePlayers.value.push(player)
 }
-
-
-
-
-
 
 // function that controls the endpoint of the search input
 function getEndpoint(endpoint) {
   resultsContainerValid.value = false
   teamContainerValid.value = false
+  gamesContainerValid.value = false;
 
   switch (endpoint) {
     case 1:
@@ -129,30 +122,32 @@ const showUserStats = (data) => {
 }
 
 
+const triggerIsValid = () => {
+  isValid.value = true;
 
-const addFavoriteTeam = (team) => {
+  setTimeout(() => {
+    isValid.value = false;
 
-  userFavoriteTeams.value = store.userData.favoriteTeams
-
-
-
-
-  for(let i = 0; i < userFavoriteTeams.value.length; i++) {
-    if(team.id === userFavoriteTeams.value[i].id) {
-      console.log('didnt work');
-      return;
-    }
-  }
-
-
-  userFavoriteTeams.value.push(team);
-
-
+  }, 1000)
 }
 
 
 
 
+
+const addFavoriteTeam = (team) => {
+  userFavoriteTeams.value = store.userData.favoriteTeams
+
+  for (let i = 0; i < userFavoriteTeams.value.length; i++) {
+    if (team.id === userFavoriteTeams.value[i].id) {
+      console.log('didnt work')
+      return
+    }
+  }
+
+  triggerIsValid();
+  userFavoriteTeams.value.push(team)
+}
 
 // 3 functions of searching either teams/ players/ or games/
 
@@ -175,15 +170,16 @@ async function searchPlayers() {
   if (response.status === 200) {
     const dataObject = await response.json()
     console.log(dataObject)
+    console.log(dataObject.data[0])
 
-    searchPlayerResults.value.push(dataObject.data[0])
+    searchPlayerResults.value.push(...dataObject.data)
 
     searchTerm.value = ''
     resultsContainerValid.value = true
-    teamContainerValid.value = false
+
   } else {
     resultsContainerValid.value = false
-    teamContainerValid.value = false
+
     console.log(response.status)
   }
 }
@@ -234,7 +230,43 @@ async function searchTeams() {
   }
 }
 
-function searchGames() {}
+async function searchGames() {
+
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/games?seasons=2024`
+
+
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    }
+  }
+
+
+
+
+  const response = await fetch(url, options)
+
+
+  if(response.status === 200) {
+    const dataObject = await response.json()
+
+
+    gameResults.value.push(...dataObject.data)
+
+    gamesContainerValid.value = true;
+
+    console.log(dataObject)
+  } else {
+    console.log(response.status)
+  }
+
+
+
+
+
+}
 
 function toggleAdvanced() {
   advancedOption.value = !advancedOption.value
@@ -352,14 +384,114 @@ const searchBasketball = async () => {
         :key="team.id"
         @click="showTeamStats(team)"
       >
+
         <button class="addFavoriteTeamButton" @click="addFavoriteTeam(team)">+</button>
         <img :src="teamLogos[team.name]" alt="" class="teamImg" />
       </div>
     </div>
+    <div class="games-container" v-if="gamesContainerValid">
+
+      <div class="games-card" v-for="game in gameResults" :key="game.id" tabindex="0">
+        <div class="header-game-card">
+          <span class="vsTeams"> {{ game.home_team.name }} vs {{ game.visitor_team.name }}</span>
+          <span class="seasonGame">{{ game.season }}</span>
+
+        </div>
+
+        <div class="teams-player-container">
+          <img :src="teamLogos[game.home_team.name]" alt="" class="vsTeamsLogo">
+          <span class="vsLetters">vs</span>
+          <img :src="teamLogos[game.visitor_team.name]" alt="" class="vsTeamsLogo">
+        </div>
+
+      </div>
+
+    </div>
+
+
   </div>
 </template>
 
 <style scoped>
+
+.seasonGame {
+  position: absolute;
+  right: 10px;
+  font-size: 25px;
+  color: rgb(47, 48, 49);
+}
+
+
+
+
+.header-game-card {
+  display: flex;
+  position: relative;
+  width: 500px;
+  justify-content: center;
+
+}
+
+
+.vsTeamsLogo {
+
+  max-width: 120px;
+  margin: .5rem;
+}
+
+.vsTeams {
+  font-size: 15px;
+  margin-block: .5rem;
+  font-weight: 700;
+}
+
+.vsLetters {
+  font-size: 40px;
+  margin-inline: 3.5rem;
+}
+
+.games-card {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 500px;
+  align-items: center;
+  cursor: pointer;
+
+}
+
+
+.games-card:hover {
+  background: rgba(23, 125, 193, 0.206);
+}
+
+
+.games-card:focus {
+  background: rgba(39, 71, 134, 0.389);
+}
+
+.games-container {
+  height: 170px;
+  display: flex;
+  font-family: var(--font-primary);
+
+
+  background: rgb(142, 140, 140);
+}
+
+.teams-player-container {
+  width: 500px;
+  display: flex;
+  height: 120px;
+  align-items: center;
+
+  justify-content: center;
+  padding-bottom: 1rem;
+}
+
+
+
 
 .addFavoriteTeamButton {
   position: absolute;
@@ -373,10 +505,12 @@ const searchBasketball = async () => {
   cursor: pointer;
   top: 15px;
   right: 15px;
-
 }
 
-
+.addFavoriteTeamButton:hover {
+  background: rgb(7, 77, 29);
+  color: white;
+}
 
 
 .addFavoriteButton {
@@ -394,11 +528,11 @@ const searchBasketball = async () => {
 }
 
 .addFavoriteButton:hover {
-  background: rgba(178, 178, 185, 0.659);
+  background: rgb(7, 77, 29);
+  color: white;
 }
 
 .team-container {
-
   width: 500px;
   height: 500px;
 
@@ -410,9 +544,11 @@ const searchBasketball = async () => {
 }
 
 .team-card {
-  width: 220px;
-  height: 220px;
-  margin: 1rem;
+  width: 230px;
+  height: 230px;
+  margin-bottom: 1rem;
+  margin-inline: .5rem;
+
   border-radius: 30px;
   border: 2px solid black;
   position: relative;
@@ -457,7 +593,6 @@ const searchBasketball = async () => {
   align-items: center;
   margin-top: 1rem;
   border-bottom: 0.5px solid rgb(78, 69, 69);
-
 }
 
 .label {
@@ -498,7 +633,6 @@ const searchBasketball = async () => {
   width: 500px;
   min-height: 50px;
   margin: 10px;
-
 }
 
 .advancedSearchButton {
@@ -660,7 +794,8 @@ const searchBasketball = async () => {
 
 .blue-team-members .user-cell {
   height: 150px;
-  border: 1px solid black;
+  border: 2px solid black;
+  border-radius: 10px;
   width: 500px;
   flex: 0 0 auto;
   display: flex;
