@@ -5,6 +5,7 @@ import Player from '../components/Player.vue'
 import Deck from '../components/Deck.vue'
 import Header from '../components/Header.vue'
 import Team from '../components/Team.vue'
+import Games from '../components/Games.vue'
 
 import { useUserStore } from '../stores/user.js'
 
@@ -12,6 +13,7 @@ const store = useUserStore()
 
 const selectedPlayer = ref(null)
 const selectedTeam = ref(null)
+const selectedGame = ref(null);
 
 const teamImg = ref(null)
 
@@ -25,6 +27,11 @@ const handleTeam = (team) => {
 
 const handleImg = (img) => {
   teamImg.value = img
+}
+
+
+const handleGame = (game) => {
+  selectedGame.value = game
 }
 </script>
 
@@ -54,12 +61,14 @@ const handleImg = (img) => {
           @playerChoice="handlePlayer"
           @teamChoice="handleTeam"
           @teamImgChoice="handleImg"
+          @gameChoice="handleGame"
         ></Deck>
       </div>
 
       <div class="season-selection-container">
         <Player v-if="selectedPlayer" :player="selectedPlayer"></Player>
         <Team v-if="selectedTeam" :team="selectedTeam" :teamImg="teamImg"></Team>
+        <Games v-if="selectedGame" :game="selectedGame"></Games>
       </div>
     </div>
     <div class="right-side-container">
@@ -68,6 +77,7 @@ const handleImg = (img) => {
           v-model:selected-player="selectedPlayer"
           v-model:selected-team="selectedTeam"
           v-model:team-img="teamImg"
+          v-model:selected-game="selectedGame"
         ></Search>
       </div>
     </div>

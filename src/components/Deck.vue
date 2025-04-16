@@ -4,7 +4,7 @@ import { useUserStore } from '../stores/user.js'
 
 const store = useUserStore()
 
-const emit = defineEmits(['playerChoice', 'teamChoice', 'teamImgChoice'])
+const emit = defineEmits(['playerChoice', 'teamChoice', 'teamImgChoice', 'gameChoice'])
 
 const favoritePlayers = ref(true)
 const favoriteTeams = ref(false)
@@ -80,6 +80,7 @@ const removeFavoriteTeam = (team) => {
 const triggerPlayerRefresh = (player) => {
   emit('playerChoice', null)
   emit('teamChoice', null)
+  emit('gameChoice', null)
 
   setTimeout(() => {
     emit('playerChoice', player)
@@ -89,6 +90,7 @@ const triggerPlayerRefresh = (player) => {
 const triggerTeamRefresh = (team, img) => {
   emit('playerChoice', null)
   emit('teamChoice', null)
+  emit('gameChoice', null)
 
   setTimeout(() => {
     emit('teamChoice', team)

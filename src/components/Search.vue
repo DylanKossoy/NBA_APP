@@ -9,20 +9,23 @@ const userFavoriteTeams = ref([])
 
 const playerSelected = defineModel('selected-player')
 const teamSelected = defineModel('selected-team')
+const gameSelected = defineModel('selected-game')
 const teamImg = defineModel('team-img')
 
 const searchInput = ref(null)
 const searchTerm = ref('')
 const resultsContainerValid = ref(false)
 const teamContainerValid = ref(false)
-const gamesContainerValid = ref(false);
+const gamesContainerValid = ref(false)
 const advancedOption = ref(false)
-const isValid = ref(false);
+const isValid = ref(false)
 
 // refs for advanced search
 
 const advancedSeason = ref('')
 const advancedConference = ref('')
+const advancedStartDate = ref('')
+const advancedEndDate = ref('')
 
 const searchPlayerResults = ref([])
 const teamResults = ref([])
@@ -64,6 +67,16 @@ const teamLogos = {
 
 let urlEndpoint = ''
 
+const showGameStats = (game) => {
+  playerSelected.value = null
+  teamSelected.value = null
+  gameSelected.value = null
+
+  setTimeout(() => {
+    gameSelected.value = game
+  }, 300)
+}
+
 const addFavoritePlayer = (player) => {
   userFavoritePlayers.value = store.userData.favoritePlayers
 
@@ -81,7 +94,7 @@ const addFavoritePlayer = (player) => {
 function getEndpoint(endpoint) {
   resultsContainerValid.value = false
   teamContainerValid.value = false
-  gamesContainerValid.value = false;
+  gamesContainerValid.value = false
 
   switch (endpoint) {
     case 1:
@@ -116,24 +129,19 @@ function getEndpoint(endpoint) {
 const showUserStats = (data) => {
   playerSelected.value = null
   teamSelected.value = null
+  gameSelected.value = null
   setTimeout(() => {
     playerSelected.value = data
   }, 100)
 }
 
-
 const triggerIsValid = () => {
-  isValid.value = true;
+  isValid.value = true
 
   setTimeout(() => {
-    isValid.value = false;
-
+    isValid.value = false
   }, 1000)
 }
-
-
-
-
 
 const addFavoriteTeam = (team) => {
   userFavoriteTeams.value = store.userData.favoriteTeams
@@ -145,7 +153,7 @@ const addFavoriteTeam = (team) => {
     }
   }
 
-  triggerIsValid();
+  triggerIsValid()
   userFavoriteTeams.value.push(team)
 }
 
@@ -176,7 +184,6 @@ async function searchPlayers() {
 
     searchTerm.value = ''
     resultsContainerValid.value = true
-
   } else {
     resultsContainerValid.value = false
 
@@ -188,6 +195,7 @@ const showTeamStats = (team) => {
   playerSelected.value = null
 
   teamSelected.value = null
+  gameSelected.value = null
 
   teamImg.value = teamLogos[team.name]
 
@@ -231,41 +239,51 @@ async function searchTeams() {
 }
 
 async function searchGames() {
-
+  gamesContainerValid.value = false
+  gameResults.value = []
   let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/games?seasons=2024`
 
+  if (advancedSeason.value) {
+    url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/games?seasons=${advancedSeason.value}`
+  }
 
+  if (advancedStartDate.value && advancedEndDate.value) {
+    url =`https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/games?start_date=${advancedStartDate.value}&end_date=${advancedEndDate.value}`
+    console.log(url)
+  }
+
+
+  if(advancedSeason.value && advancedStartDate.value && advancedEndDate.value) {
+    url =`https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/games?seasons=${advancedSeason.value}&start_date=${advancedStartDate.value}&end_date=${advancedEndDate.value}`
+  }
+
+
+  if(searchTerm.value && advancedStartDate.value && advancedEndDate.value) {
+
+  }
 
   const options = {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-    }
+    },
   }
-
-
-
 
   const response = await fetch(url, options)
 
-
-  if(response.status === 200) {
+  if (response.status === 200) {
     const dataObject = await response.json()
-
 
     gameResults.value.push(...dataObject.data)
 
-    gamesContainerValid.value = true;
+    console.log(...gameResults.value)
+
+    gamesContainerValid.value = true
 
     console.log(dataObject)
   } else {
     console.log(response.status)
   }
-
-
-
-
-
 }
 
 function toggleAdvanced() {
@@ -277,6 +295,7 @@ function toggleAdvanced() {
 const searchBasketball = async () => {
   resultsContainerValid.value = false
   searchPlayerResults.value = []
+  teamResults.value = []
 
   if (!searchInput.value || !urlEndpoint) {
     return
@@ -320,7 +339,7 @@ const searchBasketball = async () => {
       <div class="advanced-button-container">
         <div class="advanced-inputs-container" v-if="advancedOption">
           <div class="advanced-option">
-            <div class="label">Choose Season:</div>
+            <div class="label">Season:</div>
             <input
               type="number"
               min="2000"
@@ -331,7 +350,25 @@ const searchBasketball = async () => {
             />
           </div>
           <div class="advanced-option">
-            <div class="label">Choose Conference:</div>
+            <div class="label">Start Date:</div>
+            <input
+              type="date"
+              placeholder="Choose Season"
+              class="season-year"
+              v-model="advancedStartDate"
+            />
+          </div>
+          <div class="advanced-option">
+            <div class="label">End Date:</div>
+            <input
+              type="date"
+              placeholder="Choose Season"
+              class="season-year"
+              v-model="advancedEndDate"
+            />
+          </div>
+          <div class="advanced-option">
+            <div class="label">Conference:</div>
             <select name="conference" class="conferenceSelect">
               <option value="west">West</option>
               <option value="east">East</option>
@@ -384,36 +421,34 @@ const searchBasketball = async () => {
         :key="team.id"
         @click="showTeamStats(team)"
       >
-
         <button class="addFavoriteTeamButton" @click="addFavoriteTeam(team)">+</button>
         <img :src="teamLogos[team.name]" alt="" class="teamImg" />
       </div>
     </div>
     <div class="games-container" v-if="gamesContainerValid">
-
-      <div class="games-card" v-for="game in gameResults" :key="game.id" tabindex="0">
+      <div
+        class="games-card"
+        v-for="game in gameResults"
+        :key="game.id"
+        tabindex="0"
+        @click="showGameStats(game)"
+      >
         <div class="header-game-card">
           <span class="vsTeams"> {{ game.home_team.name }} vs {{ game.visitor_team.name }}</span>
           <span class="seasonGame">{{ game.season }}</span>
-
         </div>
 
         <div class="teams-player-container">
-          <img :src="teamLogos[game.home_team.name]" alt="" class="vsTeamsLogo">
+          <img :src="teamLogos[game.home_team.name]" alt="" class="vsTeamsLogo" />
           <span class="vsLetters">vs</span>
-          <img :src="teamLogos[game.visitor_team.name]" alt="" class="vsTeamsLogo">
+          <img :src="teamLogos[game.visitor_team.name]" alt="" class="vsTeamsLogo" />
         </div>
-
       </div>
-
     </div>
-
-
   </div>
 </template>
 
 <style scoped>
-
 .seasonGame {
   position: absolute;
   right: 10px;
@@ -421,27 +456,22 @@ const searchBasketball = async () => {
   color: rgb(47, 48, 49);
 }
 
-
-
-
 .header-game-card {
   display: flex;
   position: relative;
   width: 500px;
   justify-content: center;
-
 }
 
-
 .vsTeamsLogo {
-
-  max-width: 120px;
-  margin: .5rem;
+  max-width: 100px;
+  max-height: 100px;
+  margin: 0.5rem;
 }
 
 .vsTeams {
   font-size: 15px;
-  margin-block: .5rem;
+  margin-block: 0.5rem;
   font-weight: 700;
 }
 
@@ -456,28 +486,29 @@ const searchBasketball = async () => {
   border: 2px solid black;
   border-radius: 10px;
   width: 500px;
+  height: 170px;
   align-items: center;
   cursor: pointer;
-
+  background: rgb(142, 140, 140);
+  margin-block: 1rem;
 }
-
 
 .games-card:hover {
   background: rgba(23, 125, 193, 0.206);
 }
-
 
 .games-card:focus {
   background: rgba(39, 71, 134, 0.389);
 }
 
 .games-container {
-  height: 170px;
+  height: 500px;
   display: flex;
+  flex-direction: column;
   font-family: var(--font-primary);
-
-
-  background: rgb(142, 140, 140);
+  overflow-y: auto;
+  border: none;
+  outline: none;
 }
 
 .teams-player-container {
@@ -489,9 +520,6 @@ const searchBasketball = async () => {
   justify-content: center;
   padding-bottom: 1rem;
 }
-
-
-
 
 .addFavoriteTeamButton {
   position: absolute;
@@ -511,7 +539,6 @@ const searchBasketball = async () => {
   background: rgb(7, 77, 29);
   color: white;
 }
-
 
 .addFavoriteButton {
   position: absolute;
@@ -547,7 +574,7 @@ const searchBasketball = async () => {
   width: 230px;
   height: 230px;
   margin-bottom: 1rem;
-  margin-inline: .5rem;
+  margin-inline: 0.5rem;
 
   border-radius: 30px;
   border: 2px solid black;
@@ -596,27 +623,33 @@ const searchBasketball = async () => {
 }
 
 .label {
-  font-size: 10px;
+  font-size: 13px;
+  color: rgb(80, 1, 1);
 }
 
 .conferenceSelect {
-  width: 100px;
+  width: 70px;
   background: rgb(119, 119, 119);
   border: 1px solid black;
+  font-family: var(--font-primary);
 }
 .season-year {
-  width: 100px;
+  width: 70px;
   background: rgb(119, 119, 119);
   border: 1px solid black;
 }
 
 .advanced-option {
-  width: 150px;
+  width: 100px;
 }
 
 .advanced-inputs-container {
   display: flex;
-  gap: 1rem;
+
+  width: 380px;
+  gap: 0.5rem;
+
+  align-items: center;
 }
 
 .user-info-box {
