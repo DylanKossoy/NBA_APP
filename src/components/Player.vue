@@ -8,6 +8,41 @@ const props = defineProps({
 
 })
 
+
+// all team logo images
+const playerShirts = {
+  Hawks: '../../public/Players/ATL_icon.png',
+  Celtics: '../../public/Players/BOS_icon.png',
+  Nets: '../../public/Players/BKN_icon.png',
+  Hornets: '../../public/Players/CHA_icon.png',
+  Bulls: '../../public/Players/CHI_icon.png',
+  Cavaliers: '../../public/Players/CLE_icon.png',
+  Mavericks: '../../public/Players/DAL_icon.png',
+  Nuggets: '../../public/Players/DEN_icon.png',
+  Pistons: '../../public/Players/DET_icon.png',
+  Warriors: '../../public/Players/GSW_icon.png',
+  Rockets: '../../public/Players/HOU_icon.png',
+  Pacers: '../../public/Players/IND_icon.png',
+  Clippers: '../../public/Players/LAC_icon.png',
+  Lakers: '../../public/Players/LAL_icon.png',
+  Grizzlies: '../../public/Players/MEM_icon.png',
+  Heat: '../../public/Players/MIA_icon.png',
+  Bucks: '../../public/Players/MIL_icon.png',
+  Timberwolves: '../../public/Players/MIN_icon.png',
+  Pelicans: '../../public/Players/NOP_icon.png',
+  Knicks: '../../public/Players/NYK_icon.png',
+  Thunder: '../../public/Players/ORL_icon.png',
+  Magic: '../../public/Players/PHI_icon.png',
+  '76ers': '../../public/Players/PHX_icon.png',
+  Suns: '../../public/Players/POR_icon.png',
+  'Trail Blazers': '../../public/Players/POR_icon.png',
+  Kings: '../../public/Players/SAC_icon.png',
+  Spurs: '../../public/Players/SAS_icon.png',
+  Raptors: '../../public/Players/TOR_icon.png',
+  Jazz: '../../public/Players/UTA_icon.png',
+  Wizards: '../../public/Players/WAS_icon.png',
+}
+
 console.log('player component: ' + Object.keys(props.player.team))
 
 const data = computed(() => props.player)
@@ -75,7 +110,7 @@ getPlayerInfo()
   <div class="main-container">
     <div class="image-player-container">
       <div class="playerNumberSelected">#{{ data.jersey_number }}</div>
-      <img src="../../public/player-selected.png" alt="" class="player-selected-img" />
+      <img :src="playerShirts[data.team.name]" alt="" class="player-selected-img" />
       <button class="more-info-button" @click="toggleInfoContainer">More Info</button>
       <button class="addFavoriteButton" @click="addFavoritePlayer">+</button>
       <div class="added-successful" v-if="isValid">Added ✓</div>
@@ -309,7 +344,7 @@ getPlayerInfo()
 }
 
 .player-selected-img {
-  max-width: 200px;
+  max-width: 130px;
 }
 
 .player-selected-info-container {

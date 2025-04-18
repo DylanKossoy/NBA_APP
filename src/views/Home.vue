@@ -4,6 +4,7 @@ import { onMounted, ref } from 'vue'
 import { RouterLink } from 'vue-router'
 import Header from '../components/Header.vue'
 import Search from '../components/Search.vue'
+import HomeDeck from '../components/HomeDeck.vue'
 
 const store = useUserStore()
 
@@ -24,8 +25,8 @@ onMounted(() => {
     <template #links>
       <RouterLink to="/Hub">Hub</RouterLink>
       <RouterLink to="/Gambling">Gambling</RouterLink>
-      <RouterLink to="/Games">Games</RouterLink>
-      <RouterLink to="/Stats">Stats</RouterLink>
+
+
       <RouterLink to="/Profile">Profile</RouterLink>
 
     </template>
@@ -57,135 +58,7 @@ onMounted(() => {
   </div>
 
   <div class="bottom-half-container">
-    <div class="favorite-players-header">Favorite Players</div>
-    <div class="card-container">
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-      <div class="favorite-player-card">
-        <img src="../../public/basketball-player.png" alt="" class="stats-user-img" />
-        <div class="player-name-incard">player name</div>
-        <div class="player-stats-incard">
-          <span class="stats-incard">PTS: 0</span>
-          <span class="stats-incard">RBS: 0</span>
-          <span class="stats-incard">ASS: 0</span>
-        </div>
-      </div>
-    </div>
+    <HomeDeck></HomeDeck>
   </div>
 </template>
 
@@ -365,55 +238,17 @@ onMounted(() => {
 
 /* bottom half container */
 .bottom-half-container {
-  height: 250px;
+  height: 350px;
   border: 1px solid black;
   margin: 1rem;
   padding-bottom: 1rem;
 }
 
-/* bottom half container favorite players */
-.bottom-half-container .favorite-players-header {
-  font-size: 20px;
-  font-family: var(--font-primary);
-  margin-left: 1rem;
-  margin-bottom: 1.1rem;
-}
 
-/* bottom half container that holds the favorite player cards */
-.bottom-half-container .card-container {
-  overflow-y: hidden;
-  overflow-x: auto;
-  height: 200px;
-  padding-inline: 1rem;
-  display: flex;
-  gap: 1rem;
-}
 
-/* favorite player cards inside the card container */
 
-.card-container .favorite-player-card {
-  width: 125px;
-  height: 175px;
-  border: 1px solid black;
-  border-radius: 5px;
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  align-items: center;
-  justify-content: space-between;
-}
 
-/* span elements inside card that show stats (pTS, RBS, ASS) */
 
-.favorite-player-card .stats-incard {
-  font-size: 10px;
-}
-
-/* profile image in the favorite player cards */
-.favorite-player-card .stats-user-img {
-  width: 60px;
-}
 
 @media (max-width: 1450px) {
   .top-half-container {

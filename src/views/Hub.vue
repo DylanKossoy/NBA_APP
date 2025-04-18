@@ -33,6 +33,11 @@ const handleImg = (img) => {
 const handleGame = (game) => {
   selectedGame.value = game
 }
+
+
+
+
+
 </script>
 
 <template>

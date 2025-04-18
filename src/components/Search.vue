@@ -258,9 +258,7 @@ async function searchGames() {
   }
 
 
-  if(searchTerm.value && advancedStartDate.value && advancedEndDate.value) {
 
-  }
 
   const options = {
     method: 'GET',
