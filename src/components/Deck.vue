@@ -87,26 +87,76 @@ const userFavoriteTeams = ref([])
 userFavoritePlayers.value = store.userData.favoritePlayers
 userFavoriteTeams.value = store.userData.favoriteTeams
 
+const deleteFavoritePlayers = async (player) => {
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/favorite-players/${player.id}`
+
+
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${store.userToken}`,
+    },
+  }
+
+  const response = await fetch(url, options)
+
+  if (response.status === 200) {
+    console.log(response.status);
+
+
+    console.log('the player has been deleted')
+  } else {
+    console.log(response.status)
+  }
+}
+
+const deleteFavoriteTeams = async (team) => {
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/favorite-teams/${team.id}`
+
+
+  const options = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${store.userToken}`,
+    },
+  }
+
+  const response = await fetch(url, options)
+
+  if (response.status === 200) {
+    console.log(response.status);
+
+
+    console.log('the team has been deleted')
+  } else {
+    console.log(response.status)
+  }
+}
+
 const removeFavoritePlayer = (player) => {
   for (let i = 0; i < userFavoritePlayers.value.length; i++) {
     if (player === userFavoritePlayers.value[i]) {
       userFavoritePlayers.value.splice(i, 1)
+      deleteFavoritePlayers(player);
       console.log('removed')
       return
     }
   }
+
+
+
 }
 
 const removeFavoriteTeam = (team) => {
   for (let i = 0; i < userFavoriteTeams.value.length; i++) {
     if (team === userFavoriteTeams.value[i]) {
       userFavoriteTeams.value.splice(i, 1)
+      deleteFavoriteTeams(team)
       return
     }
   }
-
-  console.log(team)
-  console.log(userFavoriteTeams.value)
 }
 
 const triggerPlayerRefresh = (player) => {

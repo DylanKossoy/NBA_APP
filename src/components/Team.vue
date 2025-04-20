@@ -26,6 +26,30 @@ const teamInfo = ref(null)
 const toggleInfoContainer = () => {
   showInfo.value = !showInfo.value
 }
+const pushFavoriteTeams = async () => {
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/favorite-teams`
+
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${store.userToken}`,
+    },
+    body: JSON.stringify({ team_id: props.team.id}),
+  }
+
+  const response = await fetch(url, options)
+
+  if (response.status === 201) {
+    console.log(response.status);
+
+
+    console.log('the team has been pushed ')
+  } else {
+    console.log(response.status)
+  }
+}
 
 // function to add the player to favorite teams array in pinia
 const addFavoriteTeam = () => {
@@ -42,7 +66,7 @@ const addFavoriteTeam = () => {
   if (pass) {
     store.userData.favoriteTeams.push(props.team)
 
-
+    pushFavoriteTeams()
     triggerIsValid()
   }
 }

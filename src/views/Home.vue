@@ -5,6 +5,9 @@ import { RouterLink } from 'vue-router'
 import Header from '../components/Header.vue'
 import Search from '../components/Search.vue'
 import HomeDeck from '../components/HomeDeck.vue'
+import Feed from '../components/Feed.vue'
+
+
 
 const store = useUserStore()
 
@@ -52,7 +55,9 @@ onMounted(() => {
   <div class="top-half-container">
     <Search></Search>
     <div class="latest-feed-container">
-      <div class="feed-card">news</div>
+      <div class="feed-card">
+        <Feed></Feed>
+      </div>
       <div class="feed-card">news</div>
     </div>
   </div>

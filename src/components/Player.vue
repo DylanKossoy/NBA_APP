@@ -5,9 +5,7 @@ import { useUserStore } from '../stores/user.js'
 const store = useUserStore()
 const props = defineProps({
   player: Object,
-
 })
-
 
 // all team logo images
 const playerShirts = {
@@ -56,6 +54,31 @@ const toggleInfoContainer = () => {
   showInfo.value = !showInfo.value
 }
 
+const pushFavoritePlayers = async () => {
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/favorite-players`
+
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${store.userToken}`,
+    },
+    body: JSON.stringify({ player_id: props.player.id}),
+  }
+
+  const response = await fetch(url, options)
+
+  if (response.status === 201) {
+    console.log(response.status);
+
+
+    console.log('the player has been pushed ')
+  } else {
+    console.log(response.status)
+  }
+}
+
 // function to add the player to favorite teams array in pinia
 const addFavoritePlayer = () => {
   let favoritePlayers = store.userData.favoritePlayers
@@ -70,6 +93,8 @@ const addFavoritePlayer = () => {
 
   if (pass) {
     store.userData.favoritePlayers.push(props.player)
+
+    pushFavoritePlayers()
     triggerIsValid()
   }
 }
@@ -351,12 +376,10 @@ getPlayerInfo()
   width: 700px;
   height: 249px;
   display: flex;
-
 }
 
 .info-box {
   min-width: 170px;
-
 
   font-family: var(--font-primary);
   border-left: 0.5px solid black;

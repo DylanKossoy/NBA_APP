@@ -23,7 +23,10 @@ export const useUserStore = defineStore('userStore', () => {
     userData.avatarImg = localStorage.getItem('userAvatar');
   }
 
-  function logout() {
+  async function logout() {
+
+
+
     userToken.value = null
     userData.username = ''
     userData.email = ''

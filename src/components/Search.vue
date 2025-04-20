@@ -77,6 +77,56 @@ const showGameStats = (game) => {
   }, 300)
 }
 
+
+const pushFavoritePlayers = async () => {
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/favorite-players`
+
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${store.userToken}`,
+    },
+    body: JSON.stringify({ player_id: playerSelected.value.id}),
+  }
+
+  const response = await fetch(url, options)
+
+  if (response.status === 201) {
+    console.log(response.status);
+
+
+    console.log('the player has been pushed ')
+  } else {
+    console.log(response.status)
+  }
+}
+const pushFavoriteTeams = async () => {
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/favorite-teams`
+
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${store.userToken}`,
+    },
+    body: JSON.stringify({ team_id: teamSelected.value.id})
+  }
+
+  const response = await fetch(url, options)
+
+  if (response.status === 201) {
+    console.log(response.status);
+
+
+    console.log('the team has been pushed ')
+  } else {
+    console.log(response.status)
+  }
+}
+
 const addFavoritePlayer = (player) => {
   userFavoritePlayers.value = store.userData.favoritePlayers
 
@@ -88,6 +138,7 @@ const addFavoritePlayer = (player) => {
   }
 
   userFavoritePlayers.value.push(player)
+  pushFavoritePlayers()
 }
 
 // function that controls the endpoint of the search input
@@ -155,6 +206,7 @@ const addFavoriteTeam = (team) => {
 
   triggerIsValid()
   userFavoriteTeams.value.push(team)
+  pushFavoriteTeams()
 }
 
 // 3 functions of searching either teams/ players/ or games/
