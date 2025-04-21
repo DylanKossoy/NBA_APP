@@ -13,7 +13,7 @@ const store = useUserStore()
 
 const selectedPlayer = ref(null)
 const selectedTeam = ref(null)
-const selectedGame = ref(null);
+const selectedGame = ref(null)
 
 const teamImg = ref(null)
 
@@ -29,15 +29,9 @@ const handleImg = (img) => {
   teamImg.value = img
 }
 
-
 const handleGame = (game) => {
   selectedGame.value = game
 }
-
-
-
-
-
 </script>
 
 <template>
@@ -45,19 +39,15 @@ const handleGame = (game) => {
     <template #links>
       <RouterLink to="/home">Home</RouterLink>
       <RouterLink to="/Gambling">Gambling</RouterLink>
-      <RouterLink to="/Games">Games</RouterLink>
-      <RouterLink to="/Stats">Stats</RouterLink>
+
       <RouterLink to="/Profile">Profile</RouterLink>
-
     </template>
-
 
     <template #user>
       <img src="../../public/user.png" alt="" class="profile-user-img" />
       <div class="user-username">{{ store.userData.username }}</div>
     </template>
   </Header>
-
 
   <div class="content-container">
     <div class="left-side-container">

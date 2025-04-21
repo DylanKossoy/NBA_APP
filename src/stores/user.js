@@ -10,17 +10,22 @@ export const useUserStore = defineStore('userStore', () => {
     favoritePlayers: [],
     favoriteTeams: [],
     betIds: [],
-    avatarImg: '',
   })
 
   function setUserData(data) {
     userToken.value = data.token
-    userData.username = data.user.username
-    userData.email = data.user.email
-    userData.favoritePlayers = data.user.favoritePlayers
-    userData.favoriteTeams = data.user.favoriteTeams
-    userData.betIds = data.user.betIds
-    userData.avatarImg = localStorage.getItem('userAvatar');
+
+
+
+    if(data.user) {
+      userData.username = data.user.username || ''
+      userData.email = data.user.email || ''
+      userData.favoritePlayers = data.user.favoritePlayers || []
+      userData.favoriteTeams = data.user.favoriteTeams || []
+      userData.betIds = data.user.betIds || []
+
+    }
+
   }
 
   async function logout() {
@@ -33,7 +38,7 @@ export const useUserStore = defineStore('userStore', () => {
     userData.favoritePlayers = []
     userData.favoriteTeams = []
     userData.betIds = []
-    userData.avatarImg = ''
+
   }
 
   return {

@@ -213,9 +213,9 @@ const showTeamDetails = (team, img) => {
       :key="player.id"
       @click="showDetails(player)"
     >
-      <img :src="playerShirts[player.team.name]" alt="" class="player-card-profile-img" />
-      <div class="player-card-player-name">{{ player.first_name + ' ' + player.last_name }}</div>
-      <div class="player-card-player-number">#{{ player.jersey_number }}</div>
+      <img :src="playerShirts[player?.team?.name]" alt="" class="player-card-profile-img" />
+      <div class="player-card-player-name">{{ player?.first_name + ' ' + player?.last_name }}</div>
+      <div class="player-card-player-number">#{{ player?.jersey_number }}</div>
       <button class="removeFavoriteButton" @click="removeFavoritePlayer(player)">-</button>
     </div>
   </div>
@@ -224,7 +224,7 @@ const showTeamDetails = (team, img) => {
     <div class="team-card-container" v-for="team in userFavoriteTeams" :key="team.id">
       <div class="team-card" tabindex="0" @click="showTeamDetails(team, teamLogos[team.name])">
         <div class="team-image-container">
-          <img :src="teamLogos[team.name]" alt="" class="team-logo-img" />
+          <img :src="teamLogos[team?.name]" alt="" class="team-logo-img" />
           <button class="removeFavoriteButton" @click="removeFavoriteTeam(team)">-</button>
         </div>
       </div>

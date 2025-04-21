@@ -7,50 +7,36 @@ import Search from '../components/Search.vue'
 import HomeDeck from '../components/HomeDeck.vue'
 import Feed from '../components/Feed.vue'
 
-
-
 const store = useUserStore()
 
-
-const image = localStorage.getItem('userAvatar');
-const userImg = ref(image);
+const image = localStorage.getItem('userAvatar')
+const userImg = ref(image)
 
 onMounted(() => {
   console.log(store.userData.username)
 })
 
 
+
 </script>
 
 <template>
-
   <Header>
     <template #links>
       <RouterLink to="/Hub">Hub</RouterLink>
       <RouterLink to="/Gambling">Gambling</RouterLink>
 
-
       <RouterLink to="/Profile">Profile</RouterLink>
-
     </template>
 
     <template #user>
-
       <img :src="userImg" alt="" class="profile-user-img" />
 
       <div class="user-username">{{ store.userData.username }}</div>
 
       <RouterLink to="/join" class="logout-style" @click="store.logout">Logout</RouterLink>
-
-
-
     </template>
-
   </Header>
-
-
-
-
 
   <div class="top-half-container">
     <Search></Search>
@@ -248,12 +234,6 @@ onMounted(() => {
   margin: 1rem;
   padding-bottom: 1rem;
 }
-
-
-
-
-
-
 
 @media (max-width: 1450px) {
   .top-half-container {

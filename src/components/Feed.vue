@@ -1,39 +1,147 @@
-<script setup></script>
+<script setup>
+
+import { onMounted, ref } from 'vue'
+
+const timeNow = new Date().toISOString().split('T')[0]
+
+const gamesArray = ref([])
+
+
+
+onMounted(() => {
+  fetchGames();
+
+
+})
+
+
+// all team logo images
+const teamLogos = {
+  Hawks: '../../public/hawksLogo.avif',
+  Celtics: '../../public/celticsLogo.png',
+  Nets: '../../public/netsLogo.png',
+  Hornets: '../../public/hornetsLogo.svg',
+  Bulls: '../../public/bullsLogo.svg',
+  Cavaliers: '../../public/cavsLogo.svg',
+  Mavericks: '../../public/mavsLogo.svg',
+  Nuggets: '../../public/nuggetsLogo.svg',
+  Pistons: '../../public/pistonsLogo.svg',
+  Warriors: '../../public/warriorsLogo.svg',
+  Rockets: '../../public/rocketsLogo.svg',
+  Pacers: '../../public/pacersLogo.svg',
+  Clippers: '../../public/clippersLogo.svg',
+  Lakers: '../../public/lakersLogo.svg',
+  Grizzlies: '../../public/grizzliesLogo.svg',
+  Heat: '../../public/heatLogo.svg',
+  Bucks: '../../public/bucksLogo.svg',
+  Timberwolves: '../../public/timberwolvesLogo.svg',
+  Pelicans: '../../public/pelicansLogo.svg',
+  Knicks: '../../public/knicksLogo.svg',
+  Thunder: '../../public/thunderLogo.svg',
+  Magic: '../../public/magicLogo.svg',
+  '76ers': '../../public/sixersLogo.svg',
+  Suns: '../../public/sunsLogo.png',
+  'Trail Blazers': '../../public/trailblazersLogo.svg',
+  Kings: '../../public/kingsLogo.svg',
+  Spurs: '../../public/spursLogo.svg',
+  Raptors: '../../public/raptorsLogo.svg',
+  Jazz: '../../public/jazzLogo.svg',
+  Wizards: '../../public/wizardsLogo.svg',
+}
+
+
+
+const fetchGames = async () => {
+
+
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/games?start_date=2025-04-19&end_date=${timeNow}`
+
+
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+
+  const response = await fetch(url, options)
+
+
+  if(response.status === 200) {
+    const data = await response.json()
+
+
+
+
+    console.log(data);
+    console.log(data.data);
+
+
+    gamesArray.value.push(...data.data)
+
+
+    console.log(gamesArray.value)
+
+
+
+  } else {
+    console.log(response.status)
+  }
+}
+
+
+
+
+
+
+
+
+
+
+</script>
 
 <template>
-  <div class="container">
-    <div class="feed-header">Newest Games</div>
+  <div class="container" v-if="gamesArray">
+    <div class="feed-header">Upcoming/Newest Games</div>
 
-    <div class="newest-games">
+    <div class="newest-games" v-for="game in gamesArray" :key="game.id">
       <div class="home-team">
-        <img src="../../public/cavsLogo.svg" alt="" class="teamLogos" />
+        <img :src="teamLogos[game.home_team.name]" alt="" class="teamLogos" />
       </div>
       <div class="vsLetters">
         <span class="letterV">V</span>
         <span class="letterS">S</span>
       </div>
       <div class="away-team">
-        <img src="../../public/blazersLogo.svg" alt="" class="teamLogos" />
+        <img :src="teamLogos[game.visitor_team.name]" alt="" class="teamLogos" />
       </div>
 
-      <div class="time-container"><span>4:30pm - 40</span></div>
+      <div class="team-container"><span>{{ game.home_team.name }} VS {{ game.visitor_team.name }}</span></div>
     </div>
   </div>
 </template>
 
 <style scoped>
 .container {
-  border: 1px solid blue;
-  height: 450px;
+
+  max-height: 450px;
   display: flex;
+  overflow-y: auto;
 
   flex-direction: column;
   align-items: center;
 }
 
-.time-container {
+.team-container {
   position: absolute;
-  right: 43%;
+
+  width: 450px;
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-primary);
+  font-weight: 700;
 }
 
 .vsLetters {
@@ -79,8 +187,10 @@
 .newest-games {
   min-width: 450px;
   height: 150px;
-  border: 1px solid black;
+  border: 2px solid black;
   display: flex;
+  margin-block: 1rem;
   position: relative;
+  border-radius: 10px;
 }
 </style>

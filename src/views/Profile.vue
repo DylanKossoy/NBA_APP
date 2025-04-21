@@ -112,10 +112,10 @@ const clearFavoriteTeams = () => {
 
     <div class="nav-links">
       <RouterLink to="/home">Home</RouterLink>
+      <RouterLink to="/Hub">Hub</RouterLink>
       <RouterLink to="/Gambling">Gambling</RouterLink>
-      <RouterLink to="/Games">Games</RouterLink>
-      <RouterLink to="/Stats">Stats</RouterLink>
-      <RouterLink to="/Profile">Profile</RouterLink>
+
+
     </div>
 
     <div class="nav-username-container">

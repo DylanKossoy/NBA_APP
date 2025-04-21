@@ -4,27 +4,17 @@ import { useRouter } from 'vue-router'
 import { useUserStore } from '../../src/stores/user.js'
 import Header from '../components/Header.vue'
 
-
-
-
-
-
 const store = useUserStore()
-
 
 const router = useRouter()
 
+const email = ref('')
+const password = ref('')
 
+const emailValid = ref(false)
+const passwordValid = ref(false)
 
-const email = ref('');
-const password = ref('');
-
-const emailValid = ref(false);
-const passwordValid = ref(false);
-
-const errorText = ref('-');
-
-
+const errorText = ref('-')
 
 const triggerShake = (field) => {
   field.value = true
@@ -41,12 +31,81 @@ const triggerError = (error) => {
   }, 1000)
 }
 
+const getFavoritePlayers = async () => {
+  const token = store.userToken.value
+  const data = store.userData
+  let newArray = []
 
+  for (let i = 0; i < data.favoritePlayers.length; i++) {
+    if (!data.favoritePlayers[i]) {
+      return
+    }
+
+    const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/players/${data.favoritePlayers[i]}`
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+
+    const response = await fetch(url, options)
+
+    if (response.status === 200) {
+      const data = await response.json()
+
+      newArray.push(data.player.data)
+    } else {
+      console.log(response.status)
+    }
+  }
+
+  console.log('new players array: ')
+  console.log(newArray)
+
+  store.userData.favoritePlayers = newArray
+}
+const getFavoriteTeams = async () => {
+  const token = store.userToken.value
+  const data = store.userData
+  let newArray = []
+
+  for (let i = 0; i < data.favoriteTeams.length; i++) {
+    if (!data.favoriteTeams[i]) {
+      return
+    }
+
+    const url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/teams/${data.favoriteTeams[i]}`
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }
+
+    const response = await fetch(url, options)
+
+    if (response.status === 200) {
+      const data = await response.json()
+
+      newArray.push(data.team)
+    } else {
+      console.log(response.status)
+    }
+  }
+
+  console.log('new team array: ')
+  console.log(newArray)
+
+  store.userData.favoriteTeams = newArray
+}
 
 const signIn = async (email, password) => {
   const data = {
     email,
-    password
+    password,
   }
 
   // url for login
@@ -61,28 +120,27 @@ const signIn = async (email, password) => {
     body: JSON.stringify(data),
   }
 
-
-
   const response = await fetch(url, options)
 
   if (response.status === 200) {
-    const data = await response.json()
+    const dataIn = await response.json()
 
-    console.log(data)
-    store.setUserData(data)
+    console.log('sign in data: ' + dataIn.user.favoritePlayers)
 
+    store.setUserData(dataIn)
 
+    await getFavoritePlayers()
+    await getFavoriteTeams()
 
     router.push({
       path: '/home',
     })
   } else {
-    triggerShake(emailValid);
+    triggerShake(emailValid)
     triggerShake(passwordValid)
     triggerError('* Invalid Email or Password *')
     console.log('somethings wrong: ', response.status)
   }
-
 }
 
 const check = (event) => {
@@ -107,31 +165,17 @@ const check = (event) => {
     return
   }
 
-
-  signIn(email.value, password.value);
-
-
-
-
+  signIn(email.value, password.value)
 }
-
 </script>
 
 <template>
   <Header>
     <template #user>
       <RouterLink to="/">Welcome</RouterLink>
-      <RouterLink to="/join" >Join</RouterLink>
-
+      <RouterLink to="/join">Join</RouterLink>
     </template>
   </Header>
-
-
-
-
-
-
-
 
   <div class="join-container">
     <div class="join-prompt">
@@ -140,29 +184,19 @@ const check = (event) => {
       </div>
 
       <div class="join-inputs-container">
-
         <div class="group-input">
           <label for="email">Email</label>
-          <input type="email"
-          v-model="email"
-          :class="{ shake: emailValid }"
-          />
+          <input type="email" v-model="email" :class="{ shake: emailValid }" />
         </div>
         <div class="group-input">
           <label for="password">Password</label>
-          <input type="password"
-          v-model="password"
-          :class="{ shake: passwordValid }"
-          />
+          <input type="password" v-model="password" :class="{ shake: passwordValid }" />
         </div>
 
         <div class="error-container">
-          <div class="errorText"> {{ errorText }}</div>
-
+          <div class="errorText">{{ errorText }}</div>
         </div>
       </div>
-
-
 
       <div class="button-container">
         <button type="submit" @click="check">Proceed</button>
@@ -172,11 +206,9 @@ const check = (event) => {
 </template>
 
 <style scoped>
-
 h2 {
   font-family: var(--font-primary);
 }
-
 
 .error-container {
   display: flex;
@@ -188,13 +220,6 @@ h2 {
 .errorText {
   color: rgb(188, 70, 70);
 }
-
-
-
-
-
-
-
 
 .links-navbar {
   display: flex;
@@ -277,7 +302,6 @@ h2 {
   border-radius: 5px;
   border: none;
   transition: background-color 1s ease;
-
 }
 
 /* button hover */
