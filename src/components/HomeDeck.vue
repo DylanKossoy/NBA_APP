@@ -1,7 +1,7 @@
 <script setup>
 
 import { useUserStore } from '../stores/user.js'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const store = useUserStore()
 
@@ -9,9 +9,12 @@ const favoritePlayers = ref([])
 const favoriteTeams = ref([])
 
 
-const players = ref(true)
+const players = ref(false)
 const teams = ref(false)
 
+onMounted(() => {
+  loadFavoritePlayers();
+})
 
 // all team logo images
 const playerShirts = {

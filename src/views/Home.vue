@@ -6,6 +6,7 @@ import Header from '../components/Header.vue'
 import Search from '../components/Search.vue'
 import HomeDeck from '../components/HomeDeck.vue'
 import Feed from '../components/Feed.vue'
+import Bet from '../components/Bet.vue'
 
 const store = useUserStore()
 
@@ -44,7 +45,9 @@ onMounted(() => {
       <div class="feed-card">
         <Feed></Feed>
       </div>
-      <div class="feed-card">news</div>
+      <div class="feed-card">
+        <Bet></Bet>
+      </div>
     </div>
   </div>
 
@@ -81,7 +84,7 @@ onMounted(() => {
 
 /* latest feed container. the two cards that have recent news about games and stats and things like that */
 .latest-feed-container .feed-card {
-  width: 500px;
+  width: 600px;
   height: 450px;
   background-color: rgba(0, 0, 0, 0.031);
   border: 1px solid black;

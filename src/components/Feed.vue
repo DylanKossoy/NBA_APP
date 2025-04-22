@@ -54,7 +54,7 @@ const teamLogos = {
 const fetchGames = async () => {
 
 
-  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/games?start_date=2025-04-19&end_date=${timeNow}`
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/games?start_date=${timeNow}&end_date=${timeNow}`
 
 
 
@@ -137,7 +137,7 @@ const fetchGames = async () => {
 .team-container {
   position: absolute;
 
-  width: 450px;
+  width: 500px;
   display: flex;
   justify-content: center;
   font-family: var(--font-primary);
@@ -145,8 +145,9 @@ const fetchGames = async () => {
 }
 
 .vsLetters {
-  width: 100px;
-  height: 150px;
+  width: 120px;
+  height: 180px;
+
 
   display: flex;
   justify-content: center;
@@ -172,8 +173,8 @@ const fetchGames = async () => {
 
 .home-team,
 .away-team {
-  width: 170px;
-  height: 150px;
+  width: 200px;
+  height: 170px;
 
   display: flex;
   justify-content: center;
@@ -181,12 +182,12 @@ const fetchGames = async () => {
 }
 
 .teamLogos {
-  max-width: 80px;
+  max-width: 100px;
 }
 
 .newest-games {
-  min-width: 450px;
-  height: 150px;
+  min-width: 500px;
+  min-height: 170px;
   border: 2px solid black;
   display: flex;
   margin-block: 1rem;
