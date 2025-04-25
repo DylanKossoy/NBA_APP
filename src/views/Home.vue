@@ -6,12 +6,16 @@ import Header from '../components/Header.vue'
 import Search from '../components/Search.vue'
 import HomeDeck from '../components/HomeDeck.vue'
 import Feed from '../components/Feed.vue'
-import Bet from '../components/Bet.vue'
+
+import Predicitons from '../components/Predictions.vue'
 
 const store = useUserStore()
 
 const image = localStorage.getItem('userAvatar')
 const userImg = ref(image)
+
+
+const selectedGame = ref(null)
 
 onMounted(() => {
   console.log(store.userData.username)
@@ -43,10 +47,11 @@ onMounted(() => {
     <Search></Search>
     <div class="latest-feed-container">
       <div class="feed-card">
-        <Feed></Feed>
+        <Feed v-model:selected-game="selectedGame"></Feed>
       </div>
       <div class="feed-card">
-        <Bet></Bet>
+
+        <Predicitons ></Predicitons>
       </div>
     </div>
   </div>
@@ -84,7 +89,7 @@ onMounted(() => {
 
 /* latest feed container. the two cards that have recent news about games and stats and things like that */
 .latest-feed-container .feed-card {
-  width: 600px;
+  width: 550px;
   height: 450px;
   background-color: rgba(0, 0, 0, 0.031);
   border: 1px solid black;

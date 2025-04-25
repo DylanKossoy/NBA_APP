@@ -7,6 +7,9 @@ const timeNow = new Date().toISOString().split('T')[0]
 const gamesArray = ref([])
 
 
+const gameSelected = defineModel('selected-game');
+
+
 
 onMounted(() => {
   fetchGames();
@@ -92,6 +95,12 @@ const fetchGames = async () => {
 }
 
 
+const getGame = (game) => {
+  gameSelected.value = game
+
+}
+
+
 
 
 
@@ -106,7 +115,7 @@ const fetchGames = async () => {
   <div class="container" v-if="gamesArray">
     <div class="feed-header">Upcoming/Newest Games</div>
 
-    <div class="newest-games" v-for="game in gamesArray" :key="game.id">
+    <div class="newest-games" v-for="game in gamesArray" :key="game.id" tabindex="0" @click="getGame(game)">
       <div class="home-team">
         <img :src="teamLogos[game.home_team.name]" alt="" class="teamLogos" />
       </div>
@@ -117,6 +126,7 @@ const fetchGames = async () => {
       <div class="away-team">
         <img :src="teamLogos[game.visitor_team.name]" alt="" class="teamLogos" />
       </div>
+      <div class="teamId">{{ game.id }}</div>
 
       <div class="team-container"><span>{{ game.home_team.name }} VS {{ game.visitor_team.name }}</span></div>
     </div>
@@ -124,6 +134,20 @@ const fetchGames = async () => {
 </template>
 
 <style scoped>
+
+
+
+.teamId {
+  position: absolute;
+  font-family: var(--font-primary);
+  left: 10px;
+  color: darkred;
+  font-weight: 700;
+}
+
+
+
+
 .container {
 
   max-height: 450px;
@@ -193,5 +217,14 @@ const fetchGames = async () => {
   margin-block: 1rem;
   position: relative;
   border-radius: 10px;
+  cursor: pointer;
+}
+
+.newest-games:hover {
+  background: rgb(83, 78, 78);
+}
+
+.newest-games:focus {
+  background: rgb(102, 101, 101);
 }
 </style>

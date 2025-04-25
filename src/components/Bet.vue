@@ -1,8 +1,30 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, computed} from 'vue'
 
 const homeTeam = ref(true);
 const visitorTeam = ref(false);
+
+
+
+const props = defineProps({
+  game: Object
+})
+
+const selectedPlayerBet = defineModel('selectedBetPlayer')
+
+const game = computed(() => props.game)
+
+onMounted(() => {
+  if (game.value?.home_team && game.value?.visitor_team) {
+    getHomeTeam()
+    getVisitorTeam()
+  } else {
+    console.warn("Game data not ready on mount")
+  }
+})
+
+console.log("bet page")
+console.log(props.game)
 
 
 const toggleHomeTeam = () => {
@@ -16,6 +38,77 @@ const toggleVisitorTeam = () => {
   visitorTeam.value = true;
 }
 
+
+
+
+
+
+
+
+
+
+
+const getHomeTeam = async () => {
+
+
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/games/${game.value.id}`
+
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+
+
+  const response = await fetch(url, options)
+
+
+  if(response.status === 200) {
+    const data = await response.json()
+
+
+    console.log(data)
+  } else {
+    console.log(response.status);
+  }
+
+}
+
+
+const getVisitorTeam = async () => {
+
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/players?name-search=${props.game.visitor_team.name}`
+
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+
+
+
+  const response = await fetch(url, options)
+
+
+  if(response.status === 200) {
+    const data = await response.json()
+
+
+    console.log(data)
+  } else {
+    console.log(response.status);
+  }
+
+
+}
+
+
+
 </script>
 
 <template>
@@ -26,6 +119,110 @@ const toggleVisitorTeam = () => {
       <button class="visitorTeamButton" @click="toggleVisitorTeam">Visitor Team</button>
     </div>
     <div class="home-container" v-if="homeTeam">
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton" @click="selectPlayer()">Bet</button>
+
+        </div>
+      </div>
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton">Bet</button>
+
+        </div>
+      </div>
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton">Bet</button>
+
+        </div>
+      </div>
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton">Bet</button>
+
+        </div>
+      </div>
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton">Bet</button>
+
+        </div>
+      </div>
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton">Bet</button>
+
+        </div>
+      </div>
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton">Bet</button>
+
+        </div>
+      </div>
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton">Bet</button>
+
+        </div>
+      </div>
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton">Bet</button>
+
+        </div>
+      </div>
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton">Bet</button>
+
+        </div>
+      </div>
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton">Bet</button>
+
+        </div>
+      </div>
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton">Bet</button>
+
+        </div>
+      </div>
+      <div class="player-card">
+        <span class="player-name">first last</span>
+        <div class="right-side">
+          <span class="player-number">#6</span>
+          <button class="betButton">Bet</button>
+
+        </div>
+      </div>
       <div class="player-card">
         <span class="player-name">first last</span>
         <div class="right-side">
