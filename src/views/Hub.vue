@@ -44,7 +44,7 @@ const handleGame = (game) => {
     </template>
 
     <template #user>
-      <img src="../../public/user.png" alt="" class="profile-user-img" />
+
       <div class="user-username">{{ store.userData.username }}</div>
     </template>
   </Header>
