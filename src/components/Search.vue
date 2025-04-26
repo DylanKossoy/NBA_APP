@@ -454,8 +454,8 @@ const searchBasketball = async () => {
           <span class="stat-number">{{ result.height }}</span>
         </div>
         <div class="user-info-box">
-          <span class="label-info-player">Conference: </span>
-          <span class="stat-number">{{ result.team.conference }}</span>
+          <span class="label-info-player">Id: </span>
+          <span class="stat-number">{{ result.id }}</span>
         </div>
         <div class="user-info-box">
           <span class="label-info-player">Team: </span>

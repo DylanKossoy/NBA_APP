@@ -1,6 +1,10 @@
 <script setup>
 
 import { ref } from 'vue'
+import { useUserStore } from '../stores/user.js'
+
+
+const store = useUserStore()
 
 
 const gameId = ref(null);
@@ -13,11 +17,56 @@ const stealsP = ref(null)
 
 
 
-const createBet = () => {
+const createBet = async () => {
 
   if(!gameId.value || !playerId.value || !pointsP.value || !assistsP.value || !reboundsP.value || !threesP.value || !stealsP.value) {
     console.log("Need to fill out all fields");
     return;
+  }
+
+
+  const data = {
+    gameId: gameId.value,
+    playerId: playerId.value,
+    predictions: {
+      points: pointsP.value,
+      assists: assistsP.value,
+      rebounds: reboundsP.value,
+      threes: threesP.value,
+      steals: stealsP.value
+    }
+  }
+
+
+
+  let url = `https://csci-430-server-dubbabadgmf8hpfk.eastus2-01.azurewebsites.net/bets`
+
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${store.userToken}`
+    },
+    body: JSON.stringify(data)
+  }
+
+
+  const response = await fetch(url, options)
+
+
+  if(response.status === 201) {
+    console.log("created bet")
+    gameId.value = null
+    playerId.value = null
+    pointsP.value = null
+    assistsP.value = null
+    threesP.value = null
+    reboundsP.value = null
+    stealsP.value = null
+
+  } else {
+    console.log(response.status)
   }
 
 }

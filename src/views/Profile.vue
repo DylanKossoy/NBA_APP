@@ -113,7 +113,7 @@ const clearFavoriteTeams = () => {
     <div class="nav-links">
       <RouterLink to="/home">Home</RouterLink>
       <RouterLink to="/Hub">Hub</RouterLink>
-      <RouterLink to="/Gambling">Gambling</RouterLink>
+      <RouterLink to="/betting">Bets</RouterLink>
 
 
     </div>
@@ -270,9 +270,7 @@ h1 {
   position: relative;
 }
 
-.user-username {
-  font-size: 20px;
-}
+
 
 /* userinfo box inside the profile box container */
 .user-info-box {

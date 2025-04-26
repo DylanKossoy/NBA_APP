@@ -5,6 +5,7 @@ import Join from '../views/Join.vue'
 import SignIn from '../views/SignIn.vue'
 import Hub from '../views/Hub.vue'
 import Profile from '../views/Profile.vue'
+import Betting from '../views/Betting.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: Profile,
+    },
+    {
+      path: '/betting',
+      name: 'betting',
+      component: Betting,
     },
   ],
 })

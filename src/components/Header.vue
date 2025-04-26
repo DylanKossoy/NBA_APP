@@ -38,7 +38,7 @@
 .nav-username-container a {
   text-decoration: none;
   font-family: var(--font-primary);
-  font-size: 20px;
+  font-size: 30px;
   color: black;
 
 }
@@ -54,7 +54,7 @@
 .nav-links a {
   text-decoration: none;
   font-family: var(--font-primary);
-  font-size: 20px;
+  font-size: 30px;
   color: black;
 }
 
@@ -67,7 +67,7 @@
 /* nav links container in the middle of the nav bar */
 .nav-links {
   display: flex;
-  gap: 3rem;
+  gap: 5rem;
 }
 
 /* nav username and profile img container */
@@ -81,7 +81,7 @@
 
 /* nav-username-container username - so the real username of the user gosh */
 .user-username {
-  font-size: 20px;
+  font-size: 30px;
   font-family: var(--font-primary);
 }
 

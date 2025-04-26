@@ -38,7 +38,7 @@ const handleGame = (game) => {
   <Header>
     <template #links>
       <RouterLink to="/home">Home</RouterLink>
-      <RouterLink to="/Gambling">Gambling</RouterLink>
+      <RouterLink to="/betting">Bets</RouterLink>
 
       <RouterLink to="/Profile">Profile</RouterLink>
     </template>
@@ -315,11 +315,7 @@ const handleGame = (game) => {
   justify-content: center;
 }
 
-/* nav-username-container username - so the real username of the user gosh */
-.user-username {
-  font-size: 20px;
-  font-family: var(--font-primary);
-}
+
 
 /* profile user img */
 

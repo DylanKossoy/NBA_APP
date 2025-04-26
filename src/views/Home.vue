@@ -29,7 +29,7 @@ onMounted(() => {
   <Header>
     <template #links>
       <RouterLink to="/Hub">Hub</RouterLink>
-      <RouterLink to="/Gambling">Gambling</RouterLink>
+      <RouterLink to="/betting">Bets</RouterLink>
 
       <RouterLink to="/Profile">Profile</RouterLink>
     </template>
@@ -212,11 +212,6 @@ onMounted(() => {
   justify-content: right;
 }
 
-/* nav-username-container username - so the real username of the user gosh */
-.user-username {
-  font-size: 20px;
-  font-family: var(--font-primary);
-}
 
 /* profile user img */
 
